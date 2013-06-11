@@ -14,6 +14,8 @@
         <FileAlignment>512</FileAlignment>
         <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
         <RestorePackages>true</RestorePackages>
+        <DocumentationFile>ClariusLabs.Doq.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     </PropertyGroup>
@@ -29,6 +31,7 @@
     <ItemGroup>
         <Compile Include="CachedEnumerable.cs" />
         <Compile Include="DelegateVisitor.cs" />
+        <Compile Include="IVisitable.cs" />
         <Compile Include="Param.cs" />
         <Compile Include="TypeParam.cs" />
         <Compile Include="Exception.cs" />

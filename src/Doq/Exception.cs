@@ -21,20 +21,37 @@ namespace ClariusLabs.Doq
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Represents the <c>exception</c> documentation tag.
+    /// </summary>
+    /// <remarks>
+    /// See http://msdn.microsoft.com/en-US/library/w1htk11d(v=vs.80).aspx.
+    /// </remarks>
     public class Exception : Container
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exception"/> class.
+        /// </summary>
+        /// <param name="cref">The member id of the exception type.</param>
+        /// <param name="elements">The elements that explain when this exception is thrown.</param>
         public Exception(string cref, IEnumerable<Element> elements)
             : base(elements)
         {
             this.Cref = cref;
         }
 
+        /// <summary>
+        /// Accepts the specified visitor.
+        /// </summary>
         public override TVisitor Accept<TVisitor>(TVisitor visitor)
         {
             visitor.VisitException(this);
             return visitor;
         }
 
+        /// <summary>
+        /// Gets the member id of the exception type.
+        /// </summary>
         public string Cref { get; private set; }
     }
 }

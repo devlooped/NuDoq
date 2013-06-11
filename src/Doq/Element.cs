@@ -20,10 +20,23 @@ namespace ClariusLabs.Doq
 {
     using System.Collections.Generic;
 
-    public abstract class Element
+    /// <summary>
+    /// Base class for all elements in a documentation file, including 
+    /// types, members, and content like summaries, remarks, etc. 
+    /// </summary>
+    /// <remarks>
+    /// This type is the root of the visitor model hierarchy.
+    /// </remarks>
+    public abstract class Element : ClariusLabs.Doq.IVisitable
     {
+        /// <summary>
+        /// Accepts the specified visitor.
+        /// </summary>
         public abstract TVisitor Accept<TVisitor>(TVisitor visitor) where TVisitor : Visitor;
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
         public override string ToString()
         {
             var visitor = new TextVisitor();
@@ -31,6 +44,9 @@ namespace ClariusLabs.Doq
             return visitor.Text;
         }
 
+        /// <summary>
+        /// Enumerates this instance and all its descendents recursively.
+        /// </summary>
         public IEnumerable<Element> Traverse()
         {
             return this.Accept(new TraverseVisitor()).Elements;

@@ -23,6 +23,10 @@ namespace ClariusLabs.Doq
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Internal class used to cache the results of the enumeration of the 
+    /// container elements.
+    /// </summary>
     internal static class CachedEnumerable
     {
         public static IEnumerable<T> Cached<T>(this IEnumerable<T> enumerable)

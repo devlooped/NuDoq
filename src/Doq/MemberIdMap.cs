@@ -24,6 +24,9 @@ namespace ClariusLabs.Doq
     using System.Reflection;
     using System.Text;
 
+    /// <summary>
+    /// Provides bidirectional mapping between reflection and XML documentation ids.
+    /// </summary>
     internal class MemberIdMap
     {
         internal readonly Dictionary<string, MemberInfo> idToMemberMap = new Dictionary<string, MemberInfo>();

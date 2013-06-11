@@ -18,19 +18,35 @@
 
 namespace ClariusLabs.Doq
 {
+    /// <summary>
+    /// Represents the <c>seealso</c> documentation tag.
+    /// </summary>
+    /// <remarks>
+    /// See http://msdn.microsoft.com/en-US/library/xhd7ehkk(v=vs.80).aspx.
+    /// </remarks>
     public class SeeAlso : Element
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SeeAlso"/> class.
+        /// </summary>
+        /// <param name="cref">The member id of the referenced member.</param>
         public SeeAlso(string cref)
         {
             this.Cref = cref;
         }
 
+        /// <summary>
+        /// Accepts the specified visitor.
+        /// </summary>
         public override TVisitor Accept<TVisitor>(TVisitor visitor)
         {
             visitor.VisitSeeAlso(this);
             return visitor;
         }
 
+        /// <summary>
+        /// Gets the member id of the referenced member.
+        /// </summary>
         public string Cref { get; private set; }
     }
 }

@@ -25,8 +25,19 @@ namespace ClariusLabs.Doq
     using System.Reflection;
     using System.Xml.Linq;
 
+    /// <summary>
+    /// Reads .NET XML API documentation files, optionally augmenting 
+    /// them with reflection information if reading from an assembly.
+    /// </summary>
     public static class Reader
     {
+        /// <summary>
+        /// Reads the specified documentation file and returns a lazily-constructed 
+        /// set of members that can be visited.
+        /// </summary>
+        /// <param name="fileName">Path to the documentation file.</param>
+        /// <returns>All documented members found in the given file.</returns>
+        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         public static Members Read(string fileName)
         {
             if (!File.Exists(fileName))
@@ -39,6 +50,17 @@ namespace ClariusLabs.Doq
         }
 
         // TODO: support multiple assemblies.
+
+        /// <summary>
+        /// Uses the specified assembly to locate a documentation file alongside the assembly by 
+        /// changing the extension to ".xml". If the file is found, it will be read and all 
+        /// found members will contain extended reflection information in the <see cref="Member.Info"/> 
+        /// property.
+        /// </summary>
+        /// <param name="assembly">The assembly to read the documentation from.</param>
+        /// <returns>All documented members found in the given file, together with the reflection metadata 
+        /// association from the assembly.</returns>
+        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         public static Members Read(Assembly assembly)
         {
             var fileName = Path.ChangeExtension(assembly.Location, ".xml");
@@ -57,6 +79,9 @@ namespace ClariusLabs.Doq
                 .Select(member => SetInfo(member, map)));
         }
 
+        /// <summary>
+        /// Sets the extended reflection info if found in the map.
+        /// </summary>
         private static Member SetInfo(Member member, MemberIdMap map)
         {
             member.Info = map.FindMember(member.ToString());
@@ -64,6 +89,10 @@ namespace ClariusLabs.Doq
             return member;
         }
 
+        /// <summary>
+        /// Replaces the generic <see cref="TypeDeclaration"/> with 
+        /// concrete types according to the reflection information.
+        /// </summary>
         private static Member ReplaceTypes(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Type)
@@ -90,6 +119,13 @@ namespace ClariusLabs.Doq
             return member;
         }
 
+        /// <summary>
+        /// Replaces the generic method element with a more specific extension method 
+        /// element as needed.
+        /// </summary>
+        /// <param name="member">The member.</param>
+        /// <param name="map">The map.</param>
+        /// <returns></returns>
         private static Member ReplaceExtensionMethods(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Method)
@@ -109,6 +145,9 @@ namespace ClariusLabs.Doq
             return member;
         }
 
+        /// <summary>
+        /// Creates the appropriate type of member according to the member id prefix.
+        /// </summary>
         private static Member CreateMember(string memberId, IEnumerable<Element> elements)
         {
             switch (memberId[0])
@@ -128,6 +167,9 @@ namespace ClariusLabs.Doq
             }
         }
 
+        /// <summary>
+        /// Reads all supported documentation elements.
+        /// </summary>
         private static IEnumerable<Element> ReadContent(XElement element)
         {
             foreach (var node in element.Nodes())
@@ -209,16 +251,25 @@ namespace ClariusLabs.Doq
             }
         }
 
+        /// <summary>
+        /// Retrieves an attribute value if found, otherwise, returns a null string.
+        /// </summary>
         private static string FindAttribute(XElement elementNode, string attributeName)
         {
             return elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Trims the text by removing new lines and trimming the indent.
+        /// </summary>
         private static string TrimText(string content)
         {
             return TrimLines(content, StringSplitOptions.RemoveEmptyEntries, " ");
         }
 
+        /// <summary>
+        /// Trims the code by removing extra indent.
+        /// </summary>
         private static string TrimCode(string content)
         {
             return TrimLines(content, StringSplitOptions.None, Environment.NewLine);

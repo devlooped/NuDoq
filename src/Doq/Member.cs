@@ -23,15 +23,34 @@ namespace ClariusLabs.Doq
     using System.Linq;
     using System.Reflection;
 
+    /// <summary>
+    /// Base class for all documentation members: types, 
+    /// fields, properties, methods and events.
+    /// </summary>
+    /// <remarks>
+    /// See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
+    /// </remarks>
     public abstract class Member : Container
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
+        /// <param name="memberId">The member id as specified in the documentation XML.</param>
+        /// <param name="elements">The contained documentation elements.</param>
         public Member(string memberId, IEnumerable<Element> elements)
             : base(elements)
         {
             this.Id = memberId;
         }
 
+        /// <summary>
+        /// Gets the member id as specified in the documentation XML.
+        /// </summary>
         public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets the kind of member.
+        /// </summary>
         public abstract MemberKinds Kind { get; }
 
         /// <summary>
@@ -40,6 +59,9 @@ namespace ClariusLabs.Doq
         /// </summary>
         public MemberInfo Info { get; set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
         public override string ToString()
         {
             return this.Id;

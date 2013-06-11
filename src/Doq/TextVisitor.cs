@@ -22,6 +22,9 @@ namespace ClariusLabs.Doq
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Visitor that is used to render ToString for elements.
+    /// </summary>
     internal class TextVisitor : Visitor
     {
         private StringBuilder builder = new StringBuilder();

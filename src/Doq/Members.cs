@@ -22,14 +22,25 @@ namespace ClariusLabs.Doq
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Composite of all lazy-read members in a documentation file 
+    /// or assembly, returned from the <see cref="Reader"/>.
+    /// </summary>
     public class Members : Container
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Members"/> class.
+        /// </summary>
+        /// <param name="members">The lazily-read members of the set.</param>
         public Members(IEnumerable<Member> members)
             // In .NET 4.0 there's no covariance on IEnumerable.
             : base(members.OfType<Element>())
         {
         }
 
+        /// <summary>
+        /// Accepts the specified visitor.
+        /// </summary>
         public override TVisitor Accept<TVisitor>(TVisitor visitor)
         {
             visitor.VisitMembers(this);

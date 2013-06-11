@@ -1,4 +1,4 @@
-NuDoc: A .NET XML API Documentation Reader
+![Icon](https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-32.png) NuDoc: A .NET XML API Documentation Reader
 ===
 
 A standalone API to read .NET XML documentation files and optionally augment it with reflection information.
@@ -7,6 +7,15 @@ NuDoc provides a simple and intuitive API that reads .NET XML documentation file
 
 NuDoc leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) pattern and the [Composite](http://en.wikipedia.org/wiki/Composite_pattern) pattern. Essentially, every member in the documentation file is represented as a separate "visitable" type. By simply writing a NuDoc **Visitor**-derived class, you can process only the elements you're interested in.
 
+NuDoc can read documentation files from any CIL assembly, and the source tree has explicit unit tests that do so for all major .NET platforms: .NET, WinRT/Metro, Windows Phone and Silverlight.
+
+# How to Install
+NuDoc is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](http://nuget.org) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
+
+	PM> Install-Package NuDoc
+
+
+# Sample code
 This is a sample visitor that generates markdown content from member summaries:
 
         public class MarkdownVisitor : Visitor
@@ -109,3 +118,4 @@ The following is the members hierarchy:
 And this is the support documentation elements hierarchy:
 
 ![Members hierarchy](https://raw.github.com/clariuslabs/NuDoc/master/doc/NuDoc.Content.png)
+

@@ -10,7 +10,7 @@ NuDoc leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/w
 NuDoc can read documentation files from any CIL assembly, and the source tree has explicit unit tests that do so for all major .NET platforms: .NET, WinRT/Metro, Windows Phone and Silverlight.
 
 # How to Install
-NuDoc is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](http://nuget.org) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
+NuDoc is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](https://nuget.org/packages/nudoc) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
 
 	PM> Install-Package NuDoc
 
@@ -115,7 +115,11 @@ The following is the members hierarchy:
 
 ![Members hierarchy](https://raw.github.com/clariuslabs/NuDoc/master/doc/NuDoc.Members.png)
 
-And this is the support documentation elements hierarchy:
+And this is the supported documentation elements hierarchy:
 
 ![Members hierarchy](https://raw.github.com/clariuslabs/NuDoc/master/doc/NuDoc.Content.png)
 
+Note that at the visitor level, both hierarchies are treated uniformly, since they all ultimately inherit from **Element**. In this fashion, you can have one or multiple visitors processing different parts of the graph, such as one that processes members and generates individual folders for each, and one for documentation elements that generate the content.
+
+
+Enjoy! Go get it now from [NuGet](https://nuget.org/packages/nudoc) ;)

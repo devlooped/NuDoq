@@ -71,13 +71,6 @@ namespace ClariusLabs.NuDoc
         ExtensionMethod = 32,
 
         /// <summary>
-        /// The member is a nested type. This 
-        /// kind is used in conjunction with <see cref="Type"/> 
-        /// as a combined flag.
-        /// </summary>
-        NestedType = 64,
-
-        /// <summary>
         /// The member is an enumeration. This 
         /// kind is used in conjunction with <see cref="Type"/> 
         /// as a combined flag.

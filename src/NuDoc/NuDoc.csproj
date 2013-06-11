@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedEnumerable.cs" />
+    <Compile Include="ReflectedMembers.cs" />
     <Compile Include="DelegateVisitor.cs" />
     <Compile Include="IVisitable.cs" />
     <Compile Include="Param.cs" />
@@ -49,7 +50,6 @@
     <Compile Include="Semantic\Class.cs" />
     <Compile Include="Semantic\Enum.cs" />
     <Compile Include="Semantic\Struct.cs" />
-    <Compile Include="Semantic\NestedType.cs" />
     <Compile Include="Semantic\ExtensionMethod.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Field.cs" />
@@ -80,6 +80,8 @@
     <None Include="..\..\Common\ClariusLabs.licenseheader">
       <Link>ClariusLabs.licenseheader</Link>
     </None>
+    <None Include="NuDoc.Members.cd" />
+    <None Include="NuDoc.Content.cd" />
     <None Include="NuDoc.nuspec" />
     <None Include="NuGet.proj" />
     <None Include="packages.config" />

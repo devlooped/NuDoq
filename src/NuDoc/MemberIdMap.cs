@@ -25,19 +25,32 @@ namespace ClariusLabs.NuDoc
     using System.Text;
 
     /// <summary>
-    /// Provides bidirectional mapping between reflection and XML documentation ids.
+    /// Provides bidirectional mapping between reflection members and XML documentation ids.
     /// </summary>
-    internal class MemberIdMap
+    /// <remarks>
+    /// This map can be used in conjunction with the result of a <see cref="Reader.Read(System.Reflection.Assembly)"/>
+    /// operation to do post-processing on the <see cref="Members"/> by grouping by type, loading inheritance trees, 
+    /// etc.
+    /// </remarks>
+    public class MemberIdMap
     {
         internal readonly Dictionary<string, MemberInfo> idToMemberMap = new Dictionary<string, MemberInfo>();
         internal readonly Dictionary<MemberInfo, string> memberToIdMap = new Dictionary<MemberInfo, string>();
         private readonly StringBuilder sb = new StringBuilder();
 
+        /// <summary>
+        /// Adds all the members in the specified assembly to the map.
+        /// </summary>
+        /// <param name="assembly">The assembly to map to member ids.</param>
         public void Add(Assembly assembly)
         {
             AddRange(assembly.GetTypes());
         }
 
+        /// <summary>
+        /// Adds a set of types to the map.
+        /// </summary>
+        /// <param name="types">The types to map to member ids.</param>
         public void AddRange(IEnumerable<Type> types)
         {
             foreach (var type in types)
@@ -46,6 +59,10 @@ namespace ClariusLabs.NuDoc
             }
         }
 
+        /// <summary>
+        /// Adds the specified type to the map.
+        /// </summary>
+        /// <param name="type">The type to map to a member id.</param>
         public void Add(Type type)
         {
             sb.Length = 0;
@@ -59,6 +76,12 @@ namespace ClariusLabs.NuDoc
             }
         }
 
+        /// <summary>
+        /// Given a <paramref name="memberId"/> string, tries to find 
+        /// the corresponding reflection member.
+        /// </summary>
+        /// <param name="memberId">The member id to find.</param>
+        /// <returns>The <see cref="MemberInfo"/> if found; <see langword="null"/> otherwise.</returns>
         public MemberInfo FindMember(string memberId)
         {
             MemberInfo result = null;
@@ -66,6 +89,22 @@ namespace ClariusLabs.NuDoc
             return result;
         }
 
+        /// <summary>
+        /// Gets the documentation member ids of all members added so far to the map.
+        /// </summary>
+        public IEnumerable<string> Ids { get { return idToMemberMap.Keys; } }
+
+        /// <summary>
+        /// Gets all the reflection members added so far to the map.
+        /// </summary>
+        public IEnumerable<MemberInfo> Members { get { return memberToIdMap.Keys; } }
+
+        /// <summary>
+        /// Given a reflection <paramref name="member"/>, tries to find 
+        /// the corresponding documentation member id.
+        /// </summary>
+        /// <param name="member">The member to find the id for.</param>
+        /// <returns>The documentation member id if found; <see langword="null"/> otherwise.</returns>
         public string FindId(MemberInfo member)
         {
             string result = null;
@@ -119,12 +158,6 @@ namespace ClariusLabs.NuDoc
 
         private void Append(Type owner, MethodInfo method)
         {
-            if (method.IsSpecialName || method.IsPrivate)
-            {
-                sb.Length = 0;
-                return;
-            }
-
             AppendType(sb, method.DeclaringType);
             sb.Append('.').Append(method.Name);
 
@@ -158,12 +191,6 @@ namespace ClariusLabs.NuDoc
 
         private void Append(FieldInfo field)
         {
-            if (field.IsPrivate)
-            {
-                sb.Length = 0;
-                return;
-            }
-
             AppendType(sb, field.DeclaringType);
             sb.Append('.').Append(field.Name);
         }

@@ -10,234 +10,62 @@
             container elements.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.VisitorDelegates">
+        <member name="T:ClariusLabs.NuDoc.ReflectedMembers">
             <summary>
-            Delegate configuration to use with the <see cref="T:ClariusLabs.NuDoc.DelegateVisitor"/>, 
-            which allows anonymous visitors to be used without having to create 
-            <see cref="T:ClariusLabs.NuDoc.Visitor"/>-derived classes.
+            Composite of all lazy-read members from an assembly 
+            passed to <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMembers">
+        <member name="T:ClariusLabs.NuDoc.Members">
             <summary>
-            Gets or sets the action to invoke when visiting members.
+            Composite of all lazy-read members in a documentation file 
+            or assembly, returned from the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMembers(ClariusLabs.NuDoc.Members)"/>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitType">
+        <member name="T:ClariusLabs.NuDoc.Container">
             <summary>
-            Gets or sets the action to invoke when visiting a type member.
+            Base class for elements that can contain other elements.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitType(ClariusLabs.NuDoc.TypeDeclaration)"/>
+            <remarks>
+            Implements the composite pattern for the visitable model.
+            </remarks>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitNestedType">
+        <member name="T:ClariusLabs.NuDoc.Element">
             <summary>
-            Gets or sets the action to invoke when visiting a nested type.
+            Base class for all elements in a documentation file, including 
+            types, members, and content like summaries, remarks, etc. 
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitNestedType(ClariusLabs.NuDoc.NestedType)"/>
+            <remarks>
+            This type is the root of the visitor model hierarchy.
+            </remarks>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitInterface">
+        <member name="T:ClariusLabs.NuDoc.IVisitable">
             <summary>
-            Gets or sets the action to invoke when visiting an interface.
+            Exposes the visitor pattern on a visitable model that 
+            can receive visitors.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitInterface(ClariusLabs.NuDoc.Interface)"/>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitClass">
+        <member name="M:ClariusLabs.NuDoc.IVisitable.Accept``1(``0)">
             <summary>
-            Gets or sets the action to invoke when visiting a class.
+            Accepts the specified visitor.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitClass(ClariusLabs.NuDoc.Class)"/>
+            <typeparam name="TVisitor">The type of the visitor, inferred from the passed-in <paramref name="visitor"/>.</typeparam>
+            <param name="visitor">The visitor instance to accept.</param>
+            <returns>The received visitor. Allows for easy collecting of the results from the visitor.</returns>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitStruct">
+        <member name="M:ClariusLabs.NuDoc.Element.Accept``1(``0)">
             <summary>
-            Gets or sets the action to invoke when visiting a struct.
+            Accepts the specified visitor.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitStruct(ClariusLabs.NuDoc.Struct)"/>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitEnum">
+        <member name="M:ClariusLabs.NuDoc.Element.ToString">
             <summary>
-            Gets or sets the action to invoke when visiting an enumeration.
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitEnum(ClariusLabs.NuDoc.Enum)"/>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitField">
+        <member name="M:ClariusLabs.NuDoc.Element.Traverse">
             <summary>
-            Gets or sets the action to invoke when visiting a field.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitField(ClariusLabs.NuDoc.Field)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitProperty">
-            <summary>
-            Gets or sets the action to invoke when visiting a property.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitProperty(ClariusLabs.NuDoc.Property)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitEvent">
-            <summary>
-            Gets or sets the action to invoke when visiting an event.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitEvent(ClariusLabs.NuDoc.Event)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMethod">
-            <summary>
-            Gets or sets the action to invoke when visiting a method.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMethod(ClariusLabs.NuDoc.Method)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitExtensionMethod">
-            <summary>
-            Gets or sets the action to invoke when visiting an extension method.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitExtensionMethod(ClariusLabs.NuDoc.ExtensionMethod)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMember">
-            <summary>
-            Gets or sets the action to invoke when visiting any member.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMember(ClariusLabs.NuDoc.Member)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSummary">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>summary</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSummary(ClariusLabs.NuDoc.Summary)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitRemarks">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>remarks</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitRemarks(ClariusLabs.NuDoc.Remarks)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitPara">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>para</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitPara(ClariusLabs.NuDoc.Para)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitCode">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>code</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitCode(ClariusLabs.NuDoc.Code)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitC">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>c</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitC(ClariusLabs.NuDoc.C)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitText">
-            <summary>
-            Gets or sets the action to invoke when visiting the literal text inside other documentation elements.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitText(ClariusLabs.NuDoc.Text)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitExample">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>example</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitExample(ClariusLabs.NuDoc.Example)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSee">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>see</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSee(ClariusLabs.NuDoc.See)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSeeAlso">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>seealso</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSeeAlso(ClariusLabs.NuDoc.SeeAlso)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitParam">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>param</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitParam(ClariusLabs.NuDoc.Param)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitParamRef">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>paramref</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitParamRef(ClariusLabs.NuDoc.ParamRef)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTypeParam">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>typeparam</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTypeParam(ClariusLabs.NuDoc.TypeParam)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTypeParamRef">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>typeparamref</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTypeParamRef(ClariusLabs.NuDoc.TypeParamRef)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitValue">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>value</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitValue(ClariusLabs.NuDoc.Value)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitList">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>list</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitList(ClariusLabs.NuDoc.List)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitListHeader">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>listheader</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitListHeader(ClariusLabs.NuDoc.ListHeader)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTerm">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>term</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTerm(ClariusLabs.NuDoc.Term)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitDescription">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>description</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitDescription(ClariusLabs.NuDoc.Description)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitItem">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>item</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitItem(ClariusLabs.NuDoc.Item)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitException">
-            <summary>
-            Gets or sets the action to invoke when visiting the <c>exception</c> documentation element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitException(ClariusLabs.NuDoc.Exception)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitUnknownMember">
-            <summary>
-            Gets or sets the action to invoke when visiting an unknown member.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitContainer">
-            <summary>
-            Gets or sets the action to invoke when visiting any container element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitContainer(ClariusLabs.NuDoc.Container)"/>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitElement">
-            <summary>
-            Gets or sets the action to invoke when visiting any element.
-            </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitElement(ClariusLabs.NuDoc.Element)"/>
-        </member>
-        <member name="T:ClariusLabs.NuDoc.DelegateVisitor">
-            <summary>
-            A visitor that can receive delegates for each visit operation 
-            in the visitable model, via the <see cref="T:ClariusLabs.NuDoc.VisitorDelegates"/> 
-            type.
+            Enumerates this instance and all its descendents recursively.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Visitor">
@@ -260,19 +88,7 @@
             this method will also be called for the 
             <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/>-derived semantic 
             classes <see cref="T:ClariusLabs.NuDoc.Class"/>, <see cref="T:ClariusLabs.NuDoc.Enum"/>, 
-            <see cref="T:ClariusLabs.NuDoc.Interface"/>, <see cref="T:ClariusLabs.NuDoc.NestedType"/> 
-            and <see cref="T:ClariusLabs.NuDoc.Struct"/>.
-            </remarks>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Visitor.VisitNestedType(ClariusLabs.NuDoc.NestedType)">
-            <summary>
-            Visits the semantically augmented nested type member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
-            available.
+            <see cref="T:ClariusLabs.NuDoc.Interface"/> and <see cref="T:ClariusLabs.NuDoc.Struct"/>.
             </remarks>
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitInterface(ClariusLabs.NuDoc.Interface)">
@@ -487,6 +303,271 @@
             types.
             </remarks>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Container.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Container"/> class.
+            </summary>
+            <param name="elements">The contained elements within this instance.</param>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.Container.Elements">
+            <summary>
+            Gets the elements contained in this instance.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Members.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Members"/> class.
+            </summary>
+            <param name="members">The lazily-read members of the set.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Members.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.ReflectedMembers.#ctor(ClariusLabs.NuDoc.MemberIdMap,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Members"/> class.
+            </summary>
+            <param name="idMap">The id map of reflection members to documentation ids.</param>
+            <param name="members">The lazily-read members of the set.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.ReflectedMembers.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.ReflectedMembers.IdMap">
+            <summary>
+            Gets the map of reflection members to documentation ids used 
+            to augment the <see cref="P:ClariusLabs.NuDoc.Member.Info"/> on all documented members 
+            found in the XML API documentation associated with an assembly.
+            </summary>
+        </member>
+        <member name="T:ClariusLabs.NuDoc.VisitorDelegates">
+            <summary>
+            Delegate configuration to use with the <see cref="T:ClariusLabs.NuDoc.DelegateVisitor"/>, 
+            which allows anonymous visitors to be used without having to create 
+            <see cref="T:ClariusLabs.NuDoc.Visitor"/>-derived classes.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMembers">
+            <summary>
+            Gets or sets the action to invoke when visiting members.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMembers(ClariusLabs.NuDoc.Members)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitType">
+            <summary>
+            Gets or sets the action to invoke when visiting a type member.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitType(ClariusLabs.NuDoc.TypeDeclaration)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitInterface">
+            <summary>
+            Gets or sets the action to invoke when visiting an interface.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitInterface(ClariusLabs.NuDoc.Interface)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitClass">
+            <summary>
+            Gets or sets the action to invoke when visiting a class.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitClass(ClariusLabs.NuDoc.Class)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitStruct">
+            <summary>
+            Gets or sets the action to invoke when visiting a struct.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitStruct(ClariusLabs.NuDoc.Struct)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitEnum">
+            <summary>
+            Gets or sets the action to invoke when visiting an enumeration.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitEnum(ClariusLabs.NuDoc.Enum)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitField">
+            <summary>
+            Gets or sets the action to invoke when visiting a field.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitField(ClariusLabs.NuDoc.Field)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitProperty">
+            <summary>
+            Gets or sets the action to invoke when visiting a property.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitProperty(ClariusLabs.NuDoc.Property)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitEvent">
+            <summary>
+            Gets or sets the action to invoke when visiting an event.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitEvent(ClariusLabs.NuDoc.Event)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMethod">
+            <summary>
+            Gets or sets the action to invoke when visiting a method.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMethod(ClariusLabs.NuDoc.Method)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitExtensionMethod">
+            <summary>
+            Gets or sets the action to invoke when visiting an extension method.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitExtensionMethod(ClariusLabs.NuDoc.ExtensionMethod)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMember">
+            <summary>
+            Gets or sets the action to invoke when visiting any member.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMember(ClariusLabs.NuDoc.Member)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSummary">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>summary</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSummary(ClariusLabs.NuDoc.Summary)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitRemarks">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>remarks</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitRemarks(ClariusLabs.NuDoc.Remarks)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitPara">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>para</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitPara(ClariusLabs.NuDoc.Para)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitCode">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>code</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitCode(ClariusLabs.NuDoc.Code)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitC">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>c</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitC(ClariusLabs.NuDoc.C)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitText">
+            <summary>
+            Gets or sets the action to invoke when visiting the literal text inside other documentation elements.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitText(ClariusLabs.NuDoc.Text)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitExample">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>example</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitExample(ClariusLabs.NuDoc.Example)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSee">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>see</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSee(ClariusLabs.NuDoc.See)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitSeeAlso">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>seealso</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitSeeAlso(ClariusLabs.NuDoc.SeeAlso)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitParam">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>param</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitParam(ClariusLabs.NuDoc.Param)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitParamRef">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>paramref</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitParamRef(ClariusLabs.NuDoc.ParamRef)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTypeParam">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>typeparam</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTypeParam(ClariusLabs.NuDoc.TypeParam)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTypeParamRef">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>typeparamref</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTypeParamRef(ClariusLabs.NuDoc.TypeParamRef)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitValue">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>value</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitValue(ClariusLabs.NuDoc.Value)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitList">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>list</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitList(ClariusLabs.NuDoc.List)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitListHeader">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>listheader</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitListHeader(ClariusLabs.NuDoc.ListHeader)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitTerm">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>term</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitTerm(ClariusLabs.NuDoc.Term)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitDescription">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>description</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitDescription(ClariusLabs.NuDoc.Description)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitItem">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>item</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitItem(ClariusLabs.NuDoc.Item)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitException">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>exception</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitException(ClariusLabs.NuDoc.Exception)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitUnknownMember">
+            <summary>
+            Gets or sets the action to invoke when visiting an unknown member.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitContainer">
+            <summary>
+            Gets or sets the action to invoke when visiting any container element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitContainer(ClariusLabs.NuDoc.Container)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitElement">
+            <summary>
+            Gets or sets the action to invoke when visiting any element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitElement(ClariusLabs.NuDoc.Element)"/>
+        </member>
+        <member name="T:ClariusLabs.NuDoc.DelegateVisitor">
+            <summary>
+            A visitor that can receive delegates for each visit operation 
+            in the visitable model, via the <see cref="T:ClariusLabs.NuDoc.VisitorDelegates"/> 
+            type.
+            </summary>
+        </member>
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.#ctor(ClariusLabs.NuDoc.VisitorDelegates)">
             <summary>
             Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.DelegateVisitor"/> class.
@@ -588,11 +669,6 @@
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitMethod(ClariusLabs.NuDoc.Method)"/>.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitNestedType(ClariusLabs.NuDoc.NestedType)">
-            <summary>
-            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitNestedType(ClariusLabs.NuDoc.NestedType)"/>.
-            </summary>
-        </member>
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitPara(ClariusLabs.NuDoc.Para)">
             <summary>
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitPara(ClariusLabs.NuDoc.Para)"/>.
@@ -673,20 +749,6 @@
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitValue(ClariusLabs.NuDoc.Value)"/>.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.IVisitable">
-            <summary>
-            Exposes the visitor pattern on a visitable model that 
-            can receive visitors.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.IVisitable.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-            <typeparam name="TVisitor">The type of the visitor, inferred from the passed-in <paramref name="visitor"/>.</typeparam>
-            <param name="visitor">The visitor instance to accept.</param>
-            <returns>The received visitor. Allows for easy collecting of the results from the visitor.</returns>
-        </member>
         <member name="T:ClariusLabs.NuDoc.Param">
             <summary>
             Represents the <c>param</c> documentation tag.
@@ -694,49 +756,6 @@
             <remarks>
             See http://msdn.microsoft.com/en-US/library/8cw818w8(v=vs.80).aspx.
             </remarks>
-        </member>
-        <member name="T:ClariusLabs.NuDoc.Container">
-            <summary>
-            Base class for elements that can contain other elements.
-            </summary>
-            <remarks>
-            Implements the composite pattern for the visitable model.
-            </remarks>
-        </member>
-        <member name="T:ClariusLabs.NuDoc.Element">
-            <summary>
-            Base class for all elements in a documentation file, including 
-            types, members, and content like summaries, remarks, etc. 
-            </summary>
-            <remarks>
-            This type is the root of the visitor model hierarchy.
-            </remarks>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Element.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Element.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Element.Traverse">
-            <summary>
-            Enumerates this instance and all its descendents recursively.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Container.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Container"/> class.
-            </summary>
-            <param name="elements">The contained elements within this instance.</param>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.Container.Elements">
-            <summary>
-            Gets the elements contained in this instance.
-            </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Param.#ctor(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
             <summary>
@@ -849,23 +868,6 @@
             <param name="elements">The elements that make up the description.</param>
         </member>
         <member name="M:ClariusLabs.NuDoc.Description.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="T:ClariusLabs.NuDoc.Members">
-            <summary>
-            Composite of all lazy-read members in a documentation file 
-            or assembly, returned from the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Members.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Members"/> class.
-            </summary>
-            <param name="members">The lazily-read members of the set.</param>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.Members.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
@@ -1188,37 +1190,6 @@
             <see cref="F:ClariusLabs.NuDoc.MemberKinds.Struct"/> flags.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.NestedType">
-            <summary>
-            Semantically augmented <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> for
-            nested types, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.NestedType.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.NestedType"/> class.
-            </summary>
-            <param name="memberId">The member id.</param>
-            <param name="declaringTypeId">The declaring type id.</param>
-            <param name="elements">The elements.</param>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.NestedType.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.NestedType.DeclaringTypeId">
-            <summary>
-            Gets the declaring type identifier.
-            </summary>
-        </member>
-        <member name="P:ClariusLabs.NuDoc.NestedType.Kind">
-            <summary>
-            Gets the kind of member, which contains both the <see cref="F:ClariusLabs.NuDoc.MemberKinds.Type"/> and 
-            <see cref="F:ClariusLabs.NuDoc.MemberKinds.NestedType"/> flags.
-            </summary>
-        </member>
         <member name="T:ClariusLabs.NuDoc.ExtensionMethod">
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.Method"/> for extension methods,
@@ -1356,7 +1327,56 @@
         </member>
         <member name="T:ClariusLabs.NuDoc.MemberIdMap">
             <summary>
-            Provides bidirectional mapping between reflection and XML documentation ids.
+            Provides bidirectional mapping between reflection members and XML documentation ids.
+            </summary>
+            <remarks>
+            This map can be used in conjunction with the result of a <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>
+            operation to do post-processing on the <see cref="P:ClariusLabs.NuDoc.MemberIdMap.Members"/> by grouping by type, loading inheritance trees, 
+            etc.
+            </remarks>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.MemberIdMap.Add(System.Reflection.Assembly)">
+            <summary>
+            Adds all the members in the specified assembly to the map.
+            </summary>
+            <param name="assembly">The assembly to map to member ids.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.MemberIdMap.AddRange(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Adds a set of types to the map.
+            </summary>
+            <param name="types">The types to map to member ids.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.MemberIdMap.Add(System.Type)">
+            <summary>
+            Adds the specified type to the map.
+            </summary>
+            <param name="type">The type to map to a member id.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.MemberIdMap.FindMember(System.String)">
+            <summary>
+            Given a <paramref name="memberId"/> string, tries to find 
+            the corresponding reflection member.
+            </summary>
+            <param name="memberId">The member id to find.</param>
+            <returns>The <see cref="T:System.Reflection.MemberInfo"/> if found; <see langword="null"/> otherwise.</returns>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.MemberIdMap.FindId(System.Reflection.MemberInfo)">
+            <summary>
+            Given a reflection <paramref name="member"/>, tries to find 
+            the corresponding documentation member id.
+            </summary>
+            <param name="member">The member to find the id for.</param>
+            <returns>The documentation member id if found; <see langword="null"/> otherwise.</returns>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.MemberIdMap.Ids">
+            <summary>
+            Gets the documentation member ids of all members added so far to the map.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.MemberIdMap.Members">
+            <summary>
+            Gets all the reflection members added so far to the map.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.See">
@@ -1717,13 +1737,6 @@
             <summary>
             The member is an extension method. This 
             kind is used in conjunction with <see cref="F:ClariusLabs.NuDoc.MemberKinds.Method"/> 
-            as a combined flag.
-            </summary>
-        </member>
-        <member name="F:ClariusLabs.NuDoc.MemberKinds.NestedType">
-            <summary>
-            The member is a nested type. This 
-            kind is used in conjunction with <see cref="F:ClariusLabs.NuDoc.MemberKinds.Type"/> 
             as a combined flag.
             </summary>
         </member>

@@ -40,26 +40,11 @@ namespace ClariusLabs.NuDoc
         /// this method will also be called for the 
         /// <see cref="TypeDeclaration"/>-derived semantic 
         /// classes <see cref="Class"/>, <see cref="Enum"/>, 
-        /// <see cref="Interface"/>, <see cref="NestedType"/> 
-        /// and <see cref="Struct"/>.
+        /// <see cref="Interface"/> and <see cref="Struct"/>.
         /// </remarks>
         public virtual void VisitType(TypeDeclaration type)
         {
             VisitMember(type);
-        }
-
-        /// <summary>
-        /// Visits the semantically augmented nested type member.
-        /// </summary>
-        /// <remarks>
-        /// This member will only be called when using an 
-        /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
-        /// available.
-        /// </remarks>
-        public virtual void VisitNestedType(NestedType type)
-        {
-            VisitType(type);
         }
 
         /// <summary>

@@ -41,12 +41,6 @@ namespace ClariusLabs.NuDoc
         public Action<TypeDeclaration> VisitType { get; set; }
 
         /// <summary>
-        /// Gets or sets the action to invoke when visiting a nested type.
-        /// </summary>
-        /// <seealso cref="Visitor.VisitNestedType"/>
-        public Action<NestedType> VisitNestedType { get; set; }
-
-        /// <summary>
         /// Gets or sets the action to invoke when visiting an interface.
         /// </summary>
         /// <seealso cref="Visitor.VisitInterface"/>
@@ -470,17 +464,6 @@ namespace ClariusLabs.NuDoc
                 delegates.VisitMethod(method);
 
             base.VisitMethod(method);
-        }
-
-        /// <summary>
-        /// See <see cref="Visitor.VisitNestedType"/>.
-        /// </summary>
-        public override void VisitNestedType(NestedType type)
-        {
-            if (delegates.VisitNestedType != null)
-                delegates.VisitNestedType(type);
-
-            base.VisitNestedType(type);
         }
 
         /// <summary>

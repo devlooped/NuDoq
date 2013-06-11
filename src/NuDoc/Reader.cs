@@ -102,11 +102,6 @@ namespace ClariusLabs.NuDoc
             if (type == null)
                 return member;
 
-            var nestingTypeId = "";
-            if (type.DeclaringType != null &&
-                !string.IsNullOrEmpty((nestingTypeId = map.FindId(type.DeclaringType))))
-                return new NestedType(member.ToString(), nestingTypeId, member.Elements);
-
             if (type.IsInterface)
                 return new Interface(member.ToString(), member.Elements);
             if (type.IsClass)

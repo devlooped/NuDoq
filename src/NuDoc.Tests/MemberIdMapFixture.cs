@@ -50,6 +50,18 @@ namespace ClariusLabs.NuDoc
         }
 
         [Fact]
+        public void when_mapping_type_then_can_retrieve_from_ids_or_members()
+        {
+            var map = new MemberIdMap();
+            map.Add(typeof(Sample));
+
+            var id = map.FindId(typeof(Sample));
+
+            Assert.True(map.Ids.Contains(id));
+            Assert.True(map.Members.Contains(typeof(Sample)));
+        }
+
+        [Fact]
         public void when_mapping_generic_type_then_matches_xml_format()
         {
             var expected = "T:ClariusLabs.Demo.SampleGeneric`2";

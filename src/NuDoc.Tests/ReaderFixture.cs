@@ -83,18 +83,6 @@ namespace ClariusLabs.NuDoc
         }
 
         [Fact]
-        public void when_reading_nested_type_then_provides_typed_member()
-        {
-            var typed = Reader.Read(assembly)
-                .Elements
-                .OfType<NestedType>()
-                .FirstOrDefault();
-
-            Assert.NotNull(typed);
-            Assert.NotNull(typed.Info);
-        }
-
-        [Fact]
         public void when_reading_provider_then_reads_summary()
         {
             var map = new MemberIdMap();
@@ -144,15 +132,23 @@ namespace ClariusLabs.NuDoc
 var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().First().Content);
 
             Assert.Equal("inline code", ((Example)children[1]).Elements.OfType<Para>().First().Elements.OfType<C>().First().Content);
+
             Assert.Equal("Term", ((List)children[2])
                 .Elements.OfType<ListHeader>().First()
                 .Elements.OfType<Term>().First().Elements.OfType<Text>().First().Content);
             Assert.Equal("Description", ((List)children[2])
                 .Elements.OfType<ListHeader>().First()
                 .Elements.OfType<Description>().First().Elements.OfType<Text>().First().Content);
+            Assert.NotNull(((List)children[2]).Header.Term);
+            Assert.NotNull(((List)children[2]).Header.Description);
+
             Assert.Equal("ItemTerm", ((List)children[2])
                 .Elements.OfType<Item>().First()
                 .Elements.OfType<Term>().First().Elements.OfType<Text>().First().Content);
+
+            Assert.NotNull(((List)children[2]).Items.First().Term);
+            Assert.NotNull(((List)children[2]).Items.First().Description);
+
             Assert.Equal("ItemDescription", ((List)children[2])
                 .Elements.OfType<Item>().First()
                 .Elements.OfType<Description>().First().Elements.OfType<Text>().First().Content);
@@ -220,12 +216,11 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var providerId = map.FindId(typeof(Sample.NestedType));
 
-            var member = Reader.Read(assembly).Elements.OfType<NestedType>().Where(c => c.Id == providerId).FirstOrDefault();
+            var member = Reader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == providerId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
             Assert.Same(typeof(Sample.NestedType), member.Info);
-            Assert.True(member.Kind.HasFlag(MemberKinds.NestedType));
             Assert.True(member.Kind.HasFlag(MemberKinds.Type));
         }
 

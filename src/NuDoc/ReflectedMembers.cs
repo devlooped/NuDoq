@@ -23,20 +23,28 @@ namespace ClariusLabs.NuDoc
     using System.Linq;
 
     /// <summary>
-    /// Composite of all lazy-read members in a documentation file 
-    /// or assembly, returned from the <see cref="Reader"/>.
+    /// Composite of all lazy-read members from an assembly 
+    /// passed to <see cref="Reader.Read(System.Reflection.Assembly)"/>.
     /// </summary>
-    public class Members : Container
+    public class ReflectedMembers : Members
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Members"/> class.
+        /// Initializes a new instance of the <see cref="Members" /> class.
         /// </summary>
+        /// <param name="idMap">The id map of reflection members to documentation ids.</param>
         /// <param name="members">The lazily-read members of the set.</param>
-        public Members(IEnumerable<Member> members)
-            // In .NET 3.5 there's no covariance on IEnumerable.
-            : base(members.OfType<Element>())
+        public ReflectedMembers(MemberIdMap idMap, IEnumerable<Member> members)
+            : base(members)
         {
+            this.IdMap = idMap;
         }
+
+        /// <summary>
+        /// Gets the map of reflection members to documentation ids used 
+        /// to augment the <see cref="Member.Info"/> on all documented members 
+        /// found in the XML API documentation associated with an assembly.
+        /// </summary>
+        public MemberIdMap IdMap { get; private set; }
 
         /// <summary>
         /// Accepts the specified visitor.

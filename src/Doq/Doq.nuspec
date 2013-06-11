@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Doq</id>
+        <version>1.0</version>
+        <title>Doq: A .NET XML API Documentation Reader</title>
+        <authors>Daniel Cazzulino</authors>
+        <owners>Daniel Cazzulino</owners>
+        <licenseUrl>http://clarius.io/clide-license</licenseUrl>
+        <projectUrl>http://clarius.io/clide</projectUrl>
+        <iconUrl>http://clarius.io/clide-48x48</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.</description>
+        <releaseNotes>v1.0
+
+* Initial release with support for all documentation tags
+* Support for custom visitors over the entire results
+* Support for anonymous (delegate-based visitor) for convenience
+* Additional member post-processing annotations from reflection if available (i.e. reading from an assembly)
+</releaseNotes>
+        <copyright>Copyright 2013</copyright>
+        <tags>.net documentation</tags>
+        <dependencies />
+    </metadata>
+</package>

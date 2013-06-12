@@ -21,29 +21,37 @@ namespace ClariusLabs.NuDoc
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml.Linq;
 
     /// <summary>
     /// Composite of all lazy-read members in a documentation file 
-    /// or assembly, returned from the <see cref="Reader"/>.
+    /// returned from the <see cref="Reader.Read(string)"/>.
     /// </summary>
-    public class Members : Container
+    public class DocumentMembers : Container
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Members"/> class.
+        /// Initializes a new instance of the <see cref="DocumentMembers" /> class.
         /// </summary>
+        /// <param name="xml">The source XML document that was used to read the members.</param>
         /// <param name="members">The lazily-read members of the set.</param>
-        public Members(IEnumerable<Member> members)
+        public DocumentMembers(XDocument xml, IEnumerable<Member> members)
             // In .NET 3.5 there's no covariance on IEnumerable.
             : base(members.OfType<Element>())
         {
+            this.Xml = xml;
         }
+
+        /// <summary>
+        /// Gets the source XML document that was used to read the members.
+        /// </summary>
+        public XDocument Xml { get; private set; }
 
         /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
         public override TVisitor Accept<TVisitor>(TVisitor visitor)
         {
-            visitor.VisitMembers(this);
+            visitor.VisitDocument(this);
             return visitor;
         }
     }

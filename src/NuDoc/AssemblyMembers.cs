@@ -21,23 +21,33 @@ namespace ClariusLabs.NuDoc
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
+    using System.Xml.Linq;
 
     /// <summary>
     /// Composite of all lazy-read members from an assembly 
-    /// passed to <see cref="Reader.Read(System.Reflection.Assembly)"/>.
+    /// passed to <see cref="Reader.Read(Assembly)"/>.
     /// </summary>
-    public class ReflectedMembers : Members
+    public class AssemblyMembers : DocumentMembers
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Members" /> class.
+        /// Initializes a new instance of the <see cref="DocumentMembers" /> class.
         /// </summary>
+        /// <param name="assembly">The assembly that was used to read the documented members.</param>
         /// <param name="idMap">The id map of reflection members to documentation ids.</param>
+        /// <param name="xml">The source XML document that was used to read the members.</param>
         /// <param name="members">The lazily-read members of the set.</param>
-        public ReflectedMembers(MemberIdMap idMap, IEnumerable<Member> members)
-            : base(members)
+        public AssemblyMembers(Assembly assembly, MemberIdMap idMap, XDocument xml, IEnumerable<Member> members)
+            : base(xml, members)
         {
+            this.Assembly = assembly;
             this.IdMap = idMap;
         }
+
+        /// <summary>
+        /// Gets the assembly that was used to read the documented members.
+        /// </summary>
+        public Assembly Assembly { get; private set; }
 
         /// <summary>
         /// Gets the map of reflection members to documentation ids used 
@@ -51,7 +61,7 @@ namespace ClariusLabs.NuDoc
         /// </summary>
         public override TVisitor Accept<TVisitor>(TVisitor visitor)
         {
-            visitor.VisitMembers(this);
+            visitor.VisitAssembly(this);
             return visitor;
         }
     }

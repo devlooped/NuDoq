@@ -78,6 +78,86 @@ namespace ClariusLabs.NuDoc
         }
 
         [Fact]
+        public void when_reading_assembly_then_can_access_source_assembly()
+        {
+            var members = Reader.Read(assembly);
+
+            Assert.Same(assembly, members.Assembly);
+        }
+
+        [Fact]
+        public void when_reading_assembly_then_can_access_source_document()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var members = Reader.Read(assembly);
+
+            Assert.NotNull(members.Xml);
+            Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
+        }
+
+        [Fact]
+        public void when_reading_xml_then_can_access_source_document()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var members = Reader.Read(xmlFile);
+
+            Assert.NotNull(members.Xml);
+            Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
+        }
+
+        [Fact]
+        public void when_reading_assembly_then_can_access_id_map()
+        {
+            var members = Reader.Read(assembly);
+
+            Assert.NotNull(members.IdMap);
+            Assert.NotNull(members.IdMap.FindId(typeof(IProvider)));
+        }
+
+        [Fact]
+        public void when_reading_assembly_then_visits_assembly_and_document()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var members = Reader.Read(assembly);
+            AssemblyMembers asmMembers = null;
+            DocumentMembers docMembers = null;
+
+            members.Accept(new DelegateVisitor(new VisitorDelegates
+            {
+                VisitAssembly = asm => asmMembers = asm,
+                VisitDocument = doc => docMembers = doc,
+            }));
+
+            Assert.NotNull(asmMembers);
+            Assert.NotNull(docMembers);
+        }
+
+        [Fact]
+        public void when_reading_document_then_visits_document()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var members = Reader.Read(xmlFile);
+            DocumentMembers docMembers = null;
+
+            members.Accept(new DelegateVisitor(new VisitorDelegates
+            {
+                VisitDocument = doc => docMembers = doc,
+            }));
+
+            Assert.NotNull(docMembers);
+        }
+
+        [Fact]
+        public void when_reading_xml_then_visits_document()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var members = Reader.Read(xmlFile);
+
+            Assert.NotNull(members.Xml);
+            Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
+        }
+
+        [Fact]
         public void when_reading_extension_method_then_provides_typed_member()
         {
             var typed = Reader.Read(assembly)

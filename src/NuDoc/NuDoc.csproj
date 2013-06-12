@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedEnumerable.cs" />
-    <Compile Include="ReflectedMembers.cs" />
+    <Compile Include="AssemblyMembers.cs" />
     <Compile Include="DelegateVisitor.cs" />
     <Compile Include="IVisitable.cs" />
     <Compile Include="Param.cs" />
@@ -38,7 +38,7 @@
     <Compile Include="Exception.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Description.cs" />
-    <Compile Include="Members.cs" />
+    <Compile Include="DocumentMembers.cs" />
     <Compile Include="Term.cs" />
     <Compile Include="List.cs" />
     <Compile Include="ListHeader.cs" />

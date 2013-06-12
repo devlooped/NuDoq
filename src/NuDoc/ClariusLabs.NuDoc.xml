@@ -10,16 +10,16 @@
             container elements.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.ReflectedMembers">
+        <member name="T:ClariusLabs.NuDoc.AssemblyMembers">
             <summary>
             Composite of all lazy-read members from an assembly 
             passed to <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.Members">
+        <member name="T:ClariusLabs.NuDoc.DocumentMembers">
             <summary>
             Composite of all lazy-read members in a documentation file 
-            or assembly, returned from the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            returned from the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Container">
@@ -74,9 +74,14 @@
             model.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Visitor.VisitMembers(ClariusLabs.NuDoc.Members)">
+        <member name="M:ClariusLabs.NuDoc.Visitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Visitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)">
+            <summary>
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitType(ClariusLabs.NuDoc.TypeDeclaration)">
@@ -319,30 +324,43 @@
             Gets the elements contained in this instance.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Members.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
+        <member name="M:ClariusLabs.NuDoc.DocumentMembers.#ctor(System.Xml.Linq.XDocument,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
             <summary>
-            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Members"/> class.
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.DocumentMembers"/> class.
             </summary>
+            <param name="xml">The source XML document that was used to read the members.</param>
             <param name="members">The lazily-read members of the set.</param>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Members.Accept``1(``0)">
+        <member name="M:ClariusLabs.NuDoc.DocumentMembers.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.ReflectedMembers.#ctor(ClariusLabs.NuDoc.MemberIdMap,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
+        <member name="P:ClariusLabs.NuDoc.DocumentMembers.Xml">
             <summary>
-            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Members"/> class.
+            Gets the source XML document that was used to read the members.
             </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.AssemblyMembers.#ctor(System.Reflection.Assembly,ClariusLabs.NuDoc.MemberIdMap,System.Xml.Linq.XDocument,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Member})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.DocumentMembers"/> class.
+            </summary>
+            <param name="assembly">The assembly that was used to read the documented members.</param>
             <param name="idMap">The id map of reflection members to documentation ids.</param>
+            <param name="xml">The source XML document that was used to read the members.</param>
             <param name="members">The lazily-read members of the set.</param>
         </member>
-        <member name="M:ClariusLabs.NuDoc.ReflectedMembers.Accept``1(``0)">
+        <member name="M:ClariusLabs.NuDoc.AssemblyMembers.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="P:ClariusLabs.NuDoc.ReflectedMembers.IdMap">
+        <member name="P:ClariusLabs.NuDoc.AssemblyMembers.Assembly">
+            <summary>
+            Gets the assembly that was used to read the documented members.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.AssemblyMembers.IdMap">
             <summary>
             Gets the map of reflection members to documentation ids used 
             to augment the <see cref="P:ClariusLabs.NuDoc.Member.Info"/> on all documented members 
@@ -356,11 +374,17 @@
             <see cref="T:ClariusLabs.NuDoc.Visitor"/>-derived classes.
             </summary>
         </member>
-        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitMembers">
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitDocument">
             <summary>
-            Gets or sets the action to invoke when visiting members.
+            Gets or sets the action to invoke when visiting all documented members of an XML document file.
             </summary>
-            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitMembers(ClariusLabs.NuDoc.Members)"/>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitAssembly">
+            <summary>
+            Gets or sets the action to invoke when visiting all documented members of an assembly.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)"/>
         </member>
         <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitType">
             <summary>
@@ -585,6 +609,16 @@
             </summary>
             <param name="delegates">The delegates to use when visiting the model.</param>
         </member>
+        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)">
+            <summary>
+            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)"/>.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)">
+            <summary>
+            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)"/>.
+            </summary>
+        </member>
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitC(ClariusLabs.NuDoc.C)">
             <summary>
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitC(ClariusLabs.NuDoc.C)"/>.
@@ -668,11 +702,6 @@
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitMember(ClariusLabs.NuDoc.Member)">
             <summary>
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitMember(ClariusLabs.NuDoc.Member)"/>.
-            </summary>
-        </member>
-        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitMembers(ClariusLabs.NuDoc.Members)">
-            <summary>
-            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitMembers(ClariusLabs.NuDoc.Members)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitMethod(ClariusLabs.NuDoc.Method)">

@@ -29,10 +29,16 @@ namespace ClariusLabs.NuDoc
     public class VisitorDelegates
     {
         /// <summary>
-        /// Gets or sets the action to invoke when visiting members.
+        /// Gets or sets the action to invoke when visiting all documented members of an XML document file.
         /// </summary>
-        /// <seealso cref="Visitor.VisitMembers"/>
-        public Action<Members> VisitMembers { get; set; }
+        /// <seealso cref="Visitor.VisitDocument"/>
+        public Action<DocumentMembers> VisitDocument { get; set; }
+
+        /// <summary>
+        /// Gets or sets the action to invoke when visiting all documented members of an assembly.
+        /// </summary>
+        /// <seealso cref="Visitor.VisitAssembly"/>
+        public Action<AssemblyMembers> VisitAssembly { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a type member.
@@ -264,6 +270,28 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
+        /// See <see cref="Visitor.VisitDocument"/>.
+        /// </summary>
+        public override void VisitDocument(DocumentMembers document)
+        {
+            if (delegates.VisitDocument != null)
+                delegates.VisitDocument(document);
+
+            base.VisitDocument(document);
+        }
+
+        /// <summary>
+        /// See <see cref="Visitor.VisitAssembly"/>.
+        /// </summary>
+        public override void VisitAssembly(AssemblyMembers assembly)
+        {
+            if (delegates.VisitAssembly != null)
+                delegates.VisitAssembly(assembly);
+
+            base.VisitAssembly(assembly);
+        }
+
+        /// <summary>
         /// See <see cref="Visitor.VisitC"/>.
         /// </summary>
         public override void VisitC(C code)
@@ -448,17 +476,6 @@ namespace ClariusLabs.NuDoc
                 delegates.VisitMember(member);
 
             base.VisitMember(member);
-        }
-
-        /// <summary>
-        /// See <see cref="Visitor.VisitMembers"/>.
-        /// </summary>
-        public override void VisitMembers(Members members)
-        {
-            if (delegates.VisitMembers != null)
-                delegates.VisitMembers(members);
-
-            base.VisitMembers(members);
         }
 
         /// <summary>

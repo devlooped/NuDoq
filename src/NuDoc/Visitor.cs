@@ -18,6 +18,8 @@
 
 namespace ClariusLabs.NuDoc
 {
+    using System.Reflection;
+
     /// <summary>
     /// Base class for visitors of the visitable documentation 
     /// model.
@@ -25,11 +27,19 @@ namespace ClariusLabs.NuDoc
     public abstract class Visitor
     {
         /// <summary>
-        /// Visits the entire set of members read by the <see cref="Reader"/>.
+        /// Visits the entire set of members read by the <see cref="Reader.Read(string)"/>.
         /// </summary>
-        public virtual void VisitMembers(Members members)
+        public virtual void VisitDocument(DocumentMembers document)
         {
-            VisitContainer(members);
+            VisitContainer(document);
+        }
+
+        /// <summary>
+        /// Visits the entire set of members read by the <see cref="Reader.Read(Assembly)"/>.
+        /// </summary>
+        public virtual void VisitAssembly(AssemblyMembers assembly)
+        {
+            VisitDocument(assembly);
         }
 
         /// <summary>

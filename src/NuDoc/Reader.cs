@@ -38,14 +38,14 @@ namespace ClariusLabs.NuDoc
         /// <param name="fileName">Path to the documentation file.</param>
         /// <returns>All documented members found in the given file.</returns>
         /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
-        public static Members Read(string fileName)
+        public static DocumentMembers Read(string fileName)
         {
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("Could not find documentation file to load.", fileName);
 
-            var doc = XDocument.Load(fileName);
+            var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
 
-            return new Members(doc.Root.Element("members").Elements("member")
+            return new DocumentMembers(doc, doc.Root.Element("members").Elements("member")
                 .Select(e => CreateMember(e.Attribute("name").Value, ReadContent(e))));
         }
 
@@ -59,17 +59,17 @@ namespace ClariusLabs.NuDoc
         /// <returns>All documented members found in the given file, together with the reflection metadata 
         /// association from the assembly.</returns>
         /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
-        public static Members Read(Assembly assembly)
+        public static AssemblyMembers Read(Assembly assembly)
         {
             var fileName = Path.ChangeExtension(assembly.Location, ".xml");
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("Could not find documentation file to load.", fileName);
 
-            var doc = XDocument.Load(fileName);
+            var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
             var map = new MemberIdMap();
             map.Add(assembly);
 
-            return new Members(doc.Root.Element("members").Elements("member")
+            return new AssemblyMembers(assembly, map, doc, doc.Root.Element("members").Elements("member")
                 .Where(element => element.Attribute("name") != null)
                 .Select(element => CreateMember(element.Attribute("name").Value, ReadContent(element)))
                 .Select(member => ReplaceExtensionMethods(member, map))

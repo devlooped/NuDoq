@@ -155,5 +155,12 @@
       <FileName>Value.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="ClariusLabs.NuDoc.UnknownElement" Collapsed="true">
+    <Position X="17" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnknownElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

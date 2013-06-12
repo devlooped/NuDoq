@@ -6,9 +6,9 @@
         <title>NuDoc: A .NET XML API Documentation Reader</title>
         <authors>Daniel Cazzulino</authors>
         <owners>Daniel Cazzulino</owners>
-        <licenseUrl>http://clarius.io/clide-license</licenseUrl>
-        <projectUrl>http://clarius.io/clide</projectUrl>
-        <iconUrl>http://clarius.io/clide-48x48</iconUrl>
+        <licenseUrl>https://github.com/clariuslabs/common/blob/master/License.txt</licenseUrl>
+        <projectUrl>http://clarius.io/ndoc</projectUrl>
+        <iconUrl>https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-32.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.</description>
         <releaseNotes>v1.0

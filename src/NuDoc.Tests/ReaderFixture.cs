@@ -50,24 +50,31 @@ namespace ClariusLabs.NuDoc
         {
             var metro = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoMetro\bin\ClariusLabs.DemoMetro.dll").FullName;
             var sl = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoSilverlight\bin\ClariusLabs.DemoSilverlight.dll").FullName;
+            var wp = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoPhone\bin\ClariusLabs.DemoPhone.dll").FullName;
             var clr = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoProject\bin\ClariusLabs.DemoProject.dll").FullName;
 
             var countMetro = new CountingVisitor();
             var countSl = new CountingVisitor();
+            var countWp = new CountingVisitor();
             var countClr = new CountingVisitor();
 
             Reader.Read(Assembly.LoadFrom(metro)).Accept(countMetro);
             Reader.Read(Assembly.LoadFrom(sl)).Accept(countSl);
+            Reader.Read(Assembly.LoadFrom(wp)).Accept(countWp);
             Reader.Read(Assembly.LoadFrom(clr)).Accept(countClr);
 
             Assert.Equal(countMetro.TypeCount, countClr.TypeCount);
             Assert.Equal(countSl.TypeCount, countClr.TypeCount);
+            Assert.Equal(countWp.TypeCount, countClr.TypeCount);
 
             Assert.Equal(countMetro.ElementCount, countClr.ElementCount);
             Assert.Equal(countMetro.ElementCount, countClr.ElementCount);
 
-            Assert.Equal(countMetro.ContainerCount, countClr.ContainerCount);
-            Assert.Equal(countMetro.ContainerCount, countClr.ContainerCount);
+            Assert.Equal(countSl.ContainerCount, countClr.ContainerCount);
+            Assert.Equal(countSl.ContainerCount, countClr.ContainerCount);
+
+            Assert.Equal(countWp.ContainerCount, countClr.ContainerCount);
+            Assert.Equal(countWp.ContainerCount, countClr.ContainerCount);
         }
 
         [Fact]

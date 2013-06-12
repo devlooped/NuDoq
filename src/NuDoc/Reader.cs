@@ -49,8 +49,6 @@ namespace ClariusLabs.NuDoc
                 .Select(e => CreateMember(e.Attribute("name").Value, ReadContent(e))));
         }
 
-        // TODO: support multiple assemblies.
-
         /// <summary>
         /// Uses the specified assembly to locate a documentation file alongside the assembly by 
         /// changing the extension to ".xml". If the file is found, it will be read and all 
@@ -233,6 +231,7 @@ namespace ClariusLabs.NuDoc
                                 yield return new Value(ReadContent(elementNode));
                                 break;
                             default:
+                                yield return new UnknownElement(elementNode, ReadContent(elementNode));
                                 break;
                         }
                         break;

@@ -503,6 +503,20 @@ We can have paragraphs anywhere.
             Assert.Equal("The id of this sample.", element.ToString());
         }
 
+        [Fact]
+        public void when_parsing_unknown_element_then_reads_inner_content()
+        {
+            var map = new MemberIdMap();
+            map.Add(typeof(IProvider));
+            var typeId = map.FindId(typeof(IProvider));
+            var member = Reader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == typeId).Single();
+
+            var element = member.Elements.OfType<Summary>().Single();
+
+            Assert.True(element.Elements.OfType<UnknownElement>().Any());
+            Assert.True(element.Elements.OfType<UnknownElement>().Single().Elements.OfType<Text>().Any());
+        }
+
         private class CountingVisitor : Visitor
         {
             public int TypeCount { get; set; }

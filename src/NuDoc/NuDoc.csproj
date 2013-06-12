@@ -44,6 +44,7 @@
     <Compile Include="ListHeader.cs" />
     <Compile Include="ListType.cs" />
     <Compile Include="TextVisitor.cs" />
+    <Compile Include="UnknownElement.cs" />
     <Compile Include="Value.cs" />
     <Compile Include="TypeParamRef.cs" />
     <Compile Include="ParamRef.cs" />

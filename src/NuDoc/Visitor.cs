@@ -335,6 +335,14 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
+        /// Visits an unknown documentation element.
+        /// </summary>
+        public virtual void VisitUnknownElement(UnknownElement element)
+        {
+            VisitContainer(element);
+        }
+
+        /// <summary>
         /// Visits any container element.
         /// </summary>
         /// <remarks>

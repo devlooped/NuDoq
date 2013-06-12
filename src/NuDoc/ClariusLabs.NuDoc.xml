@@ -285,6 +285,11 @@
             Visits an unknown member element.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Visitor.VisitUnknownElement(ClariusLabs.NuDoc.UnknownElement)">
+            <summary>
+            Visits an unknown documentation element.
+            </summary>
+        </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitContainer(ClariusLabs.NuDoc.Container)">
             <summary>
             Visits any container element.
@@ -549,6 +554,12 @@
             </summary>
             <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)"/>
         </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitUnknownElement">
+            <summary>
+            Gets or sets the action to invoke when visiting an unknown element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownElement(ClariusLabs.NuDoc.UnknownElement)"/>
+        </member>
         <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitContainer">
             <summary>
             Gets or sets the action to invoke when visiting any container element.
@@ -742,6 +753,11 @@
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)">
             <summary>
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)"/>.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitUnknownElement(ClariusLabs.NuDoc.UnknownElement)">
+            <summary>
+            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitUnknownElement(ClariusLabs.NuDoc.UnknownElement)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitValue(ClariusLabs.NuDoc.Value)">
@@ -983,6 +999,28 @@
         <member name="T:ClariusLabs.NuDoc.TextVisitor">
             <summary>
             Visitor that is used to render ToString for elements.
+            </summary>
+        </member>
+        <member name="T:ClariusLabs.NuDoc.UnknownElement">
+            <summary>
+            An unsupported or unknown XML documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.UnknownElement.#ctor(System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.UnknownElement"/> class.
+            </summary>
+            <param name="xml">The <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.</param>
+            <param name="content">The child content.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.UnknownElement.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.UnknownElement.Xml">
+            <summary>
+            Gets the <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Value">

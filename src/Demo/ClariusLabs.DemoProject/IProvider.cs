@@ -21,7 +21,7 @@ namespace ClariusLabs.Demo
     using System;
 
     /// <summary>
-    ///  
+    /// <b>unknown tag</b>
     /// </summary>
     /// <remarks>
     /// <code>

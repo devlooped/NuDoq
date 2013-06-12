@@ -227,6 +227,12 @@ namespace ClariusLabs.NuDoc
         public Action<UnknownMember> VisitUnknownMember { get; set; }
 
         /// <summary>
+        /// Gets or sets the action to invoke when visiting an unknown element.
+        /// </summary>
+        /// <seealso cref="Visitor.VisitUnknownElement"/>
+        public Action<UnknownElement> VisitUnknownElement { get; set; }
+
+        /// <summary>
         /// Gets or sets the action to invoke when visiting any container element.
         /// </summary>
         /// <seealso cref="Visitor.VisitContainer"/>
@@ -629,6 +635,17 @@ namespace ClariusLabs.NuDoc
                 delegates.VisitUnknownMember(member);
 
             base.VisitUnknownMember(member);
+        }
+
+        /// <summary>
+        /// See <see cref="Visitor.VisitUnknownElement"/>.
+        /// </summary>
+        public override void VisitUnknownElement(UnknownElement element)
+        {
+            if (delegates.VisitUnknownElement != null)
+                delegates.VisitUnknownElement(element);
+
+            base.VisitUnknownElement(element);
         }
 
         /// <summary>

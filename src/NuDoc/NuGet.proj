@@ -34,7 +34,7 @@
                     TaskParameter="Minor"/>
         </ReadAssemblyVersion>
 
-        <PropertyGroup>
+        <PropertyGroup Condition="'$(FileVersion)' == ''">
             <!-- Build number is of the format (2 digit year)(2 digit month) -->
             <Build>$([System.DateTime]::UtcNow.ToString("yyMM"))</Build>
             <!-- Revision number is of the format (2 digit hour)(2 digit minutes) -->
@@ -42,6 +42,9 @@
             <FileVersion>$(Major).$(Minor).$(Build).$(Revision)</FileVersion>
             <!-- TODO: maybe we should have two builds, one that builds the public simplified version
                  and one with the full build/revision -->
+        </PropertyGroup>
+
+        <PropertyGroup>
             <PackageVersion>$(FileVersion)</PackageVersion>
         </PropertyGroup>
 

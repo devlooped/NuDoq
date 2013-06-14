@@ -4,20 +4,33 @@
         <id>NuDoc</id>
         <version>1.0</version>
         <title>NuDoc: A .NET XML API Documentation Reader</title>
-        <authors>Daniel Cazzulino</authors>
-        <owners>Daniel Cazzulino</owners>
+        <authors>Daniel Cazzulino, kzu, Clarius Labs</authors>
+        <owners>Clarius Labs</owners>
         <licenseUrl>https://github.com/clariuslabs/common/blob/master/License.txt</licenseUrl>
-        <projectUrl>http://clarius.io/ndoc</projectUrl>
+        <projectUrl>http://clarius.io/nudoc</projectUrl>
         <iconUrl>https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-32.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.</description>
-        <releaseNotes>v1.0
+        <releaseNotes>v0.4
+* Added support for `returns` tag.
+* Added support for retrieving `IXmlLineInfo` for every element, which allows much better diagnostics
+* ToString now renders basic element information 
+* Full element text content rendering moved to `ToText` method
 
-* Initial release with support for all documentation tags
+v0.3
+* Support for unknown XML elements (preserves and processes content)
+* Support for writing XML from the in-memory model via XmlVisitor
+
+v0.2
+
+* Support for all documentation tags
 * Support for custom visitors over the entire results
 * Support for anonymous (delegate-based visitor) for convenience
 * Additional member post-processing annotations from reflection if available (i.e. reading from an assembly)
-</releaseNotes>
+
+v0.1
+
+* Initial cut with visitable documentation elements</releaseNotes>
         <copyright>Copyright 2013</copyright>
         <tags>.net documentation</tags>
         <dependencies />

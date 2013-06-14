@@ -64,7 +64,7 @@ namespace ClariusLabs.NuDoc
         /// </summary>
         public override string ToString()
         {
-            return this.Id;
+            return this.Id + " " + base.ToString();
         }
     }
 }

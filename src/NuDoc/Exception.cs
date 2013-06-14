@@ -53,5 +53,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the member id of the exception type.
         /// </summary>
         public string Cref { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<exception>" + base.ToString();
+        }
     }
 }

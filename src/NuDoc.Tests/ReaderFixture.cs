@@ -24,6 +24,7 @@ namespace ClariusLabs.NuDoc
     using System.Reflection;
     using ClariusLabs.Demo;
     using Xunit;
+    using System.Xml;
 
     public class ReaderFixture
     {
@@ -53,10 +54,10 @@ namespace ClariusLabs.NuDoc
             var wp = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoPhone\bin\ClariusLabs.DemoPhone.dll").FullName;
             var clr = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoProject\bin\ClariusLabs.DemoProject.dll").FullName;
 
-            var countMetro = new CountingVisitor();
-            var countSl = new CountingVisitor();
-            var countWp = new CountingVisitor();
-            var countClr = new CountingVisitor();
+            var countMetro = new CountingVisitor("nudoc-metro");
+            var countSl = new CountingVisitor("nudoc-sl");
+            var countWp = new CountingVisitor("nudoc-wp");
+            var countClr = new CountingVisitor("nudoc-net");
 
             Reader.Read(Assembly.LoadFrom(metro)).Accept(countMetro);
             Reader.Read(Assembly.LoadFrom(sl)).Accept(countSl);
@@ -68,12 +69,11 @@ namespace ClariusLabs.NuDoc
             Assert.Equal(countWp.TypeCount, countClr.TypeCount);
 
             Assert.Equal(countMetro.ElementCount, countClr.ElementCount);
-            Assert.Equal(countMetro.ElementCount, countClr.ElementCount);
+            Assert.Equal(countSl.ElementCount, countClr.ElementCount);
+            Assert.Equal(countWp.ElementCount, countClr.ElementCount);
 
+            Assert.Equal(countMetro.ContainerCount, countClr.ContainerCount);
             Assert.Equal(countSl.ContainerCount, countClr.ContainerCount);
-            Assert.Equal(countSl.ContainerCount, countClr.ContainerCount);
-
-            Assert.Equal(countWp.ContainerCount, countClr.ContainerCount);
             Assert.Equal(countWp.ContainerCount, countClr.ContainerCount);
         }
 
@@ -103,6 +103,20 @@ namespace ClariusLabs.NuDoc
 
             Assert.NotNull(members.Xml);
             Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
+        }
+
+        [Fact]
+        public void when_reading_element_then_can_access_xml_line_info()
+        {
+            var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
+            var member = Reader.Read(xmlFile).Elements.SelectMany(x => x.Traverse()).OfType<Summary>().First();
+
+            var lineInfo = member as IXmlLineInfo;
+
+            Assert.NotNull(lineInfo);
+            Assert.True(lineInfo.HasLineInfo());
+            Assert.NotEqual(0, lineInfo.LineNumber);
+            Assert.NotEqual(0, lineInfo.LinePosition);
         }
 
         [Fact]
@@ -170,23 +184,24 @@ namespace ClariusLabs.NuDoc
         }
 
         [Fact]
-        public void when_reading_provider_then_reads_summary()
+        public void when_reading_provider_type_then_reads_summary()
         {
             var map = new MemberIdMap();
             map.Add(assembly);
 
-            var id = map.FindId(typeof(Provider));
+            var id = map.FindId(typeof(ProviderType));
             Assert.NotNull(id);
 
-            var member = Reader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
+            var member = Reader.Read(typeof(ProviderType).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
             Assert.NotNull(member);
 
             var element = member.Elements.OfType<Summary>().FirstOrDefault();
 
             Assert.NotNull(element);
-            Assert.Equal(1, element.Elements.Count());
+            Assert.Equal(4, element.Elements.Count());
             Assert.True(element.Elements.OfType<Text>().Any());
-            Assert.Equal("Summary.", element.Elements.OfType<Text>().First().Content);
+            Assert.Equal("The type of provider.", element.Elements.OfType<Text>().First().Content);
+            Assert.Equal("And then some.", element.Elements.OfType<Text>().Last().Content);
         }
 
         [Fact]
@@ -206,12 +221,11 @@ namespace ClariusLabs.NuDoc
             Assert.NotNull(element);
 
             var children = element.Elements.ToList();
-            Assert.Equal(4, children.Count);
+            Assert.Equal(3, children.Count);
 
             Assert.IsType<Text>(children[0]);
             Assert.IsType<Example>(children[1]);
             Assert.IsType<List>(children[2]);
-            Assert.IsType<Para>(children[3]);
 
             Assert.Equal("Remarks.", ((Text)children[0]).Content);
             Assert.Equal("Example with code:", ((Example)children[1]).Elements.OfType<Text>().First().Content);
@@ -239,10 +253,6 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             Assert.Equal("ItemDescription", ((List)children[2])
                 .Elements.OfType<Item>().First()
                 .Elements.OfType<Description>().First().Elements.OfType<Text>().First().Content);
-
-            Assert.Equal("A ", ((Para)children[3]).Elements.OfType<Text>().First().Content);
-            Assert.Equal(id, ((Para)children[3]).Elements.OfType<See>().First().Cref);
-            Assert.Equal(" element.", ((Para)children[3]).Elements.OfType<Text>().Last().Content);
         }
 
         [Fact]
@@ -376,14 +386,14 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
         }
 
         [Fact]
-        public void when_using_to_string_then_renders_text_content()
+        public void when_using_to_text_then_renders_text_content()
         {
             var xml = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoProject\ClariusLabs.DemoProject.xml").FullName;
             var members = Reader.Read(xml);
             var member = members.Elements.OfType<TypeDeclaration>().FirstOrDefault(x => x.Id == "T:ClariusLabs.Demo.SampleExtensions");
 
             Assert.NotNull(member);
-            Assert.Equal("Extension class for ClariusLabs.Demo.Sample.", member.Elements.OfType<Summary>().First().ToString());
+            Assert.Equal("Extension class for ClariusLabs.Demo.Sample.", member.Elements.OfType<Summary>().First().ToText());
 
             member = members.Elements.OfType<TypeDeclaration>().FirstOrDefault(x => x.Id == "T:ClariusLabs.Demo.Sample");
             Assert.NotNull(member);
@@ -394,7 +404,7 @@ You can use ClariusLabs.Demo.Provider see tag within sections.
 We can have paragraphs anywhere.
 "; 
 
-            Assert.Equal(content, member.Elements.OfType<Remarks>().First().ToString());            
+            Assert.Equal(content, member.Elements.OfType<Remarks>().First().ToText());            
         }
 
         [Fact]
@@ -551,12 +561,12 @@ We can have paragraphs anywhere.
         public void when_parsing_empty_summary_then_removes_empty_text()
         {
             var map = new MemberIdMap();
-            map.Add(typeof(IProvider));
-            var typeId = map.FindId(typeof(IProvider));
-            var member = Reader.Read(assembly).Elements.OfType<Interface>().Where(c => c.Id == typeId).Single();
+            map.Add(typeof(Provider));
+            var typeId = map.FindId(typeof(Provider));
+            var member = Reader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Summary>().Single();
-            Assert.Empty(element.ToString());
+            Assert.Empty(element.ToText());
         }
 
         [Fact]
@@ -580,7 +590,7 @@ We can have paragraphs anywhere.
             var member = Reader.Read(assembly).Elements.OfType<Property>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Value>().Single();
-            Assert.Equal("The id of this sample.", element.ToString());
+            Assert.Equal("The id of this sample.", element.ToText());
         }
 
         [Fact]
@@ -599,14 +609,25 @@ We can have paragraphs anywhere.
 
         private class CountingVisitor : Visitor
         {
+            private string platform;
+            private string fileName;
+
             public int TypeCount { get; set; }
             public int ContainerCount { get; set; }
             public int ElementCount { get; set; }
+
+            public CountingVisitor(string platform)
+            {
+                this.platform = platform;
+                this.fileName = "C:\\Temp\\" + platform + ".txt";
+                //File.WriteAllText(fileName, "");
+            }
 
             public override void VisitType(TypeDeclaration type)
             {
                 base.VisitType(type);
                 TypeCount++;
+                //File.AppendAllLines("C:\\Temp\\" + platform + ".txt", new [] { type.ToString() });
             }
 
             protected override void VisitContainer(Container container)
@@ -619,6 +640,7 @@ We can have paragraphs anywhere.
             {
                 base.VisitElement(element);
                 ElementCount++;
+                //File.AppendAllLines("C:\\Temp\\" + platform + ".txt", new[] { element.ToString() });
             }
         }
     }

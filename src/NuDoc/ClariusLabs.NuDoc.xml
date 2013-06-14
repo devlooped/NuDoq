@@ -58,6 +58,12 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Element.ToText">
+            <summary>
+            Returns the text content of this element and all its 
+            children if any.
+            </summary>
+        </member>
         <member name="M:ClariusLabs.NuDoc.Element.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents this instance.
@@ -285,6 +291,11 @@
             Visits the <c>exception</c> documentation element.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Visitor.VisitReturns(ClariusLabs.NuDoc.Returns)">
+            <summary>
+            Visits the <c>returns</c> documentation element.
+            </summary>
+        </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitUnknownMember(ClariusLabs.NuDoc.UnknownMember)">
             <summary>
             Visits an unknown member element.
@@ -336,6 +347,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.DocumentMembers.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.DocumentMembers.Xml">
             <summary>
             Gets the source XML document that was used to read the members.
@@ -355,6 +371,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.AssemblyMembers.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.AssemblyMembers.Assembly">
             <summary>
             Gets the assembly that was used to read the documented members.
@@ -365,6 +386,30 @@
             Gets the map of reflection members to documentation ids used 
             to augment the <see cref="P:ClariusLabs.NuDoc.Member.Info"/> on all documented members 
             found in the XML API documentation associated with an assembly.
+            </summary>
+        </member>
+        <member name="T:ClariusLabs.NuDoc.Returns">
+            <summary>
+            Represents the <c>returns</c> documentation tag.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-US/library/azda5z79(v=vs.80).aspx.
+            </remarks>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Returns.#ctor(System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.Returns"/> class.
+            </summary>
+            <param name="elements">The contained elements within this instance.</param>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Returns.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Returns.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.VisitorDelegates">
@@ -535,6 +580,12 @@
             Gets or sets the action to invoke when visiting the <c>value</c> documentation element.
             </summary>
             <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitValue(ClariusLabs.NuDoc.Value)"/>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitReturns">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>returns</c> documentation element.
+            </summary>
+            <seealso cref="M:ClariusLabs.NuDoc.Visitor.VisitReturns(ClariusLabs.NuDoc.Returns)"/>
         </member>
         <member name="P:ClariusLabs.NuDoc.VisitorDelegates.VisitList">
             <summary>
@@ -794,6 +845,11 @@
             See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitValue(ClariusLabs.NuDoc.Value)"/>.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.DelegateVisitor.VisitReturns(ClariusLabs.NuDoc.Returns)">
+            <summary>
+            See <see cref="M:ClariusLabs.NuDoc.Visitor.VisitReturns(ClariusLabs.NuDoc.Returns)"/>.
+            </summary>
+        </member>
         <member name="T:ClariusLabs.NuDoc.Param">
             <summary>
             Represents the <c>param</c> documentation tag.
@@ -812,6 +868,11 @@
         <member name="M:ClariusLabs.NuDoc.Param.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Param.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.Param.Name">
@@ -839,6 +900,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.TypeParam.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.TypeParam.Name">
             <summary>
             Gets the name of the type parameter.
@@ -864,6 +930,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Exception.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.Exception.Cref">
             <summary>
             Gets the member id of the exception type.
@@ -886,6 +957,11 @@
         <member name="M:ClariusLabs.NuDoc.Item.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Item.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.Item.Term">
@@ -917,6 +993,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Description.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="T:ClariusLabs.NuDoc.Term">
             <summary>
             Represents the <c>term</c> documentation tag.
@@ -934,6 +1015,11 @@
         <member name="M:ClariusLabs.NuDoc.Term.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Term.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.List">
@@ -954,6 +1040,11 @@
         <member name="M:ClariusLabs.NuDoc.List.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.List.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.List.Type">
@@ -988,6 +1079,11 @@
         <member name="M:ClariusLabs.NuDoc.ListHeader.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.ListHeader.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.ListHeader.Term">
@@ -1047,6 +1143,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.UnknownElement.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.UnknownElement.Xml">
             <summary>
             Gets the <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.
@@ -1071,6 +1172,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Value.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="T:ClariusLabs.NuDoc.TypeParamRef">
             <summary>
             Represents the <c>typeparamref</c> documentation tag.
@@ -1088,6 +1194,11 @@
         <member name="M:ClariusLabs.NuDoc.TypeParamRef.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.TypeParamRef.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.TypeParamRef.Name">
@@ -1112,6 +1223,11 @@
         <member name="M:ClariusLabs.NuDoc.ParamRef.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.ParamRef.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.ParamRef.Name">
@@ -1454,20 +1570,32 @@
             See http://msdn.microsoft.com/en-US/library/acd0tfbe(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:ClariusLabs.NuDoc.See.#ctor(System.String)">
+        <member name="M:ClariusLabs.NuDoc.See.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.See"/> class.
             </summary>
-            <param name="cref">The member id of the referenced member.</param>
+            <param name="cref">The member id of the referenced member, if any.</param>
+            <param name="langword">The element langword, if any.</param>
+            <param name="elements">The child elements.</param>
         </member>
         <member name="M:ClariusLabs.NuDoc.See.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.See.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.See.Cref">
             <summary>
             Gets the member id of the referenced member.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.See.Langword">
+            <summary>
+            Gets the original langword attribute.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.SeeAlso">
@@ -1478,15 +1606,21 @@
             See http://msdn.microsoft.com/en-US/library/xhd7ehkk(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:ClariusLabs.NuDoc.SeeAlso.#ctor(System.String)">
+        <member name="M:ClariusLabs.NuDoc.SeeAlso.#ctor(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.SeeAlso"/> class.
             </summary>
             <param name="cref">The member id of the referenced member.</param>
+            <param name="elements">The child elements.</param>
         </member>
         <member name="M:ClariusLabs.NuDoc.SeeAlso.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.SeeAlso.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.SeeAlso.Cref">
@@ -1535,6 +1669,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Text.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.Text.Content">
             <summary>
             Gets the literal text content
@@ -1557,6 +1696,11 @@
         <member name="M:ClariusLabs.NuDoc.C.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.C.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:ClariusLabs.NuDoc.C.Content">
@@ -1583,6 +1727,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Code.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.NuDoc.Code.Content">
             <summary>
             Gets the code content.
@@ -1607,6 +1756,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Example.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="T:ClariusLabs.NuDoc.Para">
             <summary>
             Represents the <c>para</c> documentation tag.
@@ -1624,6 +1778,11 @@
         <member name="M:ClariusLabs.NuDoc.Para.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Para.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Reader">
@@ -1673,7 +1832,7 @@
             <param name="map">The map.</param>
             <returns></returns>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.CreateMember(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
+        <member name="M:ClariusLabs.NuDoc.Reader.CreateMember(System.String,System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
             <summary>
             Creates the appropriate type of member according to the member id prefix.
             </summary>
@@ -1717,6 +1876,11 @@
             Accepts the specified visitor.
             </summary>
         </member>
+        <member name="M:ClariusLabs.NuDoc.Remarks.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
         <member name="T:ClariusLabs.NuDoc.Summary">
             <summary>
             Represents the <c>summary</c> documentation tag.
@@ -1734,6 +1898,11 @@
         <member name="M:ClariusLabs.NuDoc.Summary.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.Summary.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.UnknownMember">
@@ -1833,6 +2002,146 @@
             The member is a struct. This 
             kind is used in conjunction with <see cref="F:ClariusLabs.NuDoc.MemberKinds.Type"/> 
             as a combined flag.
+            </summary>
+        </member>
+        <member name="T:ClariusLabs.NuDoc.XmlVisitor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClariusLabs.NuDoc.XmlVisitor"/> class.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)">
+            <summary>
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)">
+            <summary>
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitMember(ClariusLabs.NuDoc.Member)">
+            <summary>
+            Visit the generic base class <see cref="T:ClariusLabs.NuDoc.Member"/>.
+            </summary>
+            <param name="member"></param>
+            <remarks>
+            This method is called for all <see cref="T:ClariusLabs.NuDoc.Member"/>-derived
+            types.
+            </remarks>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitC(ClariusLabs.NuDoc.C)">
+            <summary>
+            Visits the <c>c</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitCode(ClariusLabs.NuDoc.Code)">
+            <summary>
+            Visits the <c>code</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitDescription(ClariusLabs.NuDoc.Description)">
+            <summary>
+            Visits the <c>description</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitExample(ClariusLabs.NuDoc.Example)">
+            <summary>
+            Visits the <c>example</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitException(ClariusLabs.NuDoc.Exception)">
+            <summary>
+            Visits the <c>exception</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitItem(ClariusLabs.NuDoc.Item)">
+            <summary>
+            Visits the <c>item</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitList(ClariusLabs.NuDoc.List)">
+            <summary>
+            Visits the <c>list</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitListHeader(ClariusLabs.NuDoc.ListHeader)">
+            <summary>
+            Visits the <c>listheader</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitPara(ClariusLabs.NuDoc.Para)">
+            <summary>
+            Visits the <c>para</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitParam(ClariusLabs.NuDoc.Param)">
+            <summary>
+            Visits the <c>param</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitParamRef(ClariusLabs.NuDoc.ParamRef)">
+            <summary>
+            Visits the <c>paramref</c> documentation elemnet.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitRemarks(ClariusLabs.NuDoc.Remarks)">
+            <summary>
+            Visits the <c>remarks</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitSee(ClariusLabs.NuDoc.See)">
+            <summary>
+            Visits the <c>see</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitSeeAlso(ClariusLabs.NuDoc.SeeAlso)">
+            <summary>
+            Visits the <c>seealso</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitSummary(ClariusLabs.NuDoc.Summary)">
+            <summary>
+            Visits the <c>summary</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitTerm(ClariusLabs.NuDoc.Term)">
+            <summary>
+            Visits the <c>term</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitText(ClariusLabs.NuDoc.Text)">
+            <summary>
+            Visits the literal text inside other documentation elements.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitTypeParam(ClariusLabs.NuDoc.TypeParam)">
+            <summary>
+            Visits the <c>typeparam</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitTypeParamRef(ClariusLabs.NuDoc.TypeParamRef)">
+            <summary>
+            Visits the <c>typeparamref</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitUnknownElement(ClariusLabs.NuDoc.UnknownElement)">
+            <summary>
+            Visits an unknown documentation element.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitValue(ClariusLabs.NuDoc.Value)">
+            <summary>
+            Visits the <c>value</c> documentation element.
+            </summary>
+        </member>
+        <member name="P:ClariusLabs.NuDoc.XmlVisitor.Xml">
+            <summary>
+            Gets the XML.
             </summary>
         </member>
     </members>

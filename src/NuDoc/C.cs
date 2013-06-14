@@ -48,5 +48,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the code content.
         /// </summary>
         public string Content { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<c>" + base.ToString();
+        }
     }
 }

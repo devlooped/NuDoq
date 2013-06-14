@@ -23,6 +23,7 @@ namespace ClariusLabs.NuDoc
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Xml;
     using System.Xml.Linq;
 
     /// <summary>
@@ -46,7 +47,9 @@ namespace ClariusLabs.NuDoc
             var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
 
             return new DocumentMembers(doc, doc.Root.Element("members").Elements("member")
-                .Select(e => CreateMember(e.Attribute("name").Value, ReadContent(e))));
+                .Where(element => element.Attribute("name") != null)
+                //.OrderBy(element => element.Attribute("name").Value)
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element))));
         }
 
         /// <summary>
@@ -71,7 +74,8 @@ namespace ClariusLabs.NuDoc
 
             return new AssemblyMembers(assembly, map, doc, doc.Root.Element("members").Elements("member")
                 .Where(element => element.Attribute("name") != null)
-                .Select(element => CreateMember(element.Attribute("name").Value, ReadContent(element)))
+                //.OrderBy(e => e.Attribute("name").Value)
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element)))
                 .Select(member => ReplaceExtensionMethods(member, map))
                 .Select(member => ReplaceTypes(member, map))
                 .Select(member => SetInfo(member, map)));
@@ -82,7 +86,7 @@ namespace ClariusLabs.NuDoc
         /// </summary>
         private static Member SetInfo(Member member, MemberIdMap map)
         {
-            member.Info = map.FindMember(member.ToString());
+            member.Info = map.FindMember(member.Id);
 
             return member;
         }
@@ -96,18 +100,18 @@ namespace ClariusLabs.NuDoc
             if (member.Kind != MemberKinds.Type)
                 return member;
 
-            var type = (Type)map.FindMember(member.ToString());
+            var type = (Type)map.FindMember(member.Id);
             if (type == null)
                 return member;
 
             if (type.IsInterface)
-                return new Interface(member.ToString(), member.Elements);
+                return new Interface(member.Id, member.Elements);
             if (type.IsClass)
-                return new Class(member.ToString(), member.Elements);
+                return new Class(member.Id, member.Elements);
             if (type.IsEnum)
-                return new Enum(member.ToString(), member.Elements);
+                return new Enum(member.Id, member.Elements);
             if (type.IsValueType)
-                return new Struct(member.ToString(), member.Elements);
+                return new Struct(member.Id, member.Elements);
 
             return member;
         }
@@ -124,7 +128,7 @@ namespace ClariusLabs.NuDoc
             if (member.Kind != MemberKinds.Method)
                 return member;
 
-            var method = (MethodBase)map.FindMember(member.ToString());
+            var method = (MethodBase)map.FindMember(member.Id);
             if (method == null)
                 return member;
 
@@ -132,7 +136,7 @@ namespace ClariusLabs.NuDoc
             {
                 var extendedTypeId = map.FindId(method.GetParameters()[0].ParameterType);
                 if (!string.IsNullOrEmpty(extendedTypeId))
-                    return new ExtensionMethod(member.ToString(), extendedTypeId, member.Elements);
+                    return new ExtensionMethod(member.Id, extendedTypeId, member.Elements);
             }
 
             return member;
@@ -141,32 +145,43 @@ namespace ClariusLabs.NuDoc
         /// <summary>
         /// Creates the appropriate type of member according to the member id prefix.
         /// </summary>
-        private static Member CreateMember(string memberId, IEnumerable<Element> elements)
+        private static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children)
         {
+            var member = default(Member);
             switch (memberId[0])
             {
                 case 'T':
-                    return new TypeDeclaration(memberId, elements);
+                    member = new TypeDeclaration(memberId, children);
+                    break;
                 case 'F':
-                    return new Field(memberId, elements);
+                    member = new Field(memberId, children);
+                    break;
                 case 'P':
-                    return new Property(memberId, elements);
+                    member = new Property(memberId, children);
+                    break;
                 case 'M':
-                    return new Method(memberId, elements);
+                    member = new Method(memberId, children);
+                    break;
                 case 'E':
-                    return new Event(memberId, elements);
+                    member = new Event(memberId, children);
+                    break;
                 default:
-                    return new UnknownMember(memberId);
+                    member = new UnknownMember(memberId);
+                    break;
             }
+
+            member.SetLineInfo(element as IXmlLineInfo);
+            return member;
         }
 
         /// <summary>
         /// Reads all supported documentation elements.
         /// </summary>
-        private static IEnumerable<Element> ReadContent(XElement element)
+        private static IEnumerable<Element> ReadContent(XElement xml)
         {
-            foreach (var node in element.Nodes())
+            foreach (var node in xml.Nodes())
             {
+                var element = default(Element);
                 switch (node.NodeType)
                 {
                     case System.Xml.XmlNodeType.Element:
@@ -174,74 +189,82 @@ namespace ClariusLabs.NuDoc
                         switch (elementNode.Name.LocalName)
                         {
                             case "summary":
-                                yield return new Summary(ReadContent(elementNode));
+                                element = new Summary(ReadContent(elementNode));
                                 break;
                             case "remarks":
-                                yield return new Remarks(ReadContent(elementNode));
+                                element = new Remarks(ReadContent(elementNode));
                                 break;
                             case "example":
-                                yield return new Example(ReadContent(elementNode));
+                                element = new Example(ReadContent(elementNode));
                                 break;
                             case "para":
-                                yield return new Para(ReadContent(elementNode));
+                                element = new Para(ReadContent(elementNode));
                                 break;
                             case "param":
-                                yield return new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode));
+                                element = new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode));
                                 break;
                             case "paramref":
-                                yield return new ParamRef(FindAttribute(elementNode, "name"));
+                                element = new ParamRef(FindAttribute(elementNode, "name"));
                                 break;
                             case "typeparam":
-                                yield return new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode));
+                                element = new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode));
                                 break;
                             case "typeparamref":
-                                yield return new TypeParamRef(FindAttribute(elementNode, "name"));
+                                element = new TypeParamRef(FindAttribute(elementNode, "name"));
                                 break;
                             case "code":
-                                yield return new Code(TrimCode(elementNode.Value));
+                                element = new Code(TrimCode(elementNode.Value));
                                 break;
                             case "c":
-                                yield return new C(elementNode.Value);
+                                element = new C(elementNode.Value);
                                 break;
                             case "see":
-                                yield return new See(FindAttribute(elementNode, "cref"));
+                                element = new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), ReadContent(elementNode));
                                 break;
                             case "seealso":
-                                yield return new SeeAlso(FindAttribute(elementNode, "cref"));
+                                element = new SeeAlso(FindAttribute(elementNode, "cref"), ReadContent(elementNode));
                                 break;
                             case "list":
-                                yield return new List(FindAttribute(elementNode, "type"), ReadContent(elementNode));
+                                element = new List(FindAttribute(elementNode, "type"), ReadContent(elementNode));
                                 break;
                             case "listheader":
-                                yield return new ListHeader(ReadContent(elementNode));
+                                element = new ListHeader(ReadContent(elementNode));
                                 break;
                             case "term":
-                                yield return new Term(ReadContent(elementNode));
+                                element = new Term(ReadContent(elementNode));
                                 break;
                             case "description":
-                                yield return new Description(ReadContent(elementNode));
+                                element = new Description(ReadContent(elementNode));
                                 break;
                             case "item":
-                                yield return new Item(ReadContent(elementNode));
+                                element = new Item(ReadContent(elementNode));
                                 break;
                             case "exception":
-                                yield return new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode));
+                                element = new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode));
                                 break;
                             case "value":
-                                yield return new Value(ReadContent(elementNode));
+                                element = new Value(ReadContent(elementNode));
+                                break;
+                            case "returns":
+                                element = new Returns(ReadContent(elementNode));
                                 break;
                             default:
-                                yield return new UnknownElement(elementNode, ReadContent(elementNode));
+                                element = new UnknownElement(elementNode, ReadContent(elementNode));
                                 break;
                         }
                         break;
                     case System.Xml.XmlNodeType.Text:
-                        yield return new Text(TrimText(((XText)node).Value));
+                        element = new Text(TrimText(((XText)node).Value));
                         break;
                     default:
                         break;
                 }
 
+                if (element != null)
+                {
+                    element.SetLineInfo(xml as IXmlLineInfo);
+                    yield return element;
+                }
             }
         }
 

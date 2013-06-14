@@ -21,9 +21,10 @@ namespace ClariusLabs.Demo
     using System;
 
     /// <summary>
-    /// Sample with generic type <typeparamref name="T"/>.
+    /// Sample with generic type <typeparamref name="T" />.
     /// </summary>
     /// <typeparam name="T">The T</typeparam>
+    /// <typeparam name="S"></typeparam>
     public class SampleGeneric<T, S>
     {
         /// <summary>

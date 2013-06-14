@@ -1,3 +1,13 @@
+v0.4
+* Added support for `<returns>` tag.
+* Added support for retrieving `IXmlLineInfo` for every element, which allows much better diagnostics
+* ToString now renders basic element information 
+* Full element text content rendering moved to `ToText` method
+
+v0.3
+* Support for unknown XML elements (preserves and processes content)
+* Support for writing XML from the in-memory model via XmlVisitor
+
 v0.2
 
 * Support for all documentation tags

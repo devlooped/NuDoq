@@ -18,19 +18,23 @@
 
 namespace ClariusLabs.NuDoc
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents the <c>seealso</c> documentation tag.
     /// </summary>
     /// <remarks>
     /// See http://msdn.microsoft.com/en-US/library/xhd7ehkk(v=vs.80).aspx.
     /// </remarks>
-    public class SeeAlso : Element
+    public class SeeAlso : Container
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SeeAlso"/> class.
         /// </summary>
         /// <param name="cref">The member id of the referenced member.</param>
-        public SeeAlso(string cref)
+        /// <param name="elements">The child elements.</param>
+        public SeeAlso(string cref, IEnumerable<Element> elements)
+            : base(elements)
         {
             this.Cref = cref;
         }
@@ -48,5 +52,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the member id of the referenced member.
         /// </summary>
         public string Cref { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<seealso>" + base.ToString();
+        }
     }
 }

@@ -96,7 +96,9 @@
     <Compile Include="..\ClariusLabs.DemoProject\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClariusLabs.DemoMetro.xml" />
+    <Content Include="ClariusLabs.DemoMetro.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

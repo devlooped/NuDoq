@@ -53,5 +53,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the name of the type parameter.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<typeparam>" + base.ToString();
+        }
     }
 }

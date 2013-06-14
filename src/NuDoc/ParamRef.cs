@@ -48,5 +48,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the name of the referenced parameter.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<paramref>" + base.ToString();
+        }
     }
 }

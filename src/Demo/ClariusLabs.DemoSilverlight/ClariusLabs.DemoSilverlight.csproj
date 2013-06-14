@@ -60,7 +60,9 @@
     <Compile Include="..\ClariusLabs.DemoProject\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClariusLabs.DemoSilverlight.xml" />
+    <Content Include="ClariusLabs.DemoSilverlight.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

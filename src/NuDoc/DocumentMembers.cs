@@ -54,5 +54,13 @@ namespace ClariusLabs.NuDoc
             visitor.VisitDocument(this);
             return visitor;
         }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return new Uri(this.Xml.BaseUri).LocalPath;
+        }
     }
 }

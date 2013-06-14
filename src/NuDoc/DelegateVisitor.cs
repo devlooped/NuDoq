@@ -191,6 +191,12 @@ namespace ClariusLabs.NuDoc
         public Action<Value> VisitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the action to invoke when visiting the <c>returns</c> documentation element.
+        /// </summary>
+        /// <seealso cref="Visitor.VisitReturns"/>
+        public Action<Returns> VisitReturns { get; set; }
+
+        /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>list</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitList"/>
@@ -674,6 +680,17 @@ namespace ClariusLabs.NuDoc
                 delegates.VisitValue(value);
 
             base.VisitValue(value);
+        }
+
+        /// <summary>
+        /// See <see cref="Visitor.VisitReturns"/>.
+        /// </summary>
+        public override void VisitReturns(Returns returns)
+        {
+            if (delegates.VisitReturns != null)
+                delegates.VisitReturns(returns);
+
+            base.VisitReturns(returns);
         }
     }
 }

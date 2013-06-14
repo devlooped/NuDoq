@@ -15,33 +15,27 @@
         </member>
         <member name="T:ClariusLabs.Demo.Provider">
             <summary>
-            Summary.
             </summary>
             <remarks>
             Remarks.
-            <example>
-            Example with code:
-                <code>
-            var code = new Code();
-            var length = code.Length + 1;
-                </code>
-                <para>
-            With a paragraph with <c>inline code</c>.
-                </para>
-            </example>
-            <list type="table">
-                <listheader>
-                    <term>Term</term>
-                    <description>Description</description>
-                </listheader>
-                <item>
-                    <term>ItemTerm</term>
-                    <description>ItemDescription</description>
-                </item>
-            </list>
-            <para>
-            A <see cref="T:ClariusLabs.Demo.Provider"/> element.
-            </para>
+              <example>
+                  Example with code:<code>
+                      var code = new Code();
+                      var length = code.Length + 1;
+                  </code><para>
+                      With a paragraph with <c>inline code</c>.
+                  </para>
+              </example>
+              <list type="table">
+                  <listheader>
+                      <term>Term</term>
+                      <description>Description</description>
+                  </listheader>
+                  <item>
+                      <term>ItemTerm</term>
+                      <description>ItemDescription</description>
+                  </item>
+              </list>
             </remarks>
             <seealso cref="T:ClariusLabs.Demo.Provider"/>
             <exception cref="T:ClariusLabs.Demo.Provider">Exception</exception>
@@ -152,9 +146,10 @@
         </member>
         <member name="T:ClariusLabs.Demo.SampleGeneric`2">
             <summary>
-            Sample with generic type <typeparamref name="T"/>.
+            Sample with generic type <typeparamref name="T" />.
             </summary>
             <typeparam name="T">The T</typeparam>
+            <typeparam name="S"></typeparam>
         </member>
         <member name="M:ClariusLabs.Demo.SampleGeneric`2.Do``1(System.Func{`0,`1,``0})">
             <summary>

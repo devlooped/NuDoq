@@ -18,21 +18,27 @@
 
 namespace ClariusLabs.NuDoc
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents the <c>see</c> documentation tag.
     /// </summary>
     /// <remarks>
     /// See http://msdn.microsoft.com/en-US/library/acd0tfbe(v=vs.80).aspx.
     /// </remarks>
-    public class See : Element
+    public class See : Container
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="See"/> class.
+        /// Initializes a new instance of the <see cref="See" /> class.
         /// </summary>
-        /// <param name="cref">The member id of the referenced member.</param>
-        public See(string cref)
+        /// <param name="cref">The member id of the referenced member, if any.</param>
+        /// <param name="langword">The element langword, if any.</param>
+        /// <param name="elements">The child elements.</param>
+        public See(string cref, string langword, IEnumerable<Element> elements)
+            : base(elements)
         {
             this.Cref = cref;
+            this.Langword = langword;
         }
 
         /// <summary>
@@ -48,5 +54,18 @@ namespace ClariusLabs.NuDoc
         /// Gets the member id of the referenced member.
         /// </summary>
         public string Cref { get; private set; }
+
+        /// <summary>
+        /// Gets the original langword attribute.
+        /// </summary>
+        public string Langword { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<see>" + base.ToString();
+        }
     }
 }

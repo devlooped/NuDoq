@@ -45,5 +45,13 @@ namespace ClariusLabs.NuDoc
             visitor.VisitSummary(this);
             return visitor;
         }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<summary>" + base.ToString();
+        }
     }
 }

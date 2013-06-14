@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ Copyright 2013 Clarius Consulting, Daniel Cazzulino
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="doc" nillable="true" type="doc" />
+
+  <xs:complexType name="doc">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="assembly" type="assembly" />
+      <xs:element minOccurs="1" maxOccurs="1" name="members" type="members" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assembly">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="members">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="1" maxOccurs="1" name="member" type="member" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="member">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="summary" type="summary" />
+        <xs:element minOccurs="0" maxOccurs="1" name="remarks" type="remarks" />
+        <xs:element minOccurs="0" maxOccurs="1" name="example" type="example" />
+        <xs:element minOccurs="0" maxOccurs="1" name="value" type="value" />
+        <xs:element minOccurs="0" maxOccurs="1" name="returns" type="returns" />
+        <xs:element minOccurs="0" maxOccurs="1" name="param" type="param" />
+        <xs:element minOccurs="0" maxOccurs="1" name="typeparam" type="typeparam" />
+        <xs:element minOccurs="0" maxOccurs="1" name="code" type="code" />
+        <xs:element minOccurs="0" maxOccurs="1" name="include" type="include" />
+        <xs:element minOccurs="0" maxOccurs="1" name="exception" type="exception" />
+        <xs:element minOccurs="0" maxOccurs="1" name="permission" type="permission" />
+        <xs:element minOccurs="0" maxOccurs="1" name="seealso" type="seealso" />
+        <xs:element minOccurs="0" maxOccurs="1" name="list" type="list" />
+        <xs:element minOccurs="0" maxOccurs="1" name="filterpriority" type="filterpriority" />
+        <xs:element minOccurs="0" maxOccurs="1" name="completionlist" type="completionlist" />
+        <xs:element minOccurs="0" maxOccurs="1" name="PermissionSet" type="PermissionSet" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="name" use="required" type="identifier" />
+  </xs:complexType>
+
+  <xs:complexType name="summary" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="para" type="para"/>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="remarks" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="para" type="para"/>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="content" mixed="true" abstract="true">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="c" type="c"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="code" type="code"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="see" type="see"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="list" type="list"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="paramref" type="paramref"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="typeparamref" type="typeparamref"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="para" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="returns" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="value" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="example" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="exception" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content">
+        <xs:attribute name="cref" use="required" type="identifier"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="param" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content">
+        <xs:attribute name="name" use="required" type="name"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="typeparam" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="content">
+        <xs:attribute name="name" use="required" type="name"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="filterpriority">
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+  
+  <xs:complexType name="c" mixed="true">
+  </xs:complexType>
+
+  <xs:complexType name="code" mixed="true">
+    <xs:attribute name="language" use="optional" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="include">
+    <xs:attribute name="file" use="optional" type="xs:string"/>
+    <xs:attribute name="path" use="optional" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="paramref" mixed="true">
+    <xs:attribute name="name" use="optional" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="typeparamref" mixed="true">
+    <xs:attribute name="name" use="optional" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="permission" mixed="true">
+    <xs:attribute name="cref" use="optional" type="identifier"/>
+  </xs:complexType>
+
+  <xs:complexType name="see" mixed="true">
+    <xs:attribute name="cref" use="optional" type="identifier"/>
+  </xs:complexType>
+
+  <xs:complexType name="seealso" mixed="true">
+    <xs:attribute name="cref" use="optional" type="identifier"/>
+  </xs:complexType>
+
+  <xs:complexType name="completionlist" mixed="true">
+    <xs:attribute name="cref" use="optional" type="identifier"/>
+  </xs:complexType>
+
+  <xs:complexType name="list">
+    <xs:sequence>
+      <xs:element name="listheader" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="term" type="xs:string" minOccurs="0" />
+            <xs:element name="description" type="xs:string" minOccurs="0" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType mixed="true">
+          <xs:sequence>
+            <xs:element name="term" type="xs:string" minOccurs="0" />
+            <xs:element name="description" type="xs:string" minOccurs="0" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="PermissionSet">
+    <xs:sequence>
+      <xs:element name="IPermission" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any processContents="skip"/>
+          </xs:sequence>
+          <xs:attribute name="class" use="required" type="xs:string"/>
+          <xs:attribute name="version" use="required" type="xs:integer"/>
+          <xs:attribute name="Flags" use="optional" type="xs:string"/>
+          <xs:attribute name="Unrestricted" use="optional" type="xs:boolean" default="false" />
+          <xs:anyAttribute processContents="skip"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+
+  <xs:simpleType name="identifier">
+    <xs:restriction base="xs:string">
+      <!--<xs:pattern value="^(?i-:(?:(?:N|T|F|P|M|E|!|(?:Overload)):|\.|:)?(?:[a-z_][\w_]*\.)*(?:#?[a-z_][\w_]*)(?:``(?:\d+))?(?:\((?:.*)\))?).*$"/>-->
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="name">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -56,5 +56,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the description from the contained elements, if any.
         /// </summary>
         public Description Description { get { return this.Elements.OfType<Description>().FirstOrDefault(); } }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<item>" + base.ToString();
+        }
     }
 }

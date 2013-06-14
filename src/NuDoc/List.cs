@@ -72,5 +72,13 @@ namespace ClariusLabs.NuDoc
         /// Gets the items from the contained elements.
         /// </summary>
         public IEnumerable<Item> Items { get { return this.Elements.OfType<Item>(); } }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "<list>" + base.ToString();
+        }
     }
 }

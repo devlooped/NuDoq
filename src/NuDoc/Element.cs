@@ -19,6 +19,8 @@
 namespace ClariusLabs.NuDoc
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Xml;
 
     /// <summary>
     /// Base class for all elements in a documentation file, including 
@@ -27,21 +29,36 @@ namespace ClariusLabs.NuDoc
     /// <remarks>
     /// This type is the root of the visitor model hierarchy.
     /// </remarks>
-    public abstract class Element : ClariusLabs.NuDoc.IVisitable
+    [DebuggerDisplay("{ToText()}")]
+    public abstract class Element : IVisitable, IXmlLineInfo
     {
+        private IXmlLineInfo lineInfo;
+
         /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
         public abstract TVisitor Accept<TVisitor>(TVisitor visitor) where TVisitor : Visitor;
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns the text content of this element and all its 
+        /// children if any.
         /// </summary>
-        public override string ToString()
+        public string ToText()
         {
             var visitor = new TextVisitor();
             this.Accept(visitor);
             return visitor.Text;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            if (this.lineInfo != null && this.lineInfo.HasLineInfo())
+                return "(" + this.lineInfo.LineNumber + "," + this.lineInfo.LinePosition + ")";
+
+            return "";
         }
 
         /// <summary>
@@ -50,6 +67,11 @@ namespace ClariusLabs.NuDoc
         public IEnumerable<Element> Traverse()
         {
             return this.Accept(new TraverseVisitor()).Elements;
+        }
+
+        internal void SetLineInfo(IXmlLineInfo lineInfo)
+        {
+            this.lineInfo = lineInfo;
         }
 
         private class TraverseVisitor : Visitor
@@ -66,6 +88,21 @@ namespace ClariusLabs.NuDoc
             }
 
             public List<Element> Elements { get; set; }
+        }
+
+        bool IXmlLineInfo.HasLineInfo()
+        {
+            return this.lineInfo != null && this.lineInfo.HasLineInfo();
+        }
+
+        int IXmlLineInfo.LineNumber
+        {
+            get { return this.lineInfo == null ? 0 : this.lineInfo.LineNumber; }
+        }
+
+        int IXmlLineInfo.LinePosition
+        {
+            get { return this.lineInfo == null ? 0 : this.lineInfo.LinePosition; }
         }
     }
 }

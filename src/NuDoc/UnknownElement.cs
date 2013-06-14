@@ -52,5 +52,13 @@ namespace ClariusLabs.NuDoc
             visitor.VisitUnknownElement(this);
             return visitor;
         }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        public override string ToString()
+        {
+            return "unknown:<" + this.Xml.Name.LocalName + ">" + base.ToString();
+        }
     }
 }

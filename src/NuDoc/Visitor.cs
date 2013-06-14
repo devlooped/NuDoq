@@ -337,6 +337,14 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
+        /// Visits the <c>returns</c> documentation element.
+        /// </summary>
+        public virtual void VisitReturns(Returns returns)
+        {
+            VisitContainer(returns);
+        }
+
+        /// <summary>
         /// Visits an unknown member element.
         /// </summary>
         public virtual void VisitUnknownMember(UnknownMember member)

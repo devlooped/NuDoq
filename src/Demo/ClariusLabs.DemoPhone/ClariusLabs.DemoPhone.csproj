@@ -82,7 +82,9 @@
     <Compile Include="..\ClariusLabs.DemoProject\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClariusLabs.DemoPhone.xml" />
+    <Content Include="ClariusLabs.DemoPhone.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

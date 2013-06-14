@@ -31,6 +31,7 @@
   <ItemGroup>
     <Compile Include="CachedEnumerable.cs" />
     <Compile Include="AssemblyMembers.cs" />
+    <Compile Include="Returns.cs" />
     <Compile Include="DelegateVisitor.cs" />
     <Compile Include="IVisitable.cs" />
     <Compile Include="Param.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="Visitor.cs" />
     <Compile Include="MemberKinds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Common\ClariusLabs.licenseheader">

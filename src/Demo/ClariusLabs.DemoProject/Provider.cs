@@ -21,33 +21,27 @@ namespace ClariusLabs.Demo
     using System;
 
     /// <summary>
-    /// Summary.
     /// </summary>
     /// <remarks>
     /// Remarks.
-    /// <example>
-    /// Example with code:
-    ///     <code>
-    /// var code = new Code();
-    /// var length = code.Length + 1;
-    ///     </code>
-    ///     <para>
-    /// With a paragraph with <c>inline code</c>.
-    ///     </para>
-    /// </example>
-    /// <list type="table">
-    ///     <listheader>
-    ///         <term>Term</term>
-    ///         <description>Description</description>
-    ///     </listheader>
-    ///     <item>
-    ///         <term>ItemTerm</term>
-    ///         <description>ItemDescription</description>
-    ///     </item>
-    /// </list>
-    /// <para>
-    /// A <see cref="Provider"/> element.
-    /// </para>
+    ///   <example>
+    ///       Example with code:<code>
+    ///           var code = new Code();
+    ///           var length = code.Length + 1;
+    ///       </code><para>
+    ///           With a paragraph with <c>inline code</c>.
+    ///       </para>
+    ///   </example>
+    ///   <list type="table">
+    ///       <listheader>
+    ///           <term>Term</term>
+    ///           <description>Description</description>
+    ///       </listheader>
+    ///       <item>
+    ///           <term>ItemTerm</term>
+    ///           <description>ItemDescription</description>
+    ///       </item>
+    ///   </list>
     /// </remarks>
     /// <seealso cref="Provider"/>
     /// <exception cref="Provider">Exception</exception>
@@ -56,6 +50,6 @@ namespace ClariusLabs.Demo
         /// <summary>
         /// Occurs when the provider is connected.
         /// </summary>
-        public event EventHandler Connected;
+        public event EventHandler Connected = (sender, args) => {};
     }
 }

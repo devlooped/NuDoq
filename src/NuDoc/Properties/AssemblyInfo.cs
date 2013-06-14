@@ -26,5 +26,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("NuDoc")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 
-[assembly: AssemblyVersion("0.4.1306.1116")]
-[assembly: AssemblyFileVersion("0.4.1306.1116")]
+[assembly: AssemblyVersion("0.4.1306.1409")]
+[assembly: AssemblyFileVersion("0.4.1306.1409")]

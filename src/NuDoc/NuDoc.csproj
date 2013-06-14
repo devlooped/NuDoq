@@ -92,7 +92,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <SymbolSource Include="**\*.cs" Exclude="nuget\**\*.cs">
+    <SymbolSource Include="**\*.cs">
       <Visible>False</Visible>
     </SymbolSource>
     <SymbolSource Include="$(IntermediateOutputPath)**\*.cs">

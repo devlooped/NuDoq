@@ -8,7 +8,7 @@
         <owners>Clarius Labs</owners>
         <licenseUrl>https://github.com/clariuslabs/common/blob/master/License.txt</licenseUrl>
         <projectUrl>http://clarius.io/nudoc</projectUrl>
-        <iconUrl>https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-32.png</iconUrl>
+        <iconUrl>https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-big.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.</description>
         <releaseNotes>v0.4

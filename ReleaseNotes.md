@@ -1,5 +1,5 @@
 v0.4
-* Added support for `<returns>` tag.
+* Added support for `returns` tag.
 * Added support for retrieving `IXmlLineInfo` for every element, which allows much better diagnostics
 * ToString now renders basic element information 
 * Full element text content rendering moved to `ToText` method

@@ -7,8 +7,8 @@
     <PropertyGroup>
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
         <BuildRoot>$(MSBuildThisFileDirectory)</BuildRoot>
-        <DropDirectory>$(BuildRoot)..\..\</DropDirectory>
-        <NuGetExe>$(BuildRoot)..\..\.nuget\NuGet.exe</NuGetExe>
+        <DropDirectory>"$(BuildRoot)..\.."</DropDirectory>
+        <NuGetExe>"$(BuildRoot)..\..\.nuget\NuGet.exe"</NuGetExe>
         <ReleaseNotes>$([System.IO.File]::ReadAllText('$(BuildRoot)..\..\ReleaseNotes.md'))</ReleaseNotes>
     </PropertyGroup>
 

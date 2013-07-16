@@ -46,7 +46,7 @@ namespace ClariusLabs.NuDoc
                 prop.SetValue(delegates, expression.Compile());
             }
 
-            var members = Reader.Read(typeof(Sample).Assembly);
+            var members = DocReader.Read(typeof(Sample).Assembly);
             members.Accept(new DelegateVisitor(delegates));
 
             foreach (var prop in typeof(VisitorDelegates).GetProperties())

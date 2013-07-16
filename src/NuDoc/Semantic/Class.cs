@@ -24,7 +24,7 @@ namespace ClariusLabs.NuDoc
     /// <summary>
     /// Semantically augmented <see cref="TypeDeclaration" /> for
     /// classes, available when using an <see cref="System.Reflection.Assembly" />
-    /// with the <see cref="Reader" />.
+    /// with the <see cref="DocReader" />.
     /// </summary>
     public class Class : TypeDeclaration
     {

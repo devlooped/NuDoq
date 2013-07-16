@@ -25,7 +25,7 @@ namespace ClariusLabs.NuDoc
 
     /// <summary>
     /// Composite of all lazy-read members in a documentation file 
-    /// returned from the <see cref="Reader.Read(string)"/>.
+    /// returned from the <see cref="DocReader.Read(string)"/>.
     /// </summary>
     public class DocumentMembers : Container
     {

@@ -40,7 +40,7 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
-        /// Visits the entire set of members read by the <see cref="Reader.Read(Assembly)" />.
+        /// Visits the entire set of members read by the <see cref="DocReader.Read(Assembly)" />.
         /// </summary>
         public override void VisitAssembly(AssemblyMembers assembly)
         {
@@ -54,7 +54,7 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
-        /// Visits the entire set of members read by the <see cref="Reader.Read(string)" />.
+        /// Visits the entire set of members read by the <see cref="DocReader.Read(string)" />.
         /// </summary>
         public override void VisitDocument(DocumentMembers document)
         {

@@ -33,7 +33,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_reading_non_existent_xml_then_throws()
         {
-            Assert.Throws<FileNotFoundException>(() => Reader.Read(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString(), ".xml")));
+            Assert.Throws<FileNotFoundException>(() => DocReader.Read(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString(), ".xml")));
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace ClariusLabs.NuDoc
             var temp = Path.GetTempFileName();
             File.Copy(clr, temp, true);
 
-            Assert.Throws<FileNotFoundException>(() => Reader.Read(Assembly.LoadFrom(temp)).Traverse().Count());
+            Assert.Throws<FileNotFoundException>(() => DocReader.Read(Assembly.LoadFrom(temp)).Traverse().Count());
         }
 
         [Fact]
@@ -59,10 +59,10 @@ namespace ClariusLabs.NuDoc
             var countWp = new CountingVisitor("nudoc-wp");
             var countClr = new CountingVisitor("nudoc-net");
 
-            Reader.Read(Assembly.LoadFrom(metro)).Accept(countMetro);
-            Reader.Read(Assembly.LoadFrom(sl)).Accept(countSl);
-            Reader.Read(Assembly.LoadFrom(wp)).Accept(countWp);
-            Reader.Read(Assembly.LoadFrom(clr)).Accept(countClr);
+            DocReader.Read(Assembly.LoadFrom(metro)).Accept(countMetro);
+            DocReader.Read(Assembly.LoadFrom(sl)).Accept(countSl);
+            DocReader.Read(Assembly.LoadFrom(wp)).Accept(countWp);
+            DocReader.Read(Assembly.LoadFrom(clr)).Accept(countClr);
 
             Assert.Equal(countMetro.TypeCount, countClr.TypeCount);
             Assert.Equal(countSl.TypeCount, countClr.TypeCount);
@@ -80,7 +80,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_reading_assembly_then_can_access_source_assembly()
         {
-            var members = Reader.Read(assembly);
+            var members = DocReader.Read(assembly);
 
             Assert.Same(assembly, members.Assembly);
         }
@@ -89,7 +89,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_assembly_then_can_access_source_document()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(assembly);
+            var members = DocReader.Read(assembly);
 
             Assert.NotNull(members.Xml);
             Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
@@ -99,7 +99,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_xml_then_can_access_source_document()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(xmlFile);
+            var members = DocReader.Read(xmlFile);
 
             Assert.NotNull(members.Xml);
             Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
@@ -109,7 +109,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_element_then_can_access_xml_line_info()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var member = Reader.Read(xmlFile).Elements.SelectMany(x => x.Traverse()).OfType<Summary>().First();
+            var member = DocReader.Read(xmlFile).Elements.SelectMany(x => x.Traverse()).OfType<Summary>().First();
 
             var lineInfo = member as IXmlLineInfo;
 
@@ -122,7 +122,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_reading_assembly_then_can_access_id_map()
         {
-            var members = Reader.Read(assembly);
+            var members = DocReader.Read(assembly);
 
             Assert.NotNull(members.IdMap);
             Assert.NotNull(members.IdMap.FindId(typeof(IProvider)));
@@ -132,7 +132,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_assembly_then_visits_assembly_and_document()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(assembly);
+            var members = DocReader.Read(assembly);
             AssemblyMembers asmMembers = null;
             DocumentMembers docMembers = null;
 
@@ -150,7 +150,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_document_then_visits_document()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(xmlFile);
+            var members = DocReader.Read(xmlFile);
             DocumentMembers docMembers = null;
 
             members.Accept(new DelegateVisitor(new VisitorDelegates
@@ -165,7 +165,7 @@ namespace ClariusLabs.NuDoc
         public void when_reading_xml_then_visits_document()
         {
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(xmlFile);
+            var members = DocReader.Read(xmlFile);
 
             Assert.NotNull(members.Xml);
             Assert.Equal(xmlFile, new Uri(members.Xml.BaseUri).LocalPath);
@@ -174,7 +174,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_reading_extension_method_then_provides_typed_member()
         {
-            var typed = Reader.Read(assembly)
+            var typed = DocReader.Read(assembly)
                 .Elements
                 .OfType<ExtensionMethod>()
                 .FirstOrDefault();
@@ -192,7 +192,7 @@ namespace ClariusLabs.NuDoc
             var id = map.FindId(typeof(ProviderType));
             Assert.NotNull(id);
 
-            var member = Reader.Read(typeof(ProviderType).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
+            var member = DocReader.Read(typeof(ProviderType).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
             Assert.NotNull(member);
 
             var element = member.Elements.OfType<Summary>().FirstOrDefault();
@@ -213,7 +213,7 @@ namespace ClariusLabs.NuDoc
             var id = map.FindId(typeof(Provider));
             Assert.NotNull(id);
 
-            var member = Reader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
+            var member = DocReader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == id);
             Assert.NotNull(member);
 
             var element = member.Elements.OfType<Remarks>().FirstOrDefault();
@@ -264,7 +264,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             var providerId = map.FindId(typeof(Provider));
             Assert.NotNull(providerId);
 
-            var member = Reader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == providerId);
+            var member = DocReader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == providerId);
             Assert.NotNull(member);
 
             var element = member.Elements.OfType<SeeAlso>().FirstOrDefault();
@@ -282,7 +282,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             var providerId = map.FindId(typeof(Provider));
             Assert.NotNull(providerId);
 
-            var member = Reader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == providerId);
+            var member = DocReader.Read(typeof(Provider).Assembly).Elements.OfType<Member>().FirstOrDefault(x => x.Id == providerId);
             Assert.NotNull(member);
 
             var element = member.Elements.OfType<Exception>().FirstOrDefault();
@@ -298,7 +298,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var providerId = map.FindId(typeof(Provider));
 
-            var member = Reader.Read(assembly).Elements.OfType<Event>().FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Event>().FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -313,7 +313,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var providerId = map.FindId(typeof(Sample.NestedType));
 
-            var member = Reader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == providerId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == providerId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -328,7 +328,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var providerId = map.FindId(typeof(Provider));
 
-            var member = Reader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == providerId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == providerId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -344,7 +344,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var typeId = map.FindId(typeof(IProvider));
 
-            var member = Reader.Read(assembly).Elements.OfType<Interface>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Interface>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -360,7 +360,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var typeId = map.FindId(typeof(ProviderType));
 
-            var member = Reader.Read(assembly).Elements.OfType<Enum>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Enum>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -376,7 +376,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
             map.Add(assembly);
             var typeId = map.FindId(typeof(SampleStruct));
 
-            var member = Reader.Read(assembly).Elements.OfType<Struct>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Struct>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -389,7 +389,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
         public void when_using_to_text_then_renders_text_content()
         {
             var xml = new FileInfo(@"..\..\..\Demo\ClariusLabs.DemoProject\ClariusLabs.DemoProject.xml").FullName;
-            var members = Reader.Read(xml);
+            var members = DocReader.Read(xml);
             var member = members.Elements.OfType<TypeDeclaration>().FirstOrDefault(x => x.Id == "T:ClariusLabs.Demo.SampleExtensions");
 
             Assert.NotNull(member);
@@ -410,7 +410,7 @@ We can have paragraphs anywhere.
         [Fact]
         public void when_reading_list_then_can_access_type_header_and_items()
         {
-            var list = Reader.Read(assembly).Traverse().OfType<List>().Single();
+            var list = DocReader.Read(assembly).Traverse().OfType<List>().Single();
 
             Assert.Equal(ListType.Table, list.Type);
             Assert.NotNull(list.Header);
@@ -444,7 +444,7 @@ We can have paragraphs anywhere.
     </members>
 </doc>");
 
-            var member = Reader.Read(xml).Elements.First();
+            var member = DocReader.Read(xml).Elements.First();
 
             var list = member.Traverse().OfType<List>().First();
             Assert.Equal(ListType.Unknown, list.Type);
@@ -467,7 +467,7 @@ We can have paragraphs anywhere.
     </members>
 </doc>");
 
-            var member = Reader.Read(xml).Elements.OfType<UnknownMember>().FirstOrDefault();
+            var member = DocReader.Read(xml).Elements.OfType<UnknownMember>().FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.Equal(MemberKinds.Unknown, member.Kind);
@@ -486,7 +486,7 @@ We can have paragraphs anywhere.
             map.Add(assembly);
             var typeId = map.FindId(typeof(SampleGeneric<,>));
 
-            var member = Reader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -501,7 +501,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(assembly);
             var typeId = map.FindId(typeof(SampleGeneric<,>));
-            var member = Reader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).Single();
 
             var paramRef = member.Elements.OfType<Summary>().Single().Elements.OfType<TypeParamRef>().FirstOrDefault();
 
@@ -520,7 +520,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(assembly);
             var typeId = map.FindId(typeof(Sample).GetMethods().Single(m => m.IsGenericMethod));
-            var member = Reader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -532,7 +532,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(SampleGeneric<,>));
             var typeId = map.FindId(typeof(SampleGeneric<,>).GetMethods()[0]);
-            var member = Reader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
+            var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);
             Assert.NotNull(member.Info);
@@ -544,7 +544,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(SampleGeneric<,>));
             var typeId = map.FindId(typeof(SampleGeneric<,>).GetMethods()[0]);
-            var member = Reader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).Single();
 
             var paramRef = member.Elements.OfType<Summary>().Single().Elements.OfType<ParamRef>().FirstOrDefault();
 
@@ -563,7 +563,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(Provider));
             var typeId = map.FindId(typeof(Provider));
-            var member = Reader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<Class>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Summary>().Single();
             Assert.Empty(element.ToText());
@@ -575,7 +575,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(IProvider));
             var typeId = map.FindId(typeof(IProvider));
-            var member = Reader.Read(assembly).Elements.OfType<Interface>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<Interface>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Remarks>().Single().Elements.OfType<Code>().Single();
             Assert.Equal(0, element.Content.Length);
@@ -587,7 +587,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(Sample));
             var typeId = map.FindId(typeof(Sample).GetProperties()[0]);
-            var member = Reader.Read(assembly).Elements.OfType<Property>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<Property>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Value>().Single();
             Assert.Equal("The id of this sample.", element.ToText());
@@ -599,7 +599,7 @@ We can have paragraphs anywhere.
             var map = new MemberIdMap();
             map.Add(typeof(IProvider));
             var typeId = map.FindId(typeof(IProvider));
-            var member = Reader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == typeId).Single();
+            var member = DocReader.Read(assembly).Elements.OfType<TypeDeclaration>().Where(c => c.Id == typeId).Single();
 
             var element = member.Elements.OfType<Summary>().Single();
 

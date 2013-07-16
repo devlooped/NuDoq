@@ -28,7 +28,7 @@ namespace ClariusLabs.NuDoc
     /// Provides bidirectional mapping between reflection members and XML documentation ids.
     /// </summary>
     /// <remarks>
-    /// This map can be used in conjunction with the result of a <see cref="Reader.Read(System.Reflection.Assembly)"/>
+    /// This map can be used in conjunction with the result of a <see cref="DocReader.Read(System.Reflection.Assembly)"/>
     /// operation to do post-processing on the <see cref="Members"/> by grouping by type, loading inheritance trees, 
     /// etc.
     /// </remarks>

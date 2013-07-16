@@ -13,13 +13,13 @@
         <member name="T:ClariusLabs.NuDoc.AssemblyMembers">
             <summary>
             Composite of all lazy-read members from an assembly 
-            passed to <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
+            passed to <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.DocumentMembers">
             <summary>
             Composite of all lazy-read members in a documentation file 
-            returned from the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
+            returned from the <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.String)"/>.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Container">
@@ -82,12 +82,12 @@
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.String)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitType(ClariusLabs.NuDoc.TypeDeclaration)">
@@ -109,7 +109,7 @@
             <remarks>
             This member will only be called when using an 
             <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
+            the <see cref="T:ClariusLabs.NuDoc.DocReader"/> so that this augmentation is 
             available.
             </remarks>
         </member>
@@ -120,7 +120,7 @@
             <remarks>
             This member will only be called when using an 
             <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
+            the <see cref="T:ClariusLabs.NuDoc.DocReader"/> so that this augmentation is 
             available.
             </remarks>
         </member>
@@ -131,7 +131,7 @@
             <remarks>
             This member will only be called when using an 
             <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
+            the <see cref="T:ClariusLabs.NuDoc.DocReader"/> so that this augmentation is 
             available.
             </remarks>
         </member>
@@ -142,7 +142,7 @@
             <remarks>
             This member will only be called when using an 
             <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
+            the <see cref="T:ClariusLabs.NuDoc.DocReader"/> so that this augmentation is 
             available.
             </remarks>
         </member>
@@ -168,7 +168,7 @@
             <remarks>
             This method will also be called for the semantically augmented 
             <see cref="T:ClariusLabs.NuDoc.ExtensionMethod"/> if an <see cref="T:System.Reflection.Assembly"/> 
-            is used with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            is used with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </remarks>
         </member>
         <member name="M:ClariusLabs.NuDoc.Visitor.VisitExtensionMethod(ClariusLabs.NuDoc.ExtensionMethod)">
@@ -178,7 +178,7 @@
             <remarks>
             This member will only be called when using an 
             <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:ClariusLabs.NuDoc.Reader"/> so that this augmentation is 
+            the <see cref="T:ClariusLabs.NuDoc.DocReader"/> so that this augmentation is 
             available.
             </remarks>
         </member>
@@ -1239,7 +1239,7 @@
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> for
             classes, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.TypeDeclaration">
@@ -1327,7 +1327,7 @@
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> for
             enumerations, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Enum.#ctor(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
@@ -1352,7 +1352,7 @@
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> for
             structs, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Struct.#ctor(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
@@ -1377,7 +1377,7 @@
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.Method"/> for extension methods,
             available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </summary>
         </member>
         <member name="T:ClariusLabs.NuDoc.Method">
@@ -1513,7 +1513,7 @@
             Provides bidirectional mapping between reflection members and XML documentation ids.
             </summary>
             <remarks>
-            This map can be used in conjunction with the result of a <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>
+            This map can be used in conjunction with the result of a <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly)"/>
             operation to do post-processing on the <see cref="P:ClariusLabs.NuDoc.MemberIdMap.Members"/> by grouping by type, loading inheritance trees, 
             etc.
             </remarks>
@@ -1632,7 +1632,7 @@
             <summary>
             Semantically augmented <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> for
             interfaces, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:ClariusLabs.NuDoc.Reader"/>.
+            with the <see cref="T:ClariusLabs.NuDoc.DocReader"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.Interface.#ctor(System.String,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
@@ -1785,13 +1785,13 @@
             Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
-        <member name="T:ClariusLabs.NuDoc.Reader">
+        <member name="T:ClariusLabs.NuDoc.DocReader">
             <summary>
             Reads .NET XML API documentation files, optionally augmenting 
             them with reflection information if reading from an assembly.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.Read(System.String)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.Read(System.String)">
             <summary>
             Reads the specified documentation file and returns a lazily-constructed 
             set of members that can be visited.
@@ -1800,7 +1800,7 @@
             <returns>All documented members found in the given file.</returns>
             <exception cref="T:System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly)">
             <summary>
             Uses the specified assembly to locate a documentation file alongside the assembly by 
             changing the extension to ".xml". If the file is found, it will be read and all 
@@ -1812,18 +1812,18 @@
             association from the assembly.</returns>
             <exception cref="T:System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.SetInfo(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.SetInfo(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
             <summary>
             Sets the extended reflection info if found in the map.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.ReplaceTypes(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.ReplaceTypes(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
             <summary>
             Replaces the generic <see cref="T:ClariusLabs.NuDoc.TypeDeclaration"/> with 
             concrete types according to the reflection information.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.ReplaceExtensionMethods(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.ReplaceExtensionMethods(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
             <summary>
             Replaces the generic method element with a more specific extension method 
             element as needed.
@@ -1832,27 +1832,27 @@
             <param name="map">The map.</param>
             <returns></returns>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.CreateMember(System.String,System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
+        <member name="M:ClariusLabs.NuDoc.DocReader.CreateMember(System.String,System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{ClariusLabs.NuDoc.Element})">
             <summary>
             Creates the appropriate type of member according to the member id prefix.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.ReadContent(System.Xml.Linq.XElement)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.ReadContent(System.Xml.Linq.XElement)">
             <summary>
             Reads all supported documentation elements.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.FindAttribute(System.Xml.Linq.XElement,System.String)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.FindAttribute(System.Xml.Linq.XElement,System.String)">
             <summary>
             Retrieves an attribute value if found, otherwise, returns a null string.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.TrimText(System.String)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.TrimText(System.String)">
             <summary>
             Trims the text by removing new lines and trimming the indent.
             </summary>
         </member>
-        <member name="M:ClariusLabs.NuDoc.Reader.TrimCode(System.String)">
+        <member name="M:ClariusLabs.NuDoc.DocReader.TrimCode(System.String)">
             <summary>
             Trims the code by removing extra indent.
             </summary>
@@ -2016,12 +2016,12 @@
         </member>
         <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitAssembly(ClariusLabs.NuDoc.AssemblyMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.Reflection.Assembly)"/>.
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitDocument(ClariusLabs.NuDoc.DocumentMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.Reader.Read(System.String)"/>.
+            Visits the entire set of members read by the <see cref="M:ClariusLabs.NuDoc.DocReader.Read(System.String)"/>.
             </summary>
         </member>
         <member name="M:ClariusLabs.NuDoc.XmlVisitor.VisitMember(ClariusLabs.NuDoc.Member)">

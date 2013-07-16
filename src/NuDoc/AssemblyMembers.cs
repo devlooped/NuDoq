@@ -26,7 +26,7 @@ namespace ClariusLabs.NuDoc
 
     /// <summary>
     /// Composite of all lazy-read members from an assembly 
-    /// passed to <see cref="Reader.Read(Assembly)"/>.
+    /// passed to <see cref="DocReader.Read(Assembly)"/>.
     /// </summary>
     public class AssemblyMembers : DocumentMembers
     {

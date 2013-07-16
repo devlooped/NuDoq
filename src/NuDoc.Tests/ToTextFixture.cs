@@ -29,7 +29,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_rendering_to_string_then_renders_tag_name_for_known_elements()
         {
-            Reader.Read(typeof(IProvider).Assembly)
+            DocReader.Read(typeof(IProvider).Assembly)
                 .Elements
                 .SelectMany(x => x.Traverse())
                 .Where(x => !(x is Member || x is UnknownElement))
@@ -43,7 +43,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_rendering_to_string_then_renders_tag_name_for_unknown_elements()
         {
-            Reader.Read(typeof(IProvider).Assembly)
+            DocReader.Read(typeof(IProvider).Assembly)
                 .Elements
                 .SelectMany(x => x.Traverse())
                 .OfType<UnknownElement>()
@@ -59,7 +59,7 @@ namespace ClariusLabs.NuDoc
         {
             var assembly = typeof(IProvider).Assembly;
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(assembly);
+            var members = DocReader.Read(assembly);
 
             Assert.True(members.ToString().Contains(assembly.Location));
         }
@@ -69,7 +69,7 @@ namespace ClariusLabs.NuDoc
         {
             var assembly = typeof(IProvider).Assembly;
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var members = Reader.Read(xmlFile);
+            var members = DocReader.Read(xmlFile);
 
             Assert.True(members.ToString().Contains(xmlFile));
         }
@@ -79,7 +79,7 @@ namespace ClariusLabs.NuDoc
         {
             var assembly = typeof(IProvider).Assembly;
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
-            var member = Reader.Read(xmlFile).Elements.OfType<Member>().First();
+            var member = DocReader.Read(xmlFile).Elements.OfType<Member>().First();
 
             Assert.True(member.ToString().Contains(member.Id));
         }
@@ -91,7 +91,7 @@ namespace ClariusLabs.NuDoc
             map.Add(typeof(SampleStruct));
             var id = map.FindId(typeof(SampleStruct));
 
-            var member = Reader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Struct>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Struct>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Summary>().First().ToText();
             var expected = "Sample struct.";
@@ -106,7 +106,7 @@ namespace ClariusLabs.NuDoc
             map.Add(typeof(SampleStruct));
             var id = map.FindId(typeof(SampleStruct));
 
-            var member = Reader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Struct>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Struct>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Remarks>().First().ToText();
             var expected = @"Code:
@@ -124,7 +124,7 @@ cool!";
             map.Add(typeof(Sample));
             var id = map.FindId(typeof(Sample).GetMethod("GetValue"));
 
-            var member = Reader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Method>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(SampleStruct).Assembly).Elements.OfType<Method>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Summary>().First().ToText();
             var expected = "Gets the value for the given id.";
@@ -139,7 +139,7 @@ cool!";
             map.Add(typeof(SampleGeneric<,>));
             var id = map.FindId(typeof(SampleGeneric<,>));
 
-            var member = Reader.Read(typeof(Sample).Assembly).Elements.OfType<Class>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(Sample).Assembly).Elements.OfType<Class>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Summary>().First().ToText();
             var expected = "Sample with generic type T.";
@@ -154,7 +154,7 @@ cool!";
             map.Add(typeof(SampleExtensions));
             var id = map.FindId(typeof(SampleExtensions));
 
-            var member = Reader.Read(typeof(SampleExtensions).Assembly).Elements.OfType<Class>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(SampleExtensions).Assembly).Elements.OfType<Class>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Summary>().First().ToText();
             var expected = "Extension class for ClariusLabs.Demo.Sample.";
@@ -169,7 +169,7 @@ cool!";
             map.Add(typeof(ProviderType));
             var id = map.FindId(typeof(ProviderType));
 
-            var member = Reader.Read(typeof(ProviderType).Assembly).Elements.OfType<Enum>().Single(x => x.Id == id);
+            var member = DocReader.Read(typeof(ProviderType).Assembly).Elements.OfType<Enum>().Single(x => x.Id == id);
 
             var actual = member.Elements.OfType<Summary>().First().ToText();
             var expected = @"The type of provider.

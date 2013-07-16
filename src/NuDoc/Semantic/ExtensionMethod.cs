@@ -23,7 +23,7 @@ namespace ClariusLabs.NuDoc
     /// <summary>
     /// Semantically augmented <see cref="Method" /> for extension methods,
     /// available when using an <see cref="System.Reflection.Assembly" />
-    /// with the <see cref="Reader" />.
+    /// with the <see cref="DocReader" />.
     /// </summary>
     public class ExtensionMethod : Method
     {

@@ -27,7 +27,7 @@ namespace ClariusLabs.NuDoc
     public abstract class Visitor
     {
         /// <summary>
-        /// Visits the entire set of members read by the <see cref="Reader.Read(string)"/>.
+        /// Visits the entire set of members read by the <see cref="DocReader.Read(string)"/>.
         /// </summary>
         public virtual void VisitDocument(DocumentMembers document)
         {
@@ -35,7 +35,7 @@ namespace ClariusLabs.NuDoc
         }
 
         /// <summary>
-        /// Visits the entire set of members read by the <see cref="Reader.Read(Assembly)"/>.
+        /// Visits the entire set of members read by the <see cref="DocReader.Read(Assembly)"/>.
         /// </summary>
         public virtual void VisitAssembly(AssemblyMembers assembly)
         {
@@ -63,7 +63,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This member will only be called when using an 
         /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
+        /// the <see cref="DocReader"/> so that this augmentation is 
         /// available.
         /// </remarks>
         public virtual void VisitInterface(Interface type)
@@ -77,7 +77,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This member will only be called when using an 
         /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
+        /// the <see cref="DocReader"/> so that this augmentation is 
         /// available.
         /// </remarks>
         public virtual void VisitClass(Class type)
@@ -91,7 +91,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This member will only be called when using an 
         /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
+        /// the <see cref="DocReader"/> so that this augmentation is 
         /// available.
         /// </remarks>
         public virtual void VisitStruct(Struct type)
@@ -105,7 +105,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This member will only be called when using an 
         /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
+        /// the <see cref="DocReader"/> so that this augmentation is 
         /// available.
         /// </remarks>
         public virtual void VisitEnum(Enum type)
@@ -143,7 +143,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This method will also be called for the semantically augmented 
         /// <see cref="ExtensionMethod"/> if an <see cref="System.Reflection.Assembly"/> 
-        /// is used with the <see cref="Reader"/>.
+        /// is used with the <see cref="DocReader"/>.
         /// </remarks>
         public virtual void VisitMethod(Method method)
         {
@@ -156,7 +156,7 @@ namespace ClariusLabs.NuDoc
         /// <remarks>
         /// This member will only be called when using an 
         /// <see cref="System.Reflection.Assembly"/> as input for 
-        /// the <see cref="Reader"/> so that this augmentation is 
+        /// the <see cref="DocReader"/> so that this augmentation is 
         /// available.
         /// </remarks>
         public virtual void VisitExtensionMethod(ExtensionMethod method)

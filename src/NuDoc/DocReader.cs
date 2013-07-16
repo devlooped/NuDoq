@@ -30,7 +30,7 @@ namespace ClariusLabs.NuDoc
     /// Reads .NET XML API documentation files, optionally augmenting 
     /// them with reflection information if reading from an assembly.
     /// </summary>
-    public static class Reader
+    public static class DocReader
     {
         /// <summary>
         /// Reads the specified documentation file and returns a lazily-constructed 

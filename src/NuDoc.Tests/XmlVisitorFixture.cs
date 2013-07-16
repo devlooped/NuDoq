@@ -31,7 +31,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_visiting_xml_then_adds_source_assembly()
         {
-            var member = Reader.Read(typeof(ProviderType).Assembly);
+            var member = DocReader.Read(typeof(ProviderType).Assembly);
             var visitor = new XmlVisitor();
 
             member.Accept(visitor);
@@ -46,7 +46,7 @@ namespace ClariusLabs.NuDoc
         [Fact]
         public void when_visiting_xml_then_adds_members()
         {
-            var member = Reader.Read(Path.ChangeExtension(typeof(ProviderType).Assembly.Location, ".xml"));
+            var member = DocReader.Read(Path.ChangeExtension(typeof(ProviderType).Assembly.Location, ".xml"));
             var visitor = new XmlVisitor();
 
             member.Accept(visitor);
@@ -61,7 +61,7 @@ namespace ClariusLabs.NuDoc
         public void when_writing_xml_then_can_roundtrip()
         {
             var originalXml = XDocument.Load(Path.ChangeExtension(typeof(ProviderType).Assembly.Location, ".xml"));
-            var member = Reader.Read(typeof(ProviderType).Assembly);
+            var member = DocReader.Read(typeof(ProviderType).Assembly);
             var visitor = new XmlVisitor();
             
             member.Accept(visitor);

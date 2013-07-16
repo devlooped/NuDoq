@@ -69,7 +69,7 @@
     <Compile Include="Example.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="Para.cs" />
-    <Compile Include="Reader.cs" />
+    <Compile Include="DocReader.cs" />
     <Compile Include="Remarks.cs" />
     <Compile Include="Summary.cs" />
     <Compile Include="TypeDeclaration.cs" />

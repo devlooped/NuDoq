@@ -66,7 +66,7 @@ namespace ClariusLabs.NuDoc
         {
             var fileName = Path.ChangeExtension(assembly.Location, ".xml");
             if (!File.Exists(fileName))
-                throw new FileNotFoundException("Could not find documentation file to load.", fileName);
+                throw new FileNotFoundException("Could not find documentation file to load. Expected: " + fileName, fileName);
 
             var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
             var map = new MemberIdMap();
@@ -319,7 +319,7 @@ namespace ClariusLabs.NuDoc
             // Indent in generated XML doc files is greater than 4 always. 
             // This allows us to optimize the case where the author actually placed 
             // whitespace inline in between tags.
-            if (indent <= 4)
+            if (indent <= 4 && lines[0][0] != '\t')
                 indent = 0;
 
             return string.Join(joinWith, lines

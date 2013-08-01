@@ -19,6 +19,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>ClariusLabs.NuDoc.Tests.xml</DocumentationFile>
+    <NoWarn>1591,1712,1710</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Prefer32Bit>false</Prefer32Bit>
@@ -48,6 +50,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReaderFixture.cs" />
+    <Compile Include="SampleTypes\Fixture.cs" />
+    <Compile Include="SampleTypes\Foo.cs" />
     <Compile Include="XmlNormalizer.cs" />
     <Compile Include="XmlNormalizerFixture.cs" />
     <Compile Include="XmlVisitorFixture.cs">

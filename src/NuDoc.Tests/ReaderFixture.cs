@@ -204,6 +204,9 @@ namespace ClariusLabs.NuDoc
             Assert.Equal("And then some.", element.Elements.OfType<Text>().Last().Content);
         }
 
+        /// <summary>
+        /// When_reading_provider_then_reads_remarkses this instance.
+        /// </summary>
         [Fact]
         public void when_reading_provider_then_reads_remarks()
         {

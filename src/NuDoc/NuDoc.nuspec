@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>NuDoc</id>
-        <version>1.0</version>
+        <version>1.1</version>
         <title>NuDoc: A .NET XML API Documentation Reader</title>
         <authors>Daniel Cazzulino, kzu, Clarius Labs</authors>
         <owners>Clarius Labs</owners>

@@ -193,5 +193,11 @@
           </code>
         </example>
       </member>
+	  <member name="T:ClariusLabs.Demo.SampleTypeWithInvalidRemarksIndentation">
+            <remarks>
+              The next line contains less empty spaces or tabs (indentation) than this line, which it's the first one
+            
+            </remarks>
+        </member>
     </members>
 </doc>

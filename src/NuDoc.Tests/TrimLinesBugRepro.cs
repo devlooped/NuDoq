@@ -29,7 +29,7 @@ namespace ClariusLabs.NuDoc
     public class TrimLinesBugRepro
     {
         [Fact]
-        public void WhenCodeContainsEmptyLines_ThenVisitElementShouldNotThrow()
+        public void WhenCodeContainsEmptyLines_ThenToTextShouldNotThrow()
         {
             var members = DocReader.Read(typeof(ProviderType).Assembly);
 
@@ -41,6 +41,23 @@ namespace ClariusLabs.NuDoc
                 .Single();
 
             var text = code.ToText();
+
+            Assert.NotNull(text);
+        }
+
+        [Fact]
+        public void WhenRemarksContainsInvalidIndentation_ThenToTextShouldNotThrow()
+        {
+            var members = DocReader.Read(typeof(ProviderType).Assembly);
+
+            var remarks = members.Elements
+                .OfType<Member>()
+                .Single(x => x.Id == "T:ClariusLabs.Demo.SampleTypeWithInvalidRemarksIndentation")
+                .Traverse()
+                .OfType<Remarks>()
+                .Single();
+
+            var text = remarks.ToText();
 
             Assert.NotNull(text);
         }

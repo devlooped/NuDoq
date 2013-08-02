@@ -52,6 +52,7 @@
     <Compile Include="ReaderFixture.cs" />
     <Compile Include="SampleTypes\Fixture.cs" />
     <Compile Include="SampleTypes\Foo.cs" />
+    <Compile Include="TrimLinesBugRepro.cs" />
     <Compile Include="XmlNormalizer.cs" />
     <Compile Include="XmlNormalizerFixture.cs" />
     <Compile Include="XmlVisitorFixture.cs">

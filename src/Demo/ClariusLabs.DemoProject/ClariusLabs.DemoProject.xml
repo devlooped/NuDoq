@@ -173,8 +173,9 @@
             </code>
             cool!
             </remarks>
+          
         </member>
-        <member name="P:ClariusLabs.Demo.SampleStruct.Id">
+      <member name="P:ClariusLabs.Demo.SampleStruct.Id">
             <summary>
             Gets or sets the id.
             </summary>
@@ -182,5 +183,15 @@
             The id value.
             </value>
         </member>
+      <member name="T:ClariusLabs.Demo.SampleTypeWithCodeWithEmptyLines">
+        <example>
+          Code with empty lines should not throw:
+          <code>
+            var code = new Code();
+
+            var new = code.New();
+          </code>
+        </example>
+      </member>
     </members>
 </doc>

@@ -323,7 +323,15 @@ namespace ClariusLabs.NuDoc
                 indent = 0;
 
             return string.Join(joinWith, lines
-                .Select(line => string.IsNullOrEmpty(line) ? line : line.Substring(indent))
+                .Select(line => 
+                    {
+                        if(string.IsNullOrEmpty(line))
+                            return line;
+                        else if (line.Length < indent)
+                            return string.Empty;
+                        else 
+                            return line.Substring(indent);
+                    })
                 .ToArray());
         }
     }

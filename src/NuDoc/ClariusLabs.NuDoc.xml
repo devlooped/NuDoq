@@ -1812,6 +1812,19 @@
             association from the assembly.</returns>
             <exception cref="T:System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         </member>
+        <member name="M:ClariusLabs.NuDoc.DocReader.Read(System.Reflection.Assembly,System.String)">
+            <summary>
+            Uses the specified assembly to locate a documentation file alongside the assembly by 
+            changing the extension to ".xml". If the file is found, it will be read and all 
+            found members will contain extended reflection information in the <see cref="P:ClariusLabs.NuDoc.Member.Info"/> 
+            property.
+            </summary>
+            <param name="assembly">The assembly to read the documentation from.</param>
+            <param name="documentationFilename">Path to the documentation file.</param>
+            <returns>All documented members found in the given file, together with the reflection metadata 
+            association from the assembly.</returns>
+            <exception cref="T:System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
+        </member>
         <member name="M:ClariusLabs.NuDoc.DocReader.SetInfo(ClariusLabs.NuDoc.Member,ClariusLabs.NuDoc.MemberIdMap)">
             <summary>
             Sets the extended reflection info if found in the map.

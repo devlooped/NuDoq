@@ -64,7 +64,27 @@ namespace ClariusLabs.NuDoc
         /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
         public static AssemblyMembers Read(Assembly assembly)
         {
-            var fileName = Path.ChangeExtension(assembly.Location, ".xml");
+            return Read(assembly, null);
+        }
+     
+            /// <summary>
+        /// Uses the specified assembly to locate a documentation file alongside the assembly by 
+        /// changing the extension to ".xml". If the file is found, it will be read and all 
+        /// found members will contain extended reflection information in the <see cref="Member.Info"/> 
+        /// property.
+        /// </summary>
+        /// <param name="assembly">The assembly to read the documentation from.</param>
+        /// <param name="documentationFilename">Path to the documentation file.</param>
+        /// <returns>All documented members found in the given file, together with the reflection metadata 
+        /// association from the assembly.</returns>
+        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
+        public static AssemblyMembers Read(Assembly assembly, string documentationFilename)
+        {
+            var fileName = documentationFilename;
+
+            if(string.IsNullOrEmpty(fileName))
+                fileName = Path.ChangeExtension(assembly.Location, ".xml");
+
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("Could not find documentation file to load. Expected: " + fileName, fileName);
 

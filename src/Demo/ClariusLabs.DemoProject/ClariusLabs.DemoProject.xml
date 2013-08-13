@@ -172,8 +172,7 @@
             var new = code.New();
             </code>
             cool!
-            </remarks>
-          
+            </remarks>     
         </member>
       <member name="P:ClariusLabs.Demo.SampleStruct.Id">
             <summary>
@@ -187,17 +186,12 @@
         <example>
           Code with empty lines should not throw:
           <code>
+
             var code = new Code();
 
             var new = code.New();
           </code>
         </example>
       </member>
-	  <member name="T:ClariusLabs.Demo.SampleTypeWithInvalidRemarksIndentation">
-            <remarks>
-              The next line contains less empty spaces or tabs (indentation) than this line, which it's the first one
-            
-            </remarks>
-        </member>
     </members>
 </doc>

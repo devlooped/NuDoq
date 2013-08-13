@@ -339,7 +339,7 @@ namespace ClariusLabs.NuDoc
             // Indent in generated XML doc files is greater than 4 always. 
             // This allows us to optimize the case where the author actually placed 
             // whitespace inline in between tags.
-            if (indent <= 4 && lines[0][0] != '\t')
+            if (indent <= 4 && !string.IsNullOrEmpty(lines[0]) && lines[0][0] != '\t')
                 indent = 0;
 
             return string.Join(joinWith, lines

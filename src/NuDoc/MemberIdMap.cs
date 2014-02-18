@@ -219,9 +219,11 @@ namespace ClariusLabs.NuDoc
                 AppendType(sb, type.GetElementType());
                 sb.Append("[");
                 var rank = type.GetArrayRank();
-                if (rank > 1) {
+                if (rank > 1)
+                {
                     sb.Append("0:");
-                    for (var i = 2; i <= rank; i++) {
+                    for (var i = 2; i <= rank; i++)
+                    {
                         sb.Append(",0:");
                     }
                 }

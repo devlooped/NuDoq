@@ -80,7 +80,31 @@ namespace ClariusLabs.NuDoc
             var map = new MemberIdMap();
             map.Add(typeof(Sample));
 
-            var actual = map.FindId(typeof(Sample).GetMethods().Single(m => m.IsGenericMethod));
+            var actual = map.FindId(Reflect<Sample>.GetMethod(x => x.Do<object>(null)).GetGenericMethodDefinition());
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void when_mapping_generic_method_with_array_parameter_on_non_generic_type_then_matches_xml_format()
+        {
+            var expected = "M:ClariusLabs.Demo.Sample.DoWithArray1``1(``0[])";
+            var map = new MemberIdMap();
+            map.Add(typeof(Sample));
+
+            var actual = map.FindId(Reflect<Sample>.GetMethod(x => x.DoWithArray1<object>(null)).GetGenericMethodDefinition());
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void when_mapping_generic_method_with_two_dimensional_array_parameter_on_non_generic_type_then_matches_xml_format() 
+        {
+            var expected = "M:ClariusLabs.Demo.Sample.DoWithArray2``1(``0[0:,0:])";
+            var map = new MemberIdMap();
+            map.Add(typeof(Sample));
+
+            var actual = map.FindId(Reflect<Sample>.GetMethod(x => x.DoWithArray2<object>(null)).GetGenericMethodDefinition());
 
             Assert.Equal(expected, actual);
         }

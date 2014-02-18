@@ -210,8 +210,25 @@ namespace ClariusLabs.NuDoc
 
         private void AppendType(StringBuilder sb, Type type, bool addTypeToMap = true)
         {
+            // Arrays have special representation. C# compiler emits "X[]" for simple arrays and "X[0:,0:]" for multidimensional
+            // ones, where 0 is supposed to be the lower bound. It is unclear whether you can actually define bounds on type level
+            // in .NET, and why single-dimensional arrays do not emit [0:].
+            // See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.110).aspx for details.
+            if (type.IsArray)
+            {
+                AppendType(sb, type.GetElementType());
+                sb.Append("[");
+                var rank = type.GetArrayRank();
+                if (rank > 1) {
+                    sb.Append("0:");
+                    for (var i = 2; i <= rank; i++) {
+                        sb.Append(",0:");
+                    }
+                }
+                sb.Append("]");
+            }
             // Generic parameters will only have the parameter name, i.e. "T".
-            if (!type.IsGenericParameter)
+            else if (!type.IsGenericParameter)
             {
                 if (type.DeclaringType != null)
                 {

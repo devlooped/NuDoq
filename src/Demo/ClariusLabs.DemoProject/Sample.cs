@@ -80,6 +80,20 @@ namespace ClariusLabs.Demo
         }
 
         /// <summary>
+        /// Generic method on non-generic type, accepting one-dimensional array.
+        /// </summary>
+        public T DoWithArray1<T>(T[] array) {
+            return default(T);
+        }
+
+        /// <summary>
+        /// Generic method on non-generic type, accepting two-dimensional array.
+        /// </summary>
+        public T DoWithArray2<T>(T[,] array) {
+            return default(T);
+        }
+
+        /// <summary>
         /// A nested type
         /// </summary>
         public class NestedType

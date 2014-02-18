@@ -110,6 +110,16 @@
             Generic method on non-generic type.
             </summary>
         </member>
+        <member name="M:ClariusLabs.Demo.Sample.DoWithArray1``1(``0[])">
+            <summary>
+            Generic method on non-generic type, accepting one-dimensional array.
+            </summary>
+        </member>
+        <member name="M:ClariusLabs.Demo.Sample.DoWithArray2``1(``0[0:,0:])">
+            <summary>
+            Generic method on non-generic type, accepting two-dimensional array.
+            </summary>
+        </member>
         <member name="P:ClariusLabs.Demo.Sample.Id">
             <summary>
             Gets or sets the id.

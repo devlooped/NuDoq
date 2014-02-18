@@ -522,7 +522,31 @@ We can have paragraphs anywhere.
         {
             var map = new MemberIdMap();
             map.Add(assembly);
-            var typeId = map.FindId(typeof(Sample).GetMethods().Single(m => m.IsGenericMethod));
+            var typeId = map.FindId(Reflect<Sample>.GetMethod(x => x.Do<object>(null)).GetGenericMethodDefinition());
+            var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
+
+            Assert.NotNull(member);
+            Assert.NotNull(member.Info);
+        }
+
+        [Fact]
+        public void when_documenting_generic_method_with_array_parameter_then_sets_info()
+        {
+            var map = new MemberIdMap();
+            map.Add(assembly);
+            var typeId = map.FindId(Reflect<Sample>.GetMethod(x => x.DoWithArray1<object>(null)).GetGenericMethodDefinition());
+            var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
+
+            Assert.NotNull(member);
+            Assert.NotNull(member.Info);
+        }
+
+        [Fact]
+        public void when_documenting_generic_method_with_two_dimensional_array_parameter_then_sets_info()
+        {
+            var map = new MemberIdMap();
+            map.Add(assembly);
+            var typeId = map.FindId(Reflect<Sample>.GetMethod(x => x.DoWithArray2<object>(null)).GetGenericMethodDefinition());
             var member = DocReader.Read(assembly).Elements.OfType<Method>().Where(c => c.Id == typeId).FirstOrDefault();
 
             Assert.NotNull(member);

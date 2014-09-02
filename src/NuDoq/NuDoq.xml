@@ -2072,6 +2072,18 @@
             as a combined flag.
             </summary>
         </member>
+        <member name="F:ThisAssembly.Version">
+            <summary>1.2.0</summary>
+        </member>
+        <member name="F:ThisAssembly.FileVersion">
+            <summary>1.2.2</summary>
+        </member>
+        <member name="F:ThisAssembly.InformationalVersion">
+            <summary>1.2.2</summary>
+        </member>
+        <member name="F:ThisAssembly.Commit">
+            <summary>0afcded</summary>
+        </member>
         <member name="T:NuDoq.XmlVisitor">
             <summary>
             

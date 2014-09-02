@@ -11,10 +11,11 @@
         <iconUrl>https://raw.github.com/kzu/NuDoq/master/doc/Icon-big.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A simple and intuitive API for reading and writing .NET XML API documentation.</description>
-        <releaseNotes>v0.4
+        <releaseNotes>
+v0.4
 * Added support for `returns` tag.
 * Added support for retrieving `IXmlLineInfo` for every element, which allows much better diagnostics
-* ToString now renders basic element information 
+* ToString now renders basic element information
 * Full element text content rendering moved to `ToText` method
 
 v0.3
@@ -30,7 +31,8 @@ v0.2
 
 v0.1
 
-* Initial cut with visitable documentation elements</releaseNotes>
+* Initial cut with visitable documentation elements
+        </releaseNotes>
         <copyright>Copyright 2013</copyright>
         <tags>.net documentation</tags>
         <dependencies />

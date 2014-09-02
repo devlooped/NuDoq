@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>NuDoq</id>
+        <id>$id$</id>
         <version>1.2</version>
-        <title>NuDoq: A .NET XML Documentation API</title>
-        <authors>Daniel Cazzulino, kzu</authors>
-        <owners>kzu</owners>
+        <title>$title$</title>
+        <authors>$authors$</authors>
+        <owners>$owners$</owners>
         <licenseUrl>https://github.com/kzu/NuDoq/blob/master/License.txt</licenseUrl>
         <projectUrl>https://github.com/kzu/NuDoq</projectUrl>
         <iconUrl>https://raw.github.com/kzu/NuDoq/master/doc/Icon-big.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A simple and intuitive API for reading and writing .NET XML API documentation.</description>
+        <description>$description$</description>
         <releaseNotes>
 v0.4
 * Added support for `returns` tag.

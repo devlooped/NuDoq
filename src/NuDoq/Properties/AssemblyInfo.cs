@@ -16,15 +16,28 @@
 */
 #endregion
 
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("NuDoq")]
-[assembly: AssemblyDescription("Provides core APIs for reading and writing XML API documentation files.")]
-[assembly: AssemblyCompany("Daniel Cazzulino")]
-[assembly: AssemblyProduct("NuDoq")]
+[assembly: AssemblyProduct(ThisAssembly.Product)]
+[assembly: AssemblyTitle(ThisAssembly.Title)]
+[assembly: AssemblyDescription(ThisAssembly.Description)]
+[assembly: AssemblyCompany(ThisAssembly.Company)]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 
-[assembly: AssemblyVersion("0.4.1306.1409")]
-[assembly: AssemblyFileVersion("0.4.1306.1409")]
+[assembly: AssemblyMetadata("authors", ThisAssembly.Authors)]
+[assembly: AssemblyMetadata("owners", ThisAssembly.Owners)]
+[assembly: AssemblyMetadata("id", ThisAssembly.Product)]
+
+partial class ThisAssembly
+{
+    public const string Product = "NuDoq";
+    public const string Title = "NuDoq: A .NET XML Documentation API";
+    public const string Description = "Provides core APIs for reading and writing XML API documentation files.";
+
+    public const string Company = "Daniel Cazzulino";
+    public const string Owners = "kzu";
+    public const string Authors = "Daniel Cazzulino, kzu";
+}

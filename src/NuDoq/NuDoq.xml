@@ -388,6 +388,22 @@
             found in the XML API documentation associated with an assembly.
             </summary>
         </member>
+        <member name="T:System.Reflection.AssemblyMetadataAttribute">
+            <summary>Defines a key/value metadata pair for the decorated assembly.</summary>
+        </member>
+        <member name="M:System.Reflection.AssemblyMetadataAttribute.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Reflection.AssemblyMetadataAttribute" /> class by using the specified metadata key and value.</summary>
+            <param name="key">The metadata key.</param>
+            <param name="value">The metadata value.</param>
+        </member>
+        <member name="P:System.Reflection.AssemblyMetadataAttribute.Key">
+            <summary>Gets the metadata key.</summary>
+            <returns>The metadata key.</returns>
+        </member>
+        <member name="P:System.Reflection.AssemblyMetadataAttribute.Value">
+            <summary>Gets the metadata value.</summary>
+            <returns>The metadata value.</returns>
+        </member>
         <member name="T:NuDoq.Returns">
             <summary>
             Represents the <c>returns</c> documentation tag.

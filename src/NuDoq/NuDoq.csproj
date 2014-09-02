@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="CachedEnumerable.cs" />
     <Compile Include="AssemblyMembers.cs" />
+    <Compile Include="Properties\AssemblyMetadataAttribute.cs" />
     <Compile Include="Returns.cs" />
     <Compile Include="DelegateVisitor.cs" />
     <Compile Include="IVisitable.cs" />

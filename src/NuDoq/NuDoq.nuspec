@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>$id$</id>
-        <version>1.2</version>
+        <version>$version$</version>
         <title>$title$</title>
         <authors>$authors$</authors>
         <owners>$owners$</owners>

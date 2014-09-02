@@ -388,6 +388,45 @@
             found in the XML API documentation associated with an assembly.
             </summary>
         </member>
+        <member name="T:Guard">
+            <summary>
+            Common guard class for argument validation.
+            </summary>
+            <nuget id="netfx-Guard" />
+        </member>
+        <member name="M:Guard.NotNull``1(System.Linq.Expressions.Expression{System.Func{``0}},``0)">
+            <summary>
+            Ensures the given <paramref name="value"/> is not null.
+            Throws <see cref="T:System.ArgumentNullException"/> otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Guard.NotNullOrEmpty(System.Linq.Expressions.Expression{System.Func{System.String}},System.String)">
+            <summary>
+            Ensures the given string <paramref name="value"/> is not null or empty.
+            Throws <see cref="T:System.ArgumentNullException"/> in the first case, or 
+            <see cref="T:System.ArgumentException"/> in the latter.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null or an empty string.</exception>
+        </member>
+        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            Ensures the given string <paramref name="value"/> is valid according 
+            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
+            otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
+            to the <paramref name="validate"/> function.</exception>
+        </member>
+        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String,System.Object[])">
+            <summary>
+            Ensures the given string <paramref name="value"/> is valid according 
+            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
+            otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
+            to the <paramref name="validate"/> function.</exception>
+        </member>
         <member name="T:System.Reflection.AssemblyMetadataAttribute">
             <summary>Defines a key/value metadata pair for the decorated assembly.</summary>
         </member>

@@ -30,6 +30,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyMetadata("authors", ThisAssembly.Authors)]
 [assembly: AssemblyMetadata("owners", ThisAssembly.Owners)]
 [assembly: AssemblyMetadata("id", ThisAssembly.Product)]
+[assembly: AssemblyMetadata("version", ThisAssembly.Version)]
 
 partial class ThisAssembly
 {

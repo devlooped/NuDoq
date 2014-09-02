@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Read from XML">
+    <Position X="1.01" Y="1.687" Height="0.291" Width="1.054" />
+  </Comment>
+  <Comment CommentText="Read from Assembly">
+    <Position X="0.75" Y="2.938" Height="0.291" Width="1.346" />
+  </Comment>
+  <Comment CommentText="      Available when reading from Assembly">
+    <Position X="1" Y="5.312" Height="0.458" Width="1.523" />
+  </Comment>
+  <Comment CommentText="Available when reading from Assembly">
+    <Position X="7.479" Y="5.177" Height="0.291" Width="2.544" />
+  </Comment>
+  <Class Name="NuDoq.Container" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Container.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Element" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAJAAAAAAAAAEAEAAAAAAAAAQAAAEAAAAABAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NuDoq.Event" Collapsed="true">
+    <Position X="4.25" Y="4.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Event.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Field" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Member" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Member.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Method" Collapsed="true">
+    <Position X="1" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Method.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Property" Collapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.AssemblyMembers" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAEAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>AssemblyMembers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Class" Collapsed="true">
+    <Position X="7.25" Y="6" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Semantic\Class.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Enum" Collapsed="true">
+    <Position X="8.75" Y="6" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Semantic\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.ExtensionMethod" Collapsed="true">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Semantic\ExtensionMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Interface" Collapsed="true">
+    <Position X="10.25" Y="6" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Semantic\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.Struct" Collapsed="true">
+    <Position X="5.75" Y="6" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Semantic\Struct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.TypeDeclaration" Collapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeDeclaration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.DocumentMembers" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DocumentMembers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuDoq.UnknownMember" Collapsed="true">
+    <Position X="10.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnknownMember.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

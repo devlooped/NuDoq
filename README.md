@@ -1,18 +1,18 @@
-![Icon](https://raw.github.com/clariuslabs/NuDoc/master/doc/Icon-32.png) NuDoc: A .NET XML API Documentation Reader
+![Icon](https://raw.github.com/kzu/NuDoq/master/doc/Icon-32.png) NuDoq: A .NET XML Documentation API
 ===
 
-A standalone API to read .NET XML documentation files and optionally augment it with reflection information.
+A standalone API to read and write .NET XML documentation files and optionally augment it with reflection information.
 
-NuDoc provides a simple and intuitive API that reads .NET XML documentation files into an in-memory model that can be easily used to generate alternative representations or arbitrary processing. If the read operation is performed using a .NET assembly rather than an XML file, NuDoc will automatically add the reflection information to the in-memory model for the documentation elements, making it very easy to post-process them by grouping by type, namespace, etc.
+NuDoq provides a simple and intuitive API that reads .NET XML documentation files into an in-memory model that can be easily used to generate alternative representations or arbitrary processing. If the read operation is performed using a .NET assembly rather than an XML file, NuDoq will automatically add the reflection information to the in-memory model for the documentation elements, making it very easy to post-process them by grouping by type, namespace, etc.
 
-NuDoc leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) pattern and the [Composite](http://en.wikipedia.org/wiki/Composite_pattern) pattern. Essentially, every member in the documentation file is represented as a separate "visitable" type. By simply writing a NuDoc **Visitor**-derived class, you can process only the elements you're interested in.
+NuDoq leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) pattern and the [Composite](http://en.wikipedia.org/wiki/Composite_pattern) pattern. Essentially, every member in the documentation file is represented as a separate "visitable" type. By simply writing a NuDoq **Visitor**-derived class, you can process only the elements you're interested in.
 
-NuDoc can read documentation files from any CIL assembly, and the source tree has explicit unit tests that do so for all major .NET platforms: .NET, WinRT/Metro, Windows Phone and Silverlight.
+NuDoq can read documentation files from any CIL assembly, and the source tree has explicit unit tests that do so for all major .NET platforms: .NET, WinRT/Metro, Windows Phone and Silverlight.
 
 # How to Install
-NuDoc is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](https://nuget.org/packages/nudoc) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
+NuDoq is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](https://nuget.org/packages/NuDoq) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
 
-	PM> Install-Package NuDoc
+	PM> Install-Package NuDoq
 
 
 # Sample code
@@ -113,13 +113,13 @@ There are two logically separated hierarchies of visitable elements: the members
 
 The following is the members hierarchy:
 
-![Members hierarchy](https://raw.github.com/clariuslabs/NuDoc/master/doc/NuDoc.Members.png)
+![Members hierarchy](https://raw.github.com/kzu/NuDoq/master/doc/NuDoq.Members.png)
 
 And this is the supported documentation elements hierarchy:
 
-![Members hierarchy](https://raw.github.com/clariuslabs/NuDoc/master/doc/NuDoc.Content.png)
+![Members hierarchy](https://raw.github.com/kzu/NuDoq/master/doc/NuDoq.Content.png)
 
 Note that at the visitor level, both hierarchies are treated uniformly, since they all ultimately inherit from **Element**. In this fashion, you can have one or multiple visitors processing different parts of the graph, such as one that processes members and generates individual folders for each, and one for documentation elements that generate the content.
 
 
-Enjoy! Go get it now from [NuGet](https://nuget.org/packages/nudoc) ;)
+Enjoy! Go get it now from [NuGet](https://nuget.org/packages/NuDoq) ;)

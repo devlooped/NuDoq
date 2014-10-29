@@ -66,8 +66,8 @@ namespace NuDoq
         {
             return Read(assembly, null);
         }
-     
-            /// <summary>
+
+        /// <summary>
         /// Uses the specified assembly to locate a documentation file alongside the assembly by 
         /// changing the extension to ".xml". If the file is found, it will be read and all 
         /// found members will contain extended reflection information in the <see cref="Member.Info"/> 
@@ -82,7 +82,7 @@ namespace NuDoq
         {
             var fileName = documentationFilename;
 
-            if(string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(fileName))
                 fileName = Path.ChangeExtension(assembly.Location, ".xml");
 
             if (!File.Exists(fileName))
@@ -239,10 +239,10 @@ namespace NuDoq
                                 element = new C(elementNode.Value);
                                 break;
                             case "see":
-                                element = new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), ReadContent(elementNode));
+                                element = new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode));
                                 break;
                             case "seealso":
-                                element = new SeeAlso(FindAttribute(elementNode, "cref"), ReadContent(elementNode));
+                                element = new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode));
                                 break;
                             case "list":
                                 element = new List(FindAttribute(elementNode, "type"), ReadContent(elementNode));
@@ -343,13 +343,13 @@ namespace NuDoq
                 indent = 0;
 
             return string.Join(joinWith, lines
-                .Select(line => 
+                .Select(line =>
                     {
-                        if(string.IsNullOrEmpty(line))
+                        if (string.IsNullOrEmpty(line))
                             return line;
                         else if (line.Length < indent)
                             return string.Empty;
-                        else 
+                        else
                             return line.Substring(indent);
                     })
                 .ToArray());

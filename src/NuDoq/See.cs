@@ -33,12 +33,14 @@ namespace NuDoq
         /// </summary>
         /// <param name="cref">The member id of the referenced member, if any.</param>
         /// <param name="langword">The element langword, if any.</param>
+        /// <param name="content">The link's text label, if any.</param>
         /// <param name="elements">The child elements.</param>
-        public See(string cref, string langword, IEnumerable<Element> elements)
+        public See(string cref, string langword, string content, IEnumerable<Element> elements)
             : base(elements)
         {
             this.Cref = cref;
             this.Langword = langword;
+            this.Content = content;
         }
 
         /// <summary>
@@ -59,6 +61,11 @@ namespace NuDoq
         /// Gets the original langword attribute.
         /// </summary>
         public string Langword { get; private set; }
+
+        /// <summary>
+        /// Gets the reference's text.
+        /// </summary>
+        public string Content { get; private set; }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

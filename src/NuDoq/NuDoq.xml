@@ -216,6 +216,11 @@
             Visits the <c>c</c> documentation element.
             </summary>
         </member>
+        <member name="M:NuDoq.Visitor.VisitAnchor(NuDoq.Anchor)">
+            <summary>
+            Visits the <c>a</c> extended documentation element.
+            </summary>
+        </member>
         <member name="M:NuDoq.Visitor.VisitText(NuDoq.Text)">
             <summary>
             Visits the literal text inside other documentation elements.
@@ -600,6 +605,12 @@
             </summary>
             <seealso cref="M:NuDoq.Visitor.VisitSee(NuDoq.See)"/>
         </member>
+        <member name="P:NuDoq.VisitorDelegates.VisitAnchor">
+            <summary>
+            Gets or sets the action to invoke when visiting the <c>a</c> extended documentation element.
+            </summary>
+            <seealso cref="M:NuDoq.Visitor.VisitAnchor(NuDoq.Anchor)"/>
+        </member>
         <member name="P:NuDoq.VisitorDelegates.VisitSeeAlso">
             <summary>
             Gets or sets the action to invoke when visiting the <c>seealso</c> documentation element.
@@ -840,6 +851,11 @@
             See <see cref="M:NuDoq.Visitor.VisitRemarks(NuDoq.Remarks)"/>.
             </summary>
         </member>
+        <member name="M:NuDoq.DelegateVisitor.VisitAnchor(NuDoq.Anchor)">
+            <summary>
+            See <see cref="M:NuDoq.Visitor.VisitAnchor(NuDoq.Anchor)"/>.
+            </summary>
+        </member>
         <member name="M:NuDoq.DelegateVisitor.VisitSee(NuDoq.See)">
             <summary>
             See <see cref="M:NuDoq.Visitor.VisitSee(NuDoq.See)"/>.
@@ -933,6 +949,43 @@
         <member name="P:NuDoq.Param.Name">
             <summary>
             Gets the parameter name.
+            </summary>
+        </member>
+        <member name="T:NuDoq.Anchor">
+            <summary>
+            Represents the HTML (<c>&lt;a&gt;</c>) Element,
+            which can be used as an extended documentation tag.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-US/library/acd0tfbe(v=vs.80).aspx.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Anchor.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.Anchor"/> class.
+            </summary>
+            <param name="href">The anchor's destination address.</param>
+            <param name="content">The link's text label, if any.</param>
+            <param name="elements">The child elements.</param>
+        </member>
+        <member name="M:NuDoq.Anchor.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Anchor.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+        </member>
+        <member name="P:NuDoq.Anchor.Href">
+            <summary>
+            Gets the anchor's destination link address.
+            </summary>
+        </member>
+        <member name="P:NuDoq.Anchor.Content">
+            <summary>
+            Gets the reference's text.
             </summary>
         </member>
         <member name="T:NuDoq.TypeParam">
@@ -1625,12 +1678,13 @@
             See http://msdn.microsoft.com/en-US/library/acd0tfbe(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:NuDoq.See.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+        <member name="M:NuDoq.See.#ctor(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:NuDoq.See"/> class.
             </summary>
             <param name="cref">The member id of the referenced member, if any.</param>
             <param name="langword">The element langword, if any.</param>
+            <param name="content">The link's text label, if any.</param>
             <param name="elements">The child elements.</param>
         </member>
         <member name="M:NuDoq.See.Accept``1(``0)">
@@ -1653,6 +1707,11 @@
             Gets the original langword attribute.
             </summary>
         </member>
+        <member name="P:NuDoq.See.Content">
+            <summary>
+            Gets the reference's text.
+            </summary>
+        </member>
         <member name="T:NuDoq.SeeAlso">
             <summary>
             Represents the <c>seealso</c> documentation tag.
@@ -1661,11 +1720,12 @@
             See http://msdn.microsoft.com/en-US/library/xhd7ehkk(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:NuDoq.SeeAlso.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+        <member name="M:NuDoq.SeeAlso.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:NuDoq.SeeAlso"/> class.
             </summary>
             <param name="cref">The member id of the referenced member.</param>
+            <param name="content">The link's text label, if any.</param>
             <param name="elements">The child elements.</param>
         </member>
         <member name="M:NuDoq.SeeAlso.Accept``1(``0)">
@@ -1681,6 +1741,11 @@
         <member name="P:NuDoq.SeeAlso.Cref">
             <summary>
             Gets the member id of the referenced member.
+            </summary>
+        </member>
+        <member name="P:NuDoq.SeeAlso.Content">
+            <summary>
+            Gets the reference's text.
             </summary>
         </member>
         <member name="T:NuDoq.Interface">
@@ -2165,6 +2230,11 @@
         <member name="M:NuDoq.XmlVisitor.VisitSee(NuDoq.See)">
             <summary>
             Visits the <c>see</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.XmlVisitor.VisitAnchor(NuDoq.Anchor)">
+            <summary>
+            Visits the <c>a</c> documentation element.
             </summary>
         </member>
         <member name="M:NuDoq.XmlVisitor.VisitSeeAlso(NuDoq.SeeAlso)">

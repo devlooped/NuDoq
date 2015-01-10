@@ -191,6 +191,18 @@ namespace NuDoq
         }
 
         /// <summary>
+        /// Visits the <c>a</c> documentation element.
+        /// </summary>
+        public override void VisitAnchor(Anchor anchor)
+        {
+            var element = new XElement("a");
+            if (anchor.Href != null)
+                element.Add(new XAttribute("href", anchor.Href));
+
+            AddXml(element, anchor, base.VisitAnchor);
+        }
+
+        /// <summary>
         /// Visits the <c>seealso</c> documentation element.
         /// </summary>
         public override void VisitSeeAlso(SeeAlso seeAlso)

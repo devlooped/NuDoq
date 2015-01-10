@@ -155,6 +155,12 @@ namespace NuDoq
         public Action<See> VisitSee { get; set; }
 
         /// <summary>
+        /// Gets or sets the action to invoke when visiting the <c>a</c> extended documentation element.
+        /// </summary>
+        /// <seealso cref="Visitor.VisitAnchor"/>
+        public Action<Anchor> VisitAnchor { get; set; }
+
+        /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>seealso</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitSeeAlso"/>
@@ -548,6 +554,17 @@ namespace NuDoq
                 delegates.VisitRemarks(remarks);
 
             base.VisitRemarks(remarks);
+        }
+
+        /// <summary>
+        /// See <see cref="Visitor.VisitAnchor"/>.
+        /// </summary>
+        public override void VisitAnchor(Anchor anchor)
+        {
+            if (delegates.VisitAnchor != null)
+                delegates.VisitAnchor(anchor);
+
+            base.VisitAnchor(anchor);
         }
 
         /// <summary>

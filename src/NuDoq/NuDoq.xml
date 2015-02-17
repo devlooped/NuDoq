@@ -1625,12 +1625,13 @@
             See http://msdn.microsoft.com/en-US/library/acd0tfbe(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:NuDoq.See.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+        <member name="M:NuDoq.See.#ctor(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:NuDoq.See"/> class.
             </summary>
             <param name="cref">The member id of the referenced member, if any.</param>
             <param name="langword">The element langword, if any.</param>
+            <param name="content">The link's text label, if any.</param>
             <param name="elements">The child elements.</param>
         </member>
         <member name="M:NuDoq.See.Accept``1(``0)">
@@ -1653,6 +1654,11 @@
             Gets the original langword attribute.
             </summary>
         </member>
+        <member name="P:NuDoq.See.Content">
+            <summary>
+            Gets the reference's text.
+            </summary>
+        </member>
         <member name="T:NuDoq.SeeAlso">
             <summary>
             Represents the <c>seealso</c> documentation tag.
@@ -1661,11 +1667,12 @@
             See http://msdn.microsoft.com/en-US/library/xhd7ehkk(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:NuDoq.SeeAlso.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+        <member name="M:NuDoq.SeeAlso.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
             Initializes a new instance of the <see cref="T:NuDoq.SeeAlso"/> class.
             </summary>
             <param name="cref">The member id of the referenced member.</param>
+            <param name="content">The link's text label, if any.</param>
             <param name="elements">The child elements.</param>
         </member>
         <member name="M:NuDoq.SeeAlso.Accept``1(``0)">
@@ -1681,6 +1688,11 @@
         <member name="P:NuDoq.SeeAlso.Cref">
             <summary>
             Gets the member id of the referenced member.
+            </summary>
+        </member>
+        <member name="P:NuDoq.SeeAlso.Content">
+            <summary>
+            Gets the reference's text.
             </summary>
         </member>
         <member name="T:NuDoq.Interface">
@@ -2076,13 +2088,13 @@
             <summary>1.2.0</summary>
         </member>
         <member name="F:ThisAssembly.FileVersion">
-            <summary>1.2.2</summary>
+            <summary>1.2.5</summary>
         </member>
         <member name="F:ThisAssembly.InformationalVersion">
-            <summary>1.2.2</summary>
+            <summary>1.2.5</summary>
         </member>
         <member name="F:ThisAssembly.Commit">
-            <summary>0afcded</summary>
+            <summary>56ad8c5</summary>
         </member>
         <member name="T:NuDoq.XmlVisitor">
             <summary>

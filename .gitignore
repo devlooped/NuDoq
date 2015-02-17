@@ -110,3 +110,4 @@ UpgradeLog*.XML
 
 *.nupkg
 NuDoq.sln.ide
+*.metaproj

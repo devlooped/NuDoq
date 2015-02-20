@@ -16,13 +16,13 @@
         <Delete Files="bin\lib\**\*.*" ContinueOnError="false" />
         <RemoveDir Directories="bin\lib" Condition="false" />
         
-        <MSBuild Projects="NuDoc.csproj"
+        <MSBuild Projects="NuDoq.csproj"
                  Properties="NuGet=true"
                  Targets="Rebuild"
                  />
 
         <!-- Finally build the package -->
-        <Exec Command="$(NuGetExe) pack -NoPackageAnalysis bin\NuDoc.nuspec -Symbols -OutputDirectory $(DropDirectory) -Version $(PackageVersion)"
+        <Exec Command="$(NuGetExe) pack -NoPackageAnalysis bin\NuDoq.nuspec -Symbols -OutputDirectory $(DropDirectory) -Version $(PackageVersion)"
               ContinueOnError="false" />
     </Target>
 

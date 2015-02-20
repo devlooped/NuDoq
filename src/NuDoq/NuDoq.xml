@@ -2088,13 +2088,13 @@
             <summary>1.2.0</summary>
         </member>
         <member name="F:ThisAssembly.FileVersion">
-            <summary>1.2.5</summary>
+            <summary>1.2.7</summary>
         </member>
         <member name="F:ThisAssembly.InformationalVersion">
-            <summary>1.2.5</summary>
+            <summary>1.2.7</summary>
         </member>
         <member name="F:ThisAssembly.Commit">
-            <summary>56ad8c5</summary>
+            <summary>19c363c</summary>
         </member>
         <member name="T:NuDoq.XmlVisitor">
             <summary>

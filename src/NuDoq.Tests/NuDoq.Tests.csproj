@@ -12,10 +12,10 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>NuDoq.Tests.xml</DocumentationFile>
     <NoWarn>1591,1712,1710</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
@@ -66,6 +66,10 @@
     </None>
     <None Include="netfx\System\Reflection\TargetFramework.ttinclude" />
     <None Include="packages.config" />
+    <Content Include="..\Demo\DemoProject\DemoProject.xml">
+      <Link>DemoProject.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="XmlDocumentation.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -78,7 +82,7 @@
     </ProjectReference>
     <ProjectReference Include="..\NuDoq\NuDoq.csproj">
       <Project>{3f235025-3ae8-4776-be9c-6872c2932f27}</Project>
-      <Name>NuDoc</Name>
+      <Name>NuDoq</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

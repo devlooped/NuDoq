@@ -3,6 +3,10 @@
 
 A standalone API to read and write .NET XML documentation files and optionally augment it with reflection information.
 
+[![Build status](https://img.shields.io/appveyor/ci/kzu/NuDoq.svg)](https://ci.appveyor.com/project/kzu/NuDoq)
+[![NuGet downloads](https://img.shields.io/nuget/dt/NuDoq.svg)](https://www.nuget.org/packages/NuDoq)
+[![Version](https://img.shields.io/nuget/v/NuDoq.svg)](https://www.nuget.org/packages/NuDoq)
+
 NuDoq provides a simple and intuitive API that reads .NET XML documentation files into an in-memory model that can be easily used to generate alternative representations or arbitrary processing. If the read operation is performed using a .NET assembly rather than an XML file, NuDoq will automatically add the reflection information to the in-memory model for the documentation elements, making it very easy to post-process them by grouping by type, namespace, etc.
 
 NuDoq leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) pattern and the [Composite](http://en.wikipedia.org/wiki/Composite_pattern) pattern. Essentially, every member in the documentation file is represented as a separate "visitable" type. By simply writing a NuDoq **Visitor**-derived class, you can process only the elements you're interested in.

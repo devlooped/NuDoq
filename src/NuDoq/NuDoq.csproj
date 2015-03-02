@@ -1,102 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<Import Project="..\..\packages\SemanticGit.1.0.10\build\SemanticGit.props" Condition="Exists('..\..\packages\SemanticGit.1.0.10\build\SemanticGit.props')" />
-	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProjectGuid>{3F235025-3AE8-4776-BE9C-6872C2932F27}</ProjectGuid>
-		<OutputType>Library</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
-		<RootNamespace>NuDoq</RootNamespace>
-		<AssemblyName>NuDoq</AssemblyName>
-		<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-		<FileAlignment>512</FileAlignment>
-		<DocumentationFile>NuDoq.xml</DocumentationFile>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>..\..\NuDoq.snk</AssemblyOriginatorKeyFile>
-		<OutputPath>bin\$(Configuration)\</OutputPath>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F235025-3AE8-4776-BE9C-6872C2932F27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NuDoq</RootNamespace>
+    <AssemblyName>NuDoq</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <DocumentationFile>NuDoq.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\NuDoq.snk</AssemblyOriginatorKeyFile>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
 		<NuGetPackageImportStamp>e746c7f1</NuGetPackageImportStamp>
-		<AssemblyFileVersionFormat>MAJOR.MINOR.PATCH</AssemblyFileVersionFormat>
-		<AssemblyInformationalVersionFormat>MAJOR.MINOR.PATCH</AssemblyInformationalVersionFormat>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	</PropertyGroup>
-	<ItemGroup>
-		<Reference Include="System" />
-		<Reference Include="System.Core" />
-		<Reference Include="System.Xml.Linq" />
-		<Reference Include="System.Xml" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="CachedEnumerable.cs" />
-		<Compile Include="AssemblyMembers.cs" />
-		<Compile Include="netfx\System\Guard.cs" />
-		<Compile Include="Properties\AssemblyMetadataAttribute.cs" />
-		<Compile Include="Returns.cs" />
-		<Compile Include="DelegateVisitor.cs" />
-		<Compile Include="IVisitable.cs" />
-		<Compile Include="Param.cs" />
-		<Compile Include="TypeParam.cs" />
-		<Compile Include="Exception.cs" />
-		<Compile Include="Item.cs" />
-		<Compile Include="Description.cs" />
-		<Compile Include="DocumentMembers.cs" />
-		<Compile Include="Term.cs" />
-		<Compile Include="List.cs" />
-		<Compile Include="ListHeader.cs" />
-		<Compile Include="ListType.cs" />
-		<Compile Include="TextVisitor.cs" />
-		<Compile Include="UnknownElement.cs" />
-		<Compile Include="Value.cs" />
-		<Compile Include="TypeParamRef.cs" />
-		<Compile Include="ParamRef.cs" />
-		<Compile Include="Semantic\Class.cs" />
-		<Compile Include="Semantic\Enum.cs" />
-		<Compile Include="Semantic\Struct.cs" />
-		<Compile Include="Semantic\ExtensionMethod.cs" />
-		<Compile Include="Event.cs" />
-		<Compile Include="Field.cs" />
-		<Compile Include="Method.cs" />
-		<Compile Include="Property.cs" />
-		<Compile Include="MemberIdMap.cs" />
-		<Compile Include="See.cs" />
-		<Compile Include="SeeAlso.cs" />
-		<Compile Include="Semantic\Interface.cs" />
-		<Compile Include="Text.cs" />
-		<Compile Include="C.cs" />
-		<Compile Include="Code.cs" />
-		<Compile Include="Container.cs" />
-		<Compile Include="Element.cs" />
-		<Compile Include="Example.cs" />
-		<Compile Include="Member.cs" />
-		<Compile Include="Para.cs" />
-		<Compile Include="DocReader.cs" />
-		<Compile Include="Remarks.cs" />
-		<Compile Include="Summary.cs" />
-		<Compile Include="TypeDeclaration.cs" />
-		<Compile Include="UnknownMember.cs" />
-		<Compile Include="Visitor.cs" />
-		<Compile Include="MemberKinds.cs" />
-		<Compile Include="Properties\AssemblyInfo.cs" />
-		<Compile Include="XmlVisitor.cs">
-			<SubType>Code</SubType>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\..\kzu.licenseheader">
-			<Link>kzu.licenseheader</Link>
-		</None>
-		<None Include="NuDoq.Members.cd" />
-		<None Include="NuDoq.Content.cd" />
-		<None Include="NuDoq.nuspec" />
-		<None Include="NuGet.proj" />
+    <AssemblyFileVersionFormat>MAJOR.MINOR.PATCH</AssemblyFileVersionFormat>
+    <AssemblyInformationalVersionFormat>MAJOR.MINOR.PATCH</AssemblyInformationalVersionFormat>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CachedEnumerable.cs" />
+    <Compile Include="AssemblyMembers.cs" />
+    <Compile Include="netfx\System\Guard.cs" />
+    <Compile Include="Properties\AssemblyMetadataAttribute.cs" />
+    <Compile Include="Returns.cs" />
+    <Compile Include="DelegateVisitor.cs" />
+    <Compile Include="IVisitable.cs" />
+    <Compile Include="Param.cs" />
+    <Compile Include="Anchor.cs" />
+    <Compile Include="TypeParam.cs" />
+    <Compile Include="Exception.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Description.cs" />
+    <Compile Include="DocumentMembers.cs" />
+    <Compile Include="Term.cs" />
+    <Compile Include="List.cs" />
+    <Compile Include="ListHeader.cs" />
+    <Compile Include="ListType.cs" />
+    <Compile Include="TextVisitor.cs" />
+    <Compile Include="UnknownElement.cs" />
+    <Compile Include="Value.cs" />
+    <Compile Include="TypeParamRef.cs" />
+    <Compile Include="ParamRef.cs" />
+    <Compile Include="Semantic\Class.cs" />
+    <Compile Include="Semantic\Enum.cs" />
+    <Compile Include="Semantic\Struct.cs" />
+    <Compile Include="Semantic\ExtensionMethod.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="Method.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="MemberIdMap.cs" />
+    <Compile Include="See.cs" />
+    <Compile Include="SeeAlso.cs" />
+    <Compile Include="Semantic\Interface.cs" />
+    <Compile Include="Text.cs" />
+    <Compile Include="C.cs" />
+    <Compile Include="Code.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Element.cs" />
+    <Compile Include="Example.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="Para.cs" />
+    <Compile Include="DocReader.cs" />
+    <Compile Include="Remarks.cs" />
+    <Compile Include="Summary.cs" />
+    <Compile Include="TypeDeclaration.cs" />
+    <Compile Include="UnknownMember.cs" />
+    <Compile Include="Visitor.cs" />
+    <Compile Include="MemberKinds.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\kzu.licenseheader">
+      <Link>kzu.licenseheader</Link>
+    </None>
+    <None Include="NuDoq.Members.cd" />
+    <None Include="NuDoq.Content.cd" />
+    <None Include="NuDoq.nuspec" />
+    <None Include="NuGet.proj" />
 		<None Include="packages.config" />
-	</ItemGroup>
-	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 	<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
 		<PropertyGroup>
 			<ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

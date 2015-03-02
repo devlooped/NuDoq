@@ -238,6 +238,9 @@ namespace NuDoq
                             case "c":
                                 element = new C(elementNode.Value);
                                 break;
+                            case "a":
+                                element = new Anchor(FindAttribute(elementNode, "href"), elementNode.Value, ReadContent(elementNode));
+                                break;
                             case "see":
                                 element = new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode));
                                 break;

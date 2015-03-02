@@ -217,6 +217,14 @@ namespace NuDoq
         }
 
         /// <summary>
+        /// Visits the <c>a</c> extended documentation element.
+        /// </summary>
+        public virtual void VisitAnchor(Anchor anchor)
+        {
+            VisitElement(anchor);
+        }
+
+        /// <summary>
         /// Visits the literal text inside other documentation elements.
         /// </summary>
         public virtual void VisitText(Text text)

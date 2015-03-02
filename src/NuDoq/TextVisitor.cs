@@ -68,6 +68,13 @@ namespace NuDoq
                 builder.Append(see.Cref.Substring(2));
         }
 
+        public override void VisitAnchor(Anchor anchor)
+        {
+            base.VisitAnchor(anchor);
+            if (!string.IsNullOrEmpty(anchor.Href))
+                builder.Append(anchor.Href);
+        }
+
         public override void VisitPara(Para para)
         {
             // Avoid double line breaks between adjacent <para> elements.

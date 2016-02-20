@@ -311,6 +311,19 @@ namespace NuDoq
         {
             return TrimLines(content, StringSplitOptions.None, Environment.NewLine);
         }
+        
+        private static string TrimWhitespaceTo(string content, int index)
+        {
+          if (string.IsNullOrEmpty(content))
+            return content;
+          for (var i = 0; i < index; i++)
+          {
+            // Check for end of whitespace
+            if (!char.IsWhiteSpace(content[i]))
+              return content.Substring(i);
+          }
+          return content.Substring(index);
+        }
 
         private static string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
         {
@@ -350,7 +363,7 @@ namespace NuDoq
                         else if (line.Length < indent)
                             return string.Empty;
                         else
-                            return line.Substring(indent);
+                            return TrimWhitespaceTo(line, indent);
                     })
                 .ToArray());
         }

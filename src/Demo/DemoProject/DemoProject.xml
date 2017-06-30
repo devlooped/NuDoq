@@ -98,6 +98,14 @@
             Initializes a new instance of the <see cref="T:Demo.Sample"/> class.
             </summary>
         </member>
+        <member name="P:Demo.Sample.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id of this sample.
+            </value>
+        </member>
         <member name="M:Demo.Sample.GetValue(System.Int32)">
             <summary>
             Gets the value for the given <paramref name="id"/>.
@@ -109,14 +117,6 @@
             <summary>
             Generic method on non-generic type.
             </summary>
-        </member>
-        <member name="P:Demo.Sample.Id">
-            <summary>
-            Gets or sets the id.
-            </summary>
-            <value>
-            The id of this sample.
-            </value>
         </member>
         <member name="T:Demo.Sample.NestedType">
             <summary>

@@ -27,12 +27,26 @@ namespace NuDoq
     public class Code : Element
     {
         /// <summary>
+        /// Gets or sets the code source, if any.
+        /// </summary>
+        /// 
+        public string Source { get; set; }
+
+        /// <summary>
+        /// Gets or sets the #pragma region of the <see cref="Source"/>, if any.
+        /// </summary>
+        /// 
+        public string Region { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Code"/> class 
         /// with the given content.
         /// </summary>
-        public Code(string content)
+        public Code(string content, string source, string region)
         {
             this.Content = content;
+            this.Source = source;
+            this.Region = region;
         }
 
         /// <summary>
@@ -54,6 +68,8 @@ namespace NuDoq
         /// </summary>
         public override string ToString()
         {
+            if (Source != null)
+                return string.Format("<code source=\"{0}>\"", Source) + base.ToString();
             return "<code>" + base.ToString();
         }
     }

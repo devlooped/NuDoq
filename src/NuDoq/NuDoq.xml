@@ -16,370 +16,14 @@
             passed to <see cref="M:NuDoq.DocReader.Read(System.Reflection.Assembly)"/>.
             </summary>
         </member>
-        <member name="T:NuDoq.DocumentMembers">
-            <summary>
-            Composite of all lazy-read members in a documentation file 
-            returned from the <see cref="M:NuDoq.DocReader.Read(System.String)"/>.
-            </summary>
-        </member>
-        <member name="T:NuDoq.Container">
-            <summary>
-            Base class for elements that can contain other elements.
-            </summary>
-            <remarks>
-            Implements the composite pattern for the visitable model.
-            </remarks>
-        </member>
-        <member name="T:NuDoq.Element">
-            <summary>
-            Base class for all elements in a documentation file, including 
-            types, members, and content like summaries, remarks, etc. 
-            </summary>
-            <remarks>
-            This type is the root of the visitor model hierarchy.
-            </remarks>
-        </member>
-        <member name="T:NuDoq.IVisitable">
-            <summary>
-            Exposes the visitor pattern on a visitable model that 
-            can receive visitors.
-            </summary>
-        </member>
-        <member name="M:NuDoq.IVisitable.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-            <typeparam name="TVisitor">The type of the visitor, inferred from the passed-in <paramref name="visitor"/>.</typeparam>
-            <param name="visitor">The visitor instance to accept.</param>
-            <returns>The received visitor. Allows for easy collecting of the results from the visitor.</returns>
-        </member>
-        <member name="M:NuDoq.Element.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Element.ToText">
-            <summary>
-            Returns the text content of this element and all its 
-            children if any.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Element.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Element.Traverse">
-            <summary>
-            Enumerates this instance and all its descendents recursively.
-            </summary>
-        </member>
-        <member name="T:NuDoq.Visitor">
-            <summary>
-            Base class for visitors of the visitable documentation 
-            model.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitDocument(NuDoq.DocumentMembers)">
-            <summary>
-            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.String)"/>.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitAssembly(NuDoq.AssemblyMembers)">
-            <summary>
-            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.Reflection.Assembly)"/>.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitType(NuDoq.TypeDeclaration)">
-            <summary>
-            Visits a type member.
-            </summary>
-            <remarks>
-            If reflection metadata augmentation exists, 
-            this method will also be called for the 
-            <see cref="T:NuDoq.TypeDeclaration"/>-derived semantic 
-            classes <see cref="T:NuDoq.Class"/>, <see cref="T:NuDoq.Enum"/>, 
-            <see cref="T:NuDoq.Interface"/> and <see cref="T:NuDoq.Struct"/>.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitInterface(NuDoq.Interface)">
-            <summary>
-            Visits the semantically augmented interface type member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
-            available.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitClass(NuDoq.Class)">
-            <summary>
-            Visits the semantically augmented class type member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
-            available.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitStruct(NuDoq.Struct)">
-            <summary>
-            Visits the semantically augmented struct type member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
-            available.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitEnum(NuDoq.Enum)">
-            <summary>
-            Visits the semantically augmented enum type member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
-            available.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitField(NuDoq.Field)">
-            <summary>
-            Visits a documented field member.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitProperty(NuDoq.Property)">
-            <summary>
-            Visits a documented property member.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitEvent(NuDoq.Event)">
-            <summary>
-            Visits a documented event member.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitMethod(NuDoq.Method)">
-            <summary>
-            Visits a documented method member.
-            </summary>
-            <remarks>
-            This method will also be called for the semantically augmented 
-            <see cref="T:NuDoq.ExtensionMethod"/> if an <see cref="T:System.Reflection.Assembly"/> 
-            is used with the <see cref="T:NuDoq.DocReader"/>.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitExtensionMethod(NuDoq.ExtensionMethod)">
-            <summary>
-            Visits the semantically augmented extension method member.
-            </summary>
-            <remarks>
-            This member will only be called when using an 
-            <see cref="T:System.Reflection.Assembly"/> as input for 
-            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
-            available.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitMember(NuDoq.Member)">
-            <summary>
-            Visit the generic base class <see cref="T:NuDoq.Member"/>.
-            </summary>
-            <remarks>
-            This method is called for all <see cref="T:NuDoq.Member"/>-derived 
-            types.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitSummary(NuDoq.Summary)">
-            <summary>
-            Visits the <c>summary</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitRemarks(NuDoq.Remarks)">
-            <summary>
-            Visits the <c>remarks</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitPara(NuDoq.Para)">
-            <summary>
-            Visits the <c>para</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitCode(NuDoq.Code)">
-            <summary>
-            Visits the <c>code</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitC(NuDoq.C)">
-            <summary>
-            Visits the <c>c</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitAnchor(NuDoq.Anchor)">
-            <summary>
-            Visits the <c>a</c> extended documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitText(NuDoq.Text)">
-            <summary>
-            Visits the literal text inside other documentation elements.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitExample(NuDoq.Example)">
-            <summary>
-            Visits the <c>example</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitSee(NuDoq.See)">
-            <summary>
-            Visits the <c>see</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitSeeAlso(NuDoq.SeeAlso)">
-            <summary>
-            Visits the <c>seealso</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitParam(NuDoq.Param)">
-            <summary>
-            Visits the <c>param</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitParamRef(NuDoq.ParamRef)">
-            <summary>
-            Visits the <c>paramref</c> documentation elemnet.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitTypeParam(NuDoq.TypeParam)">
-            <summary>
-            Visits the <c>typeparam</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitTypeParamRef(NuDoq.TypeParamRef)">
-            <summary>
-            Visits the <c>typeparamref</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitValue(NuDoq.Value)">
-            <summary>
-            Visits the <c>value</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitList(NuDoq.List)">
-            <summary>
-            Visits the <c>list</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitListHeader(NuDoq.ListHeader)">
-            <summary>
-            Visits the <c>listheader</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitTerm(NuDoq.Term)">
-            <summary>
-            Visits the <c>term</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitDescription(NuDoq.Description)">
-            <summary>
-            Visits the <c>description</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitItem(NuDoq.Item)">
-            <summary>
-            Visits the <c>item</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitException(NuDoq.Exception)">
-            <summary>
-            Visits the <c>exception</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitReturns(NuDoq.Returns)">
-            <summary>
-            Visits the <c>returns</c> documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitUnknownMember(NuDoq.UnknownMember)">
-            <summary>
-            Visits an unknown member element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitUnknownElement(NuDoq.UnknownElement)">
-            <summary>
-            Visits an unknown documentation element.
-            </summary>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitContainer(NuDoq.Container)">
-            <summary>
-            Visits any container element.
-            </summary>
-            <remarks>
-            This method is called for all of the <see cref="T:NuDoq.Container"/>-derived 
-            types.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Visitor.VisitElement(NuDoq.Element)">
-            <summary>
-            Visits any element.
-            </summary>
-            <remarks>
-            This method is called for all of the <see cref="T:NuDoq.Element"/>-derived 
-            types.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Container.#ctor(System.Collections.Generic.IEnumerable{NuDoq.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.Container"/> class.
-            </summary>
-            <param name="elements">The contained elements within this instance.</param>
-        </member>
-        <member name="P:NuDoq.Container.Elements">
-            <summary>
-            Gets the elements contained in this instance.
-            </summary>
-        </member>
-        <member name="M:NuDoq.DocumentMembers.#ctor(System.Xml.Linq.XDocument,System.Collections.Generic.IEnumerable{NuDoq.Member})">
-            <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.DocumentMembers"/> class.
-            </summary>
-            <param name="xml">The source XML document that was used to read the members.</param>
-            <param name="members">The lazily-read members of the set.</param>
-        </member>
-        <member name="M:NuDoq.DocumentMembers.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="M:NuDoq.DocumentMembers.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
-        <member name="P:NuDoq.DocumentMembers.Xml">
-            <summary>
-            Gets the source XML document that was used to read the members.
-            </summary>
-        </member>
         <member name="M:NuDoq.AssemblyMembers.#ctor(System.Reflection.Assembly,NuDoq.MemberIdMap,System.Xml.Linq.XDocument,System.Collections.Generic.IEnumerable{NuDoq.Member})">
             <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.DocumentMembers"/> class.
+            Initializes a new instance of the <see cref="T:NuDoq.DocumentMembers" /> class.
             </summary>
             <param name="assembly">The assembly that was used to read the documented members.</param>
             <param name="idMap">The id map of reflection members to documentation ids.</param>
             <param name="xml">The source XML document that was used to read the members.</param>
             <param name="members">The lazily-read members of the set.</param>
-        </member>
-        <member name="M:NuDoq.AssemblyMembers.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="M:NuDoq.AssemblyMembers.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
         </member>
         <member name="P:NuDoq.AssemblyMembers.Assembly">
             <summary>
@@ -393,60 +37,15 @@
             found in the XML API documentation associated with an assembly.
             </summary>
         </member>
-        <member name="T:Guard">
+        <member name="M:NuDoq.AssemblyMembers.Accept``1(``0)">
             <summary>
-            Common guard class for argument validation.
+            Accepts the specified visitor.
             </summary>
-            <nuget id="netfx-Guard" />
         </member>
-        <member name="M:Guard.NotNull``1(System.Linq.Expressions.Expression{System.Func{``0}},``0)">
+        <member name="M:NuDoq.AssemblyMembers.ToString">
             <summary>
-            Ensures the given <paramref name="value"/> is not null.
-            Throws <see cref="T:System.ArgumentNullException"/> otherwise.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
-            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null.</exception>
-        </member>
-        <member name="M:Guard.NotNullOrEmpty(System.Linq.Expressions.Expression{System.Func{System.String}},System.String)">
-            <summary>
-            Ensures the given string <paramref name="value"/> is not null or empty.
-            Throws <see cref="T:System.ArgumentNullException"/> in the first case, or 
-            <see cref="T:System.ArgumentException"/> in the latter.
-            </summary>
-            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null or an empty string.</exception>
-        </member>
-        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String)">
-            <summary>
-            Ensures the given string <paramref name="value"/> is valid according 
-            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
-            otherwise.
-            </summary>
-            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
-            to the <paramref name="validate"/> function.</exception>
-        </member>
-        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String,System.Object[])">
-            <summary>
-            Ensures the given string <paramref name="value"/> is valid according 
-            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
-            otherwise.
-            </summary>
-            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
-            to the <paramref name="validate"/> function.</exception>
-        </member>
-        <member name="T:System.Reflection.AssemblyMetadataAttribute">
-            <summary>Defines a key/value metadata pair for the decorated assembly.</summary>
-        </member>
-        <member name="M:System.Reflection.AssemblyMetadataAttribute.#ctor(System.String,System.String)">
-            <summary>Initializes a new instance of the <see cref="T:System.Reflection.AssemblyMetadataAttribute" /> class by using the specified metadata key and value.</summary>
-            <param name="key">The metadata key.</param>
-            <param name="value">The metadata value.</param>
-        </member>
-        <member name="P:System.Reflection.AssemblyMetadataAttribute.Key">
-            <summary>Gets the metadata key.</summary>
-            <returns>The metadata key.</returns>
-        </member>
-        <member name="P:System.Reflection.AssemblyMetadataAttribute.Value">
-            <summary>Gets the metadata value.</summary>
-            <returns>The metadata value.</returns>
         </member>
         <member name="T:NuDoq.Returns">
             <summary>
@@ -469,7 +68,7 @@
         </member>
         <member name="M:NuDoq.Returns.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.VisitorDelegates">
@@ -921,6 +520,20 @@
             See <see cref="M:NuDoq.Visitor.VisitReturns(NuDoq.Returns)"/>.
             </summary>
         </member>
+        <member name="T:NuDoq.IVisitable">
+            <summary>
+            Exposes the visitor pattern on a visitable model that 
+            can receive visitors.
+            </summary>
+        </member>
+        <member name="M:NuDoq.IVisitable.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+            <typeparam name="TVisitor">The type of the visitor, inferred from the passed-in <paramref name="visitor"/>.</typeparam>
+            <param name="visitor">The visitor instance to accept.</param>
+            <returns>The received visitor. Allows for easy collecting of the results from the visitor.</returns>
+        </member>
         <member name="T:NuDoq.Param">
             <summary>
             Represents the <c>param</c> documentation tag.
@@ -941,14 +554,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Param.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Param.Name">
             <summary>
             Gets the parameter name.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Param.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Anchor">
@@ -962,7 +575,7 @@
         </member>
         <member name="M:NuDoq.Anchor.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.Anchor"/> class.
+            Initializes a new instance of the <see cref="T:NuDoq.Anchor" /> class.
             </summary>
             <param name="href">The anchor's destination address.</param>
             <param name="content">The link's text label, if any.</param>
@@ -973,11 +586,6 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Anchor.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Anchor.Href">
             <summary>
             Gets the anchor's destination link address.
@@ -986,6 +594,11 @@
         <member name="P:NuDoq.Anchor.Content">
             <summary>
             Gets the reference's text.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Anchor.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.TypeParam">
@@ -1008,14 +621,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.TypeParam.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.TypeParam.Name">
             <summary>
             Gets the name of the type parameter.
+            </summary>
+        </member>
+        <member name="M:NuDoq.TypeParam.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Exception">
@@ -1038,14 +651,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Exception.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Exception.Cref">
             <summary>
             Gets the member id of the exception type.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Exception.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Item">
@@ -1067,11 +680,6 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Item.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Item.Term">
             <summary>
             Gets the term from the contained elements, if any.
@@ -1080,6 +688,11 @@
         <member name="P:NuDoq.Item.Description">
             <summary>
             Gets the description from the contained elements, if any.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Item.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Description">
@@ -1103,7 +716,35 @@
         </member>
         <member name="M:NuDoq.Description.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
+        <member name="T:NuDoq.DocumentMembers">
+            <summary>
+            Composite of all lazy-read members in a documentation file 
+            returned from the <see cref="M:NuDoq.DocReader.Read(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.DocumentMembers.#ctor(System.Xml.Linq.XDocument,System.Collections.Generic.IEnumerable{NuDoq.Member})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.DocumentMembers" /> class.
+            </summary>
+            <param name="xml">The source XML document that was used to read the members.</param>
+            <param name="members">The lazily-read members of the set.</param>
+        </member>
+        <member name="P:NuDoq.DocumentMembers.Xml">
+            <summary>
+            Gets the source XML document that was used to read the members.
+            </summary>
+        </member>
+        <member name="M:NuDoq.DocumentMembers.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:NuDoq.DocumentMembers.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Term">
@@ -1127,7 +768,7 @@
         </member>
         <member name="M:NuDoq.Term.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.List">
@@ -1150,11 +791,6 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.List.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.List.Type">
             <summary>
             Gets the type of list.
@@ -1168,6 +804,11 @@
         <member name="P:NuDoq.List.Items">
             <summary>
             Gets the items from the contained elements.
+            </summary>
+        </member>
+        <member name="M:NuDoq.List.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.ListHeader">
@@ -1189,11 +830,6 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.ListHeader.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.ListHeader.Term">
             <summary>
             Gets the term from the contained elements, if any.
@@ -1204,9 +840,14 @@
             Gets the description from the contained elements, if any.
             </summary>
         </member>
+        <member name="M:NuDoq.ListHeader.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
         <member name="T:NuDoq.ListType">
             <summary>
-            Specifies the type of <see cref="T:NuDoq.List"/> in use.
+            Specifies the type of <see cref="T:NuDoq.List" /> in use.
             </summary>
         </member>
         <member name="F:NuDoq.ListType.Bullet">
@@ -1246,6 +887,11 @@
             <param name="xml">The <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.</param>
             <param name="content">The child content.</param>
         </member>
+        <member name="P:NuDoq.UnknownElement.Xml">
+            <summary>
+            Gets the <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.
+            </summary>
+        </member>
         <member name="M:NuDoq.UnknownElement.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
@@ -1253,12 +899,7 @@
         </member>
         <member name="M:NuDoq.UnknownElement.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
-        <member name="P:NuDoq.UnknownElement.Xml">
-            <summary>
-            Gets the <see cref="T:System.Xml.Linq.XElement"/> containing the entire element markup.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Value">
@@ -1282,7 +923,7 @@
         </member>
         <member name="M:NuDoq.Value.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.TypeParamRef">
@@ -1304,14 +945,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.TypeParamRef.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.TypeParamRef.Name">
             <summary>
             Gets the name of the referenced type parameter.
+            </summary>
+        </member>
+        <member name="M:NuDoq.TypeParamRef.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.ParamRef">
@@ -1333,84 +974,21 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.ParamRef.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.ParamRef.Name">
             <summary>
             Gets the name of the referenced parameter.
             </summary>
         </member>
+        <member name="M:NuDoq.ParamRef.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
         <member name="T:NuDoq.Class">
             <summary>
-            Semantically augmented <see cref="T:NuDoq.TypeDeclaration"/> for
-            classes, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:NuDoq.DocReader"/>.
-            </summary>
-        </member>
-        <member name="T:NuDoq.TypeDeclaration">
-            <summary>
-            Represents the type kind of documentation member, denoted by the starting "T:" 
-            prefix in the member <see cref="P:NuDoq.Member.Id"/>.
-            </summary>
-            <remarks>
-            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
-            </remarks>
-        </member>
-        <member name="T:NuDoq.Member">
-            <summary>
-            Base class for all documentation members: types, 
-            fields, properties, methods and events.
-            </summary>
-            <remarks>
-            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Member.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.Member"/> class.
-            </summary>
-            <param name="memberId">The member id as specified in the documentation XML.</param>
-            <param name="elements">The contained documentation elements.</param>
-        </member>
-        <member name="M:NuDoq.Member.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
-        <member name="P:NuDoq.Member.Id">
-            <summary>
-            Gets the member id as specified in the documentation XML.
-            </summary>
-        </member>
-        <member name="P:NuDoq.Member.Kind">
-            <summary>
-            Gets the kind of member.
-            </summary>
-        </member>
-        <member name="P:NuDoq.Member.Info">
-            <summary>
-            Gets the reflection information for this member, 
-            if the reading process used an assembly.
-            </summary>
-        </member>
-        <member name="M:NuDoq.TypeDeclaration.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.TypeDeclaration"/> class.
-            </summary>
-            <param name="memberId">The member id as specified in the documentation XML.</param>
-            <param name="elements">The contained documentation elements.</param>
-        </member>
-        <member name="M:NuDoq.TypeDeclaration.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="P:NuDoq.TypeDeclaration.Kind">
-            <summary>
-            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Type"/>.
+            Semantically augmented <see cref="T:NuDoq.TypeDeclaration" /> for
+            classes, available when using an <see cref="T:System.Reflection.Assembly" />
+            with the <see cref="T:NuDoq.DocReader" />.
             </summary>
         </member>
         <member name="M:NuDoq.Class.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
@@ -1420,22 +998,22 @@
             <param name="memberId">The member id as specified in the documentation XML.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
+        <member name="P:NuDoq.Class.Kind">
+            <summary>
+            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type" /> and 
+            <see cref="F:NuDoq.MemberKinds.Class"/> flags.
+            </summary>
+        </member>
         <member name="M:NuDoq.Class.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="P:NuDoq.Class.Kind">
-            <summary>
-            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type"/> and 
-            <see cref="F:NuDoq.MemberKinds.Class"/> flags.
-            </summary>
-        </member>
         <member name="T:NuDoq.Enum">
             <summary>
-            Semantically augmented <see cref="T:NuDoq.TypeDeclaration"/> for
-            enumerations, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:NuDoq.DocReader"/>.
+            Semantically augmented <see cref="T:NuDoq.TypeDeclaration" /> for
+            enumerations, available when using an <see cref="T:System.Reflection.Assembly" />
+            with the <see cref="T:NuDoq.DocReader" />.
             </summary>
         </member>
         <member name="M:NuDoq.Enum.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
@@ -1445,22 +1023,22 @@
             <param name="memberId">The member id as specified in the documentation XML.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
+        <member name="P:NuDoq.Enum.Kind">
+            <summary>
+            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type" /> and 
+            <see cref="F:NuDoq.MemberKinds.Enum"/> flags.
+            </summary>
+        </member>
         <member name="M:NuDoq.Enum.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="P:NuDoq.Enum.Kind">
-            <summary>
-            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type"/> and 
-            <see cref="F:NuDoq.MemberKinds.Enum"/> flags.
-            </summary>
-        </member>
         <member name="T:NuDoq.Struct">
             <summary>
-            Semantically augmented <see cref="T:NuDoq.TypeDeclaration"/> for
-            structs, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:NuDoq.DocReader"/>.
+            Semantically augmented <see cref="T:NuDoq.TypeDeclaration" /> for
+            structs, available when using an <see cref="T:System.Reflection.Assembly" />
+            with the <see cref="T:NuDoq.DocReader" />.
             </summary>
         </member>
         <member name="M:NuDoq.Struct.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
@@ -1470,48 +1048,22 @@
             <param name="memberId">The member id as specified in the documentation XML.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
+        <member name="P:NuDoq.Struct.Kind">
+            <summary>
+            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type" /> and 
+            <see cref="F:NuDoq.MemberKinds.Struct"/> flags.
+            </summary>
+        </member>
         <member name="M:NuDoq.Struct.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="P:NuDoq.Struct.Kind">
-            <summary>
-            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type"/> and 
-            <see cref="F:NuDoq.MemberKinds.Struct"/> flags.
-            </summary>
-        </member>
         <member name="T:NuDoq.ExtensionMethod">
             <summary>
-            Semantically augmented <see cref="T:NuDoq.Method"/> for extension methods,
-            available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:NuDoq.DocReader"/>.
-            </summary>
-        </member>
-        <member name="T:NuDoq.Method">
-            <summary>
-            Represents the method kind of documentation member, denoted by the starting "M:" 
-            prefix in the member <see cref="P:NuDoq.Member.Id"/>.
-            </summary>
-            <remarks>
-            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
-            </remarks>
-        </member>
-        <member name="M:NuDoq.Method.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
-            <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.Method"/> class.
-            </summary>
-            <param name="memberId">The member id as specified in the documentation XML.</param>
-            <param name="elements">The contained documentation elements.</param>
-        </member>
-        <member name="M:NuDoq.Method.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="P:NuDoq.Method.Kind">
-            <summary>
-            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Method"/>.
+            Semantically augmented <see cref="T:NuDoq.Method" /> for extension methods,
+            available when using an <see cref="T:System.Reflection.Assembly" />
+            with the <see cref="T:NuDoq.DocReader" />.
             </summary>
         </member>
         <member name="M:NuDoq.ExtensionMethod.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
@@ -1522,11 +1074,6 @@
             <param name="extendedTypeId">The extended type id (the <c>this</c> parameter).</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
-        <member name="M:NuDoq.ExtensionMethod.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
         <member name="P:NuDoq.ExtensionMethod.ExtendedTypeId">
             <summary>
             Gets the extended type id (the <c>this</c> parameter).
@@ -1534,8 +1081,13 @@
         </member>
         <member name="P:NuDoq.ExtensionMethod.Kind">
             <summary>
-            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Method"/> and 
+            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Method" /> and 
             <see cref="F:NuDoq.MemberKinds.ExtensionMethod"/> flags.
+            </summary>
+        </member>
+        <member name="M:NuDoq.ExtensionMethod.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
             </summary>
         </member>
         <member name="T:NuDoq.Event">
@@ -1554,14 +1106,14 @@
             <param name="memberId">The member id.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
-        <member name="M:NuDoq.Event.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
         <member name="P:NuDoq.Event.Kind">
             <summary>
             Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Event"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Event.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
             </summary>
         </member>
         <member name="T:NuDoq.Field">
@@ -1580,14 +1132,40 @@
             <param name="memberId">The member id.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
+        <member name="P:NuDoq.Field.Kind">
+            <summary>
+            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Field"/>.
+            </summary>
+        </member>
         <member name="M:NuDoq.Field.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="P:NuDoq.Field.Kind">
+        <member name="T:NuDoq.Method">
             <summary>
-            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Field"/>.
+            Represents the method kind of documentation member, denoted by the starting "M:" 
+            prefix in the member <see cref="P:NuDoq.Member.Id"/>.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Method.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.Method"/> class.
+            </summary>
+            <param name="memberId">The member id as specified in the documentation XML.</param>
+            <param name="elements">The contained documentation elements.</param>
+        </member>
+        <member name="P:NuDoq.Method.Kind">
+            <summary>
+            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Method"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Method.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
             </summary>
         </member>
         <member name="T:NuDoq.Property">
@@ -1606,14 +1184,14 @@
             <param name="memberId">The member id as specified in the documentation XML.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
-        <member name="M:NuDoq.Property.Accept``1(``0)">
-            <summary>
-            Accepts the specified visitor.
-            </summary>
-        </member>
         <member name="P:NuDoq.Property.Kind">
             <summary>
             Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Property"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Property.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
             </summary>
         </member>
         <member name="T:NuDoq.MemberIdMap">
@@ -1652,14 +1230,6 @@
             <param name="memberId">The member id to find.</param>
             <returns>The <see cref="T:System.Reflection.MemberInfo"/> if found; <see langword="null"/> otherwise.</returns>
         </member>
-        <member name="M:NuDoq.MemberIdMap.FindId(System.Reflection.MemberInfo)">
-            <summary>
-            Given a reflection <paramref name="member"/>, tries to find 
-            the corresponding documentation member id.
-            </summary>
-            <param name="member">The member to find the id for.</param>
-            <returns>The documentation member id if found; <see langword="null"/> otherwise.</returns>
-        </member>
         <member name="P:NuDoq.MemberIdMap.Ids">
             <summary>
             Gets the documentation member ids of all members added so far to the map.
@@ -1669,6 +1239,14 @@
             <summary>
             Gets all the reflection members added so far to the map.
             </summary>
+        </member>
+        <member name="M:NuDoq.MemberIdMap.FindId(System.Reflection.MemberInfo)">
+            <summary>
+            Given a reflection <paramref name="member"/>, tries to find 
+            the corresponding documentation member id.
+            </summary>
+            <param name="member">The member to find the id for.</param>
+            <returns>The documentation member id if found; <see langword="null"/> otherwise.</returns>
         </member>
         <member name="T:NuDoq.See">
             <summary>
@@ -1680,7 +1258,7 @@
         </member>
         <member name="M:NuDoq.See.#ctor(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
             <summary>
-            Initializes a new instance of the <see cref="T:NuDoq.See"/> class.
+            Initializes a new instance of the <see cref="T:NuDoq.See" /> class.
             </summary>
             <param name="cref">The member id of the referenced member, if any.</param>
             <param name="langword">The element langword, if any.</param>
@@ -1690,11 +1268,6 @@
         <member name="M:NuDoq.See.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="M:NuDoq.See.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
         </member>
         <member name="P:NuDoq.See.Cref">
@@ -1710,6 +1283,11 @@
         <member name="P:NuDoq.See.Content">
             <summary>
             Gets the reference's text.
+            </summary>
+        </member>
+        <member name="M:NuDoq.See.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.SeeAlso">
@@ -1733,11 +1311,6 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.SeeAlso.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.SeeAlso.Cref">
             <summary>
             Gets the member id of the referenced member.
@@ -1748,11 +1321,16 @@
             Gets the reference's text.
             </summary>
         </member>
+        <member name="M:NuDoq.SeeAlso.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
         <member name="T:NuDoq.Interface">
             <summary>
-            Semantically augmented <see cref="T:NuDoq.TypeDeclaration"/> for
-            interfaces, available when using an <see cref="T:System.Reflection.Assembly"/>
-            with the <see cref="T:NuDoq.DocReader"/>.
+            Semantically augmented <see cref="T:NuDoq.TypeDeclaration" /> for
+            interfaces, available when using an <see cref="T:System.Reflection.Assembly" />
+            with the <see cref="T:NuDoq.DocReader" />.
             </summary>
         </member>
         <member name="M:NuDoq.Interface.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
@@ -1762,15 +1340,15 @@
             <param name="memberId">The member id as specified in the documentation XML.</param>
             <param name="elements">The contained documentation elements.</param>
         </member>
+        <member name="P:NuDoq.Interface.Kind">
+            <summary>
+            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type" /> and 
+            <see cref="F:NuDoq.MemberKinds.Interface"/> flags.
+            </summary>
+        </member>
         <member name="M:NuDoq.Interface.Accept``1(``0)">
             <summary>
             Accepts the specified visitor.
-            </summary>
-        </member>
-        <member name="P:NuDoq.Interface.Kind">
-            <summary>
-            Gets the kind of member, which contains both the <see cref="F:NuDoq.MemberKinds.Type"/> and 
-            <see cref="F:NuDoq.MemberKinds.Interface"/> flags.
             </summary>
         </member>
         <member name="T:NuDoq.Text">
@@ -1789,14 +1367,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Text.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Text.Content">
             <summary>
             Gets the literal text content
+            </summary>
+        </member>
+        <member name="M:NuDoq.Text.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.C">
@@ -1818,14 +1396,14 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.C.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.C.Content">
             <summary>
             Gets the code content.
+            </summary>
+        </member>
+        <member name="M:NuDoq.C.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Code">
@@ -1836,7 +1414,19 @@
             See http://msdn.microsoft.com/en-US/library/f8hahtxf(v=vs.80).aspx.
             </remarks>
         </member>
-        <member name="M:NuDoq.Code.#ctor(System.String)">
+        <member name="P:NuDoq.Code.Source">
+            <summary>
+            Gets or sets the code source, if any.
+            </summary>
+            
+        </member>
+        <member name="P:NuDoq.Code.Region">
+            <summary>
+            Gets or sets the #pragma region of the <see cref="P:NuDoq.Code.Source"/>, if any.
+            </summary>
+            
+        </member>
+        <member name="M:NuDoq.Code.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:NuDoq.Code"/> class 
             with the given content.
@@ -1847,14 +1437,63 @@
             Accepts the specified visitor.
             </summary>
         </member>
-        <member name="M:NuDoq.Code.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-        </member>
         <member name="P:NuDoq.Code.Content">
             <summary>
             Gets the code content.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Code.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
+        <member name="T:NuDoq.Container">
+            <summary>
+            Base class for elements that can contain other elements.
+            </summary>
+            <remarks>
+            Implements the composite pattern for the visitable model.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Container.#ctor(System.Collections.Generic.IEnumerable{NuDoq.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.Container"/> class.
+            </summary>
+            <param name="elements">The contained elements within this instance.</param>
+        </member>
+        <member name="P:NuDoq.Container.Elements">
+            <summary>
+            Gets the elements contained in this instance.
+            </summary>
+        </member>
+        <member name="T:NuDoq.Element">
+            <summary>
+            Base class for all elements in a documentation file, including 
+            types, members, and content like summaries, remarks, etc. 
+            </summary>
+            <remarks>
+            This type is the root of the visitor model hierarchy.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Element.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Element.ToText">
+            <summary>
+            Returns the text content of this element and all its 
+            children if any.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Element.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Element.Traverse">
+            <summary>
+            Enumerates this instance and all its descendents recursively.
             </summary>
         </member>
         <member name="T:NuDoq.Example">
@@ -1878,7 +1517,44 @@
         </member>
         <member name="M:NuDoq.Example.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
+        <member name="T:NuDoq.Member">
+            <summary>
+            Base class for all documentation members: types, 
+            fields, properties, methods and events.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Member.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.Member"/> class.
+            </summary>
+            <param name="memberId">The member id as specified in the documentation XML.</param>
+            <param name="elements">The contained documentation elements.</param>
+        </member>
+        <member name="P:NuDoq.Member.Id">
+            <summary>
+            Gets the member id as specified in the documentation XML.
+            </summary>
+        </member>
+        <member name="P:NuDoq.Member.Kind">
+            <summary>
+            Gets the kind of member.
+            </summary>
+        </member>
+        <member name="P:NuDoq.Member.Info">
+            <summary>
+            Gets the reflection information for this member, 
+            if the reading process used an assembly.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Member.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Para">
@@ -1902,7 +1578,7 @@
         </member>
         <member name="M:NuDoq.Para.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.DocReader">
@@ -2011,7 +1687,7 @@
         </member>
         <member name="M:NuDoq.Remarks.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
         </member>
         <member name="T:NuDoq.Summary">
@@ -2035,7 +1711,33 @@
         </member>
         <member name="M:NuDoq.Summary.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+        </member>
+        <member name="T:NuDoq.TypeDeclaration">
+            <summary>
+            Represents the type kind of documentation member, denoted by the starting "T:" 
+            prefix in the member <see cref="P:NuDoq.Member.Id"/>.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-us/library/fsbx0t7x(v=vs.80).aspx.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.TypeDeclaration.#ctor(System.String,System.Collections.Generic.IEnumerable{NuDoq.Element})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NuDoq.TypeDeclaration"/> class.
+            </summary>
+            <param name="memberId">The member id as specified in the documentation XML.</param>
+            <param name="elements">The contained documentation elements.</param>
+        </member>
+        <member name="P:NuDoq.TypeDeclaration.Kind">
+            <summary>
+            Gets the kind of member, which equals to <see cref="F:NuDoq.MemberKinds.Type"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.TypeDeclaration.Accept``1(``0)">
+            <summary>
+            Accepts the specified visitor.
             </summary>
         </member>
         <member name="T:NuDoq.UnknownMember">
@@ -2062,6 +1764,261 @@
             <summary>
             Gets the kind of member, which equals <see cref="F:NuDoq.MemberKinds.Unknown"/>.
             </summary>
+        </member>
+        <member name="T:NuDoq.Visitor">
+            <summary>
+            Base class for visitors of the visitable documentation 
+            model.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitDocument(NuDoq.DocumentMembers)">
+            <summary>
+            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitAssembly(NuDoq.AssemblyMembers)">
+            <summary>
+            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.Reflection.Assembly)"/>.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitType(NuDoq.TypeDeclaration)">
+            <summary>
+            Visits a type member.
+            </summary>
+            <remarks>
+            If reflection metadata augmentation exists, 
+            this method will also be called for the 
+            <see cref="T:NuDoq.TypeDeclaration"/>-derived semantic 
+            classes <see cref="T:NuDoq.Class"/>, <see cref="T:NuDoq.Enum"/>, 
+            <see cref="T:NuDoq.Interface"/> and <see cref="T:NuDoq.Struct"/>.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitInterface(NuDoq.Interface)">
+            <summary>
+            Visits the semantically augmented interface type member.
+            </summary>
+            <remarks>
+            This member will only be called when using an 
+            <see cref="T:System.Reflection.Assembly"/> as input for 
+            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
+            available.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitClass(NuDoq.Class)">
+            <summary>
+            Visits the semantically augmented class type member.
+            </summary>
+            <remarks>
+            This member will only be called when using an 
+            <see cref="T:System.Reflection.Assembly"/> as input for 
+            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
+            available.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitStruct(NuDoq.Struct)">
+            <summary>
+            Visits the semantically augmented struct type member.
+            </summary>
+            <remarks>
+            This member will only be called when using an 
+            <see cref="T:System.Reflection.Assembly"/> as input for 
+            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
+            available.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitEnum(NuDoq.Enum)">
+            <summary>
+            Visits the semantically augmented enum type member.
+            </summary>
+            <remarks>
+            This member will only be called when using an 
+            <see cref="T:System.Reflection.Assembly"/> as input for 
+            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
+            available.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitField(NuDoq.Field)">
+            <summary>
+            Visits a documented field member.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitProperty(NuDoq.Property)">
+            <summary>
+            Visits a documented property member.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitEvent(NuDoq.Event)">
+            <summary>
+            Visits a documented event member.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitMethod(NuDoq.Method)">
+            <summary>
+            Visits a documented method member.
+            </summary>
+            <remarks>
+            This method will also be called for the semantically augmented 
+            <see cref="T:NuDoq.ExtensionMethod"/> if an <see cref="T:System.Reflection.Assembly"/> 
+            is used with the <see cref="T:NuDoq.DocReader"/>.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitExtensionMethod(NuDoq.ExtensionMethod)">
+            <summary>
+            Visits the semantically augmented extension method member.
+            </summary>
+            <remarks>
+            This member will only be called when using an 
+            <see cref="T:System.Reflection.Assembly"/> as input for 
+            the <see cref="T:NuDoq.DocReader"/> so that this augmentation is 
+            available.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitMember(NuDoq.Member)">
+            <summary>
+            Visit the generic base class <see cref="T:NuDoq.Member"/>.
+            </summary>
+            <remarks>
+            This method is called for all <see cref="T:NuDoq.Member"/>-derived 
+            types.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitSummary(NuDoq.Summary)">
+            <summary>
+            Visits the <c>summary</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitRemarks(NuDoq.Remarks)">
+            <summary>
+            Visits the <c>remarks</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitPara(NuDoq.Para)">
+            <summary>
+            Visits the <c>para</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitCode(NuDoq.Code)">
+            <summary>
+            Visits the <c>code</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitC(NuDoq.C)">
+            <summary>
+            Visits the <c>c</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitAnchor(NuDoq.Anchor)">
+            <summary>
+            Visits the <c>a</c> extended documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitText(NuDoq.Text)">
+            <summary>
+            Visits the literal text inside other documentation elements.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitExample(NuDoq.Example)">
+            <summary>
+            Visits the <c>example</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitSee(NuDoq.See)">
+            <summary>
+            Visits the <c>see</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitSeeAlso(NuDoq.SeeAlso)">
+            <summary>
+            Visits the <c>seealso</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitParam(NuDoq.Param)">
+            <summary>
+            Visits the <c>param</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitParamRef(NuDoq.ParamRef)">
+            <summary>
+            Visits the <c>paramref</c> documentation elemnet.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitTypeParam(NuDoq.TypeParam)">
+            <summary>
+            Visits the <c>typeparam</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitTypeParamRef(NuDoq.TypeParamRef)">
+            <summary>
+            Visits the <c>typeparamref</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitValue(NuDoq.Value)">
+            <summary>
+            Visits the <c>value</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitList(NuDoq.List)">
+            <summary>
+            Visits the <c>list</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitListHeader(NuDoq.ListHeader)">
+            <summary>
+            Visits the <c>listheader</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitTerm(NuDoq.Term)">
+            <summary>
+            Visits the <c>term</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitDescription(NuDoq.Description)">
+            <summary>
+            Visits the <c>description</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitItem(NuDoq.Item)">
+            <summary>
+            Visits the <c>item</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitException(NuDoq.Exception)">
+            <summary>
+            Visits the <c>exception</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitReturns(NuDoq.Returns)">
+            <summary>
+            Visits the <c>returns</c> documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitUnknownMember(NuDoq.UnknownMember)">
+            <summary>
+            Visits an unknown member element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitUnknownElement(NuDoq.UnknownElement)">
+            <summary>
+            Visits an unknown documentation element.
+            </summary>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitContainer(NuDoq.Container)">
+            <summary>
+            Visits any container element.
+            </summary>
+            <remarks>
+            This method is called for all of the <see cref="T:NuDoq.Container"/>-derived 
+            types.
+            </remarks>
+        </member>
+        <member name="M:NuDoq.Visitor.VisitElement(NuDoq.Element)">
+            <summary>
+            Visits any element.
+            </summary>
+            <remarks>
+            This method is called for all of the <see cref="T:NuDoq.Element"/>-derived 
+            types.
+            </remarks>
         </member>
         <member name="T:NuDoq.MemberKinds">
             <summary>
@@ -2149,21 +2106,21 @@
         </member>
         <member name="M:NuDoq.XmlVisitor.VisitAssembly(NuDoq.AssemblyMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.Reflection.Assembly)"/>.
+            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.Reflection.Assembly)" />.
             </summary>
         </member>
         <member name="M:NuDoq.XmlVisitor.VisitDocument(NuDoq.DocumentMembers)">
             <summary>
-            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.String)"/>.
+            Visits the entire set of members read by the <see cref="M:NuDoq.DocReader.Read(System.String)" />.
             </summary>
         </member>
         <member name="M:NuDoq.XmlVisitor.VisitMember(NuDoq.Member)">
             <summary>
-            Visit the generic base class <see cref="T:NuDoq.Member"/>.
+            Visit the generic base class <see cref="T:NuDoq.Member" />.
             </summary>
             <param name="member"></param>
             <remarks>
-            This method is called for all <see cref="T:NuDoq.Member"/>-derived
+            This method is called for all <see cref="T:NuDoq.Member" />-derived
             types.
             </remarks>
         </member>
@@ -2281,6 +2238,61 @@
             <summary>
             Gets the XML.
             </summary>
+        </member>
+        <member name="T:Guard">
+            <summary>
+            Common guard class for argument validation.
+            </summary>
+            <nuget id="netfx-Guard" />
+        </member>
+        <member name="M:Guard.NotNull``1(System.Linq.Expressions.Expression{System.Func{``0}},``0)">
+            <summary>
+            Ensures the given <paramref name="value"/> is not null.
+            Throws <see cref="T:System.ArgumentNullException"/> otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Guard.NotNullOrEmpty(System.Linq.Expressions.Expression{System.Func{System.String}},System.String)">
+            <summary>
+            Ensures the given string <paramref name="value"/> is not null or empty.
+            Throws <see cref="T:System.ArgumentNullException"/> in the first case, or 
+            <see cref="T:System.ArgumentException"/> in the latter.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null or an empty string.</exception>
+        </member>
+        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            Ensures the given string <paramref name="value"/> is valid according 
+            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
+            otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
+            to the <paramref name="validate"/> function.</exception>
+        </member>
+        <member name="M:Guard.IsValid``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,System.Func{``0,System.Boolean},System.String,System.Object[])">
+            <summary>
+            Ensures the given string <paramref name="value"/> is valid according 
+            to the <paramref name="validate"/> function. Throws <see cref="T:System.ArgumentNullException"/> 
+            otherwise.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is not valid according 
+            to the <paramref name="validate"/> function.</exception>
+        </member>
+        <member name="T:System.Reflection.AssemblyMetadataAttribute">
+            <summary>Defines a key/value metadata pair for the decorated assembly.</summary>
+        </member>
+        <member name="M:System.Reflection.AssemblyMetadataAttribute.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Reflection.AssemblyMetadataAttribute" /> class by using the specified metadata key and value.</summary>
+            <param name="key">The metadata key.</param>
+            <param name="value">The metadata value.</param>
+        </member>
+        <member name="P:System.Reflection.AssemblyMetadataAttribute.Key">
+            <summary>Gets the metadata key.</summary>
+            <returns>The metadata key.</returns>
+        </member>
+        <member name="P:System.Reflection.AssemblyMetadataAttribute.Value">
+            <summary>Gets the metadata value.</summary>
+            <returns>The metadata value.</returns>
         </member>
     </members>
 </doc>

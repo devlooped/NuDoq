@@ -4,6 +4,17 @@
         <name>NuDoq.Tests</name>
     </assembly>
     <members>
+        <member name="M:NuDoq.ReaderFixture.when_reading_provider_then_reads_remarks">
+            <summary>
+            When_reading_provider_then_reads_remarkses this instance.
+            </summary>
+        </member>
+        <member name="M:NuDoq.SampleTypes.Foo`2.SomeMethod``1(System.String@)">
+            <summary>
+            Some method
+            </summary>
+            <param name="x">The x param</param>
+        </member>
         <member name="T:Guard">
             <summary>
             Common guard class for argument validation.
@@ -2331,17 +2342,6 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="method"/> is null.</exception>
             <exception cref="T:System.ArgumentException">The <paramref name="method"/> is not a lambda expression or it does not represent a method invocation.</exception>
             <returns>The method info.</returns>
-        </member>
-        <member name="M:NuDoq.ReaderFixture.when_reading_provider_then_reads_remarks">
-            <summary>
-            When_reading_provider_then_reads_remarkses this instance.
-            </summary>
-        </member>
-        <member name="M:NuDoq.SampleTypes.Foo`2.SomeMethod``1(System.String@)">
-            <summary>
-            Some method
-            </summary>
-            <param name="x">The x param</param>
         </member>
     </members>
 </doc>

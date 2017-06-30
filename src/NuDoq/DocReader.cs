@@ -233,7 +233,7 @@ namespace NuDoq
                                 element = new TypeParamRef(FindAttribute(elementNode, "name"));
                                 break;
                             case "code":
-                                element = new Code(TrimCode(elementNode.Value));
+                                element = new Code(TrimCode(elementNode.Value), FindAttribute(elementNode, "source"), FindAttribute(elementNode, "region"));
                                 break;
                             case "c":
                                 element = new C(elementNode.Value);

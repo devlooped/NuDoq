@@ -41,6 +41,4 @@ partial class ThisAssembly
     public const string Company = "Daniel Cazzulino";
     public const string Owners = "kzu";
     public const string Authors = "Daniel Cazzulino, kzu";
-
-    public const string Version = "https://github.com/cesarsouza/NuDoq";
 }

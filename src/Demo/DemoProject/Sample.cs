@@ -1,4 +1,6 @@
-﻿#region Apache Licensed
+﻿using System;
+
+#region Apache Licensed
 /*
  Copyright 2013 Daniel Cazzulino
 
@@ -18,8 +20,6 @@
 
 namespace Demo
 {
-    using System;
-
     /// <summary>
     /// Sample API documentation. This is the summary.
     /// With every line we will have the same 

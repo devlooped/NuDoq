@@ -18,8 +18,6 @@
 
 namespace Demo
 {
-    using System;
-
     /// <summary>
     /// The type of provider.
     /// <para>

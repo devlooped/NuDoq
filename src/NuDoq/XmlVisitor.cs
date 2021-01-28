@@ -1,28 +1,9 @@
-﻿#region Apache Licensed
-/*
- Copyright 2013 Daniel Cazzulino
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-#endregion
+﻿using System;
+using System.Xml.Linq;
+using System.Reflection;
 
 namespace NuDoq
 {
-    using System;
-    using System.Linq;
-    using System.Xml.Linq;
-    using System.Reflection;
-
     /// <summary>
     /// 
     /// </summary>
@@ -35,8 +16,8 @@ namespace NuDoq
         /// </summary>
         public XmlVisitor()
         {
-            this.Xml = new XDocument();
-            this.Xml.Declaration = null;
+            Xml = new XDocument();
+            Xml.Declaration = null;
         }
 
         /// <summary>
@@ -44,11 +25,11 @@ namespace NuDoq
         /// </summary>
         public override void VisitAssembly(AssemblyMembers assembly)
         {
-            this.currentElement = new XElement("members");
-            this.Xml.Add(new XElement("doc",
+            currentElement = new XElement("members");
+            Xml.Add(new XElement("doc",
                 new XElement("assembly",
                     new XElement("name", assembly.Assembly.GetName().Name)),
-                    this.currentElement));
+                    currentElement));
 
             base.VisitAssembly(assembly);
         }
@@ -58,10 +39,10 @@ namespace NuDoq
         /// </summary>
         public override void VisitDocument(DocumentMembers document)
         {
-            if (this.currentElement == null)
+            if (currentElement == null)
             {
-                this.currentElement = new XElement("members");
-                this.Xml.Add(new XElement("doc", this.currentElement));
+                currentElement = new XElement("members");
+                Xml.Add(new XElement("doc", currentElement));
             }
 
             base.VisitDocument(document);
@@ -219,7 +200,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitText(Text text)
         {
-            this.currentElement.Add(new XText(text.Content));
+            currentElement.Add(new XText(text.Content));
             base.VisitText(text);
         }
 
@@ -276,12 +257,12 @@ namespace NuDoq
 
         void AddXml<TVisitable>(XElement xml, TVisitable element, Action<TVisitable> visit)
         {
-            this.currentElement.Add(xml);
-            this.currentElement = xml;
+            currentElement.Add(xml);
+            currentElement = xml;
 
             visit(element);
 
-            this.currentElement = this.currentElement.Parent;
+            currentElement = currentElement.Parent;
         }
     }
 }

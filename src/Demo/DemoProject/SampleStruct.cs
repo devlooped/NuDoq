@@ -18,8 +18,6 @@
 
 namespace Demo
 {
-    using System;
-
     /// <summary>
     /// Sample <c>struct</c>.
     /// </summary>

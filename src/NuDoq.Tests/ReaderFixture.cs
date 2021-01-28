@@ -676,6 +676,19 @@ lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First(
             Assert.Equal("indexed", method.ToText());
         }
 
+        [Fact]
+        public void when_reading_weird_indenting_then_preserves_text()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly(), new ReaderOptions { KeepNewLinesInText = true });
+            var method = member.Elements.OfType<Method>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.WeirdIndenting));
+
+            Assert.NotNull(method);
+            Assert.Equal(@"Begin
+End", method.ToText());
+        }
+
+
         class CountingVisitor : Visitor
         {
             readonly string platform;
@@ -724,6 +737,12 @@ lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First(
         /// </remarks>
         public class CustomXml
         {
+            ///     <summary>
+            ///   Begin
+            ///  End
+            ///     </summary>
+            public void WeirdIndenting() { }
+
             /// <preliminary />
             public void Preliminary() { }
 

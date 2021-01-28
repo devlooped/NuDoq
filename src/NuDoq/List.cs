@@ -17,8 +17,9 @@ namespace NuDoq
         /// </summary>
         /// <param name="type">The type of list, which can be "bullet", "number" or "table".</param>
         /// <param name="elements">The elements.</param>
-        public List(string type, IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public List(string type, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
             Type = ListType.Unknown;
             if (!string.IsNullOrEmpty(type))

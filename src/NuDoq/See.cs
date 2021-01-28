@@ -17,8 +17,9 @@ namespace NuDoq
         /// <param name="langword">The element langword, if any.</param>
         /// <param name="content">The link's text label, if any.</param>
         /// <param name="elements">The child elements.</param>
-        public See(string cref, string langword, string content, IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public See(string cref, string langword, string content, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
             Cref = cref;
             Langword = langword;

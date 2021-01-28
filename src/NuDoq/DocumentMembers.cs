@@ -18,7 +18,7 @@ namespace NuDoq
         /// <param name="members">The lazily-read members of the set.</param>
         public DocumentMembers(XDocument xml, IEnumerable<Member> members)
             // In .NET 3.5 there's no covariance on IEnumerable.
-            : base(members.OfType<Element>())
+            : base(members.OfType<Element>(), new Dictionary<string, string>())
             => Xml = xml;
 
         /// <summary>

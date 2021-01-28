@@ -15,8 +15,9 @@ namespace NuDoq
         /// <param name="memberId">The extension method member id.</param>
         /// <param name="extendedTypeId">The extended type id (the <c>this</c> parameter).</param>
         /// <param name="elements">The contained documentation elements.</param>
-        public ExtensionMethod(string memberId, string extendedTypeId, IEnumerable<Element> elements)
-            : base(memberId, elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public ExtensionMethod(string memberId, string extendedTypeId, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(memberId, elements, attributes)
             => ExtendedTypeId = extendedTypeId;
 
         /// <summary>

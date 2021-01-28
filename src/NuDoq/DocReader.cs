@@ -31,7 +31,8 @@ namespace NuDoq
             return new DocumentMembers(doc, doc.Root.Element("members").Elements("member")
                 .Where(element => element.Attribute("name") != null)
                 //.OrderBy(element => element.Attribute("name").Value)
-                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element))));
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element),
+                    element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value))));
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace NuDoq
             return new AssemblyMembers(assembly, map, doc, doc.Root.Element("members").Elements("member")
                 .Where(element => element.Attribute("name") != null)
                 //.OrderBy(e => e.Attribute("name").Value)
-                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element)))
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element), element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value)))
                 .Select(member => ReplaceExtensionMethods(member, map))
                 .Select(member => ReplaceTypes(member, map))
                 .Select(member => SetInfo(member, map)));
@@ -104,13 +105,13 @@ namespace NuDoq
                 return member;
 
             if (type.IsInterface)
-                return new Interface(member.Id, member.Elements);
+                return new Interface(member.Id, member.Elements, member.Attributes);
             if (type.IsClass)
-                return new Class(member.Id, member.Elements);
+                return new Class(member.Id, member.Elements, member.Attributes);
             if (type.IsEnum)
-                return new Enum(member.Id, member.Elements);
+                return new Enum(member.Id, member.Elements, member.Attributes);
             if (type.IsValueType)
-                return new Struct(member.Id, member.Elements);
+                return new Struct(member.Id, member.Elements, member.Attributes);
 
             return member;
         }
@@ -135,7 +136,7 @@ namespace NuDoq
             {
                 var extendedTypeId = map.FindId(method.GetParameters()[0].ParameterType);
                 if (!string.IsNullOrEmpty(extendedTypeId))
-                    return new ExtensionMethod(member.Id, extendedTypeId, member.Elements);
+                    return new ExtensionMethod(member.Id, extendedTypeId, member.Elements, member.Attributes);
             }
 
             return member;
@@ -144,16 +145,16 @@ namespace NuDoq
         /// <summary>
         /// Creates the appropriate type of member according to the member id prefix.
         /// </summary>
-        static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children)
+        static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children, IDictionary<string, string> attributes)
         {
             Member? member = (memberId[0]) switch
             {
-                'T' => new TypeDeclaration(memberId, children),
-                'F' => new Field(memberId, children),
-                'P' => new Property(memberId, children),
-                'M' => new Method(memberId, children),
-                'E' => new Event(memberId, children),
-                _ => new UnknownMember(memberId),
+                'T' => new TypeDeclaration(memberId, children, attributes),
+                'F' => new Field(memberId, children, attributes),
+                'P' => new Property(memberId, children, attributes),
+                'M' => new Method(memberId, children, attributes),
+                'E' => new Event(memberId, children, attributes),
+                _ => new UnknownMember(memberId, attributes),
             };
             member.SetLineInfo(element);
             return member;
@@ -171,29 +172,30 @@ namespace NuDoq
                 {
                     case XmlNodeType.Element:
                         var elementNode = (XElement)node;
+                        var attributes = elementNode.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value);
                         element = elementNode.Name.LocalName switch
                         {
-                            "summary" => new Summary(ReadContent(elementNode)),
-                            "remarks" => new Remarks(ReadContent(elementNode)),
-                            "example" => new Example(ReadContent(elementNode)),
-                            "para" => new Para(ReadContent(elementNode)),
-                            "param" => new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode)),
-                            "paramref" => new ParamRef(FindAttribute(elementNode, "name")),
-                            "typeparam" => new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode)),
-                            "typeparamref" => new TypeParamRef(FindAttribute(elementNode, "name")),
-                            "code" => new Code(TrimCode(elementNode.Value)),
-                            "c" => new C(elementNode.Value),
-                            "see" => new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode)),
-                            "seealso" => new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode)),
-                            "list" => new List(FindAttribute(elementNode, "type"), ReadContent(elementNode)),
-                            "listheader" => new ListHeader(ReadContent(elementNode)),
-                            "term" => new Term(ReadContent(elementNode)),
-                            "description" => new Description(ReadContent(elementNode)),
-                            "item" => new Item(ReadContent(elementNode)),
-                            "exception" => new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode)),
-                            "value" => new Value(ReadContent(elementNode)),
-                            "returns" => new Returns(ReadContent(elementNode)),
-                            _ => new UnknownElement(elementNode, ReadContent(elementNode)),
+                            "summary" => new Summary(ReadContent(elementNode), attributes),
+                            "remarks" => new Remarks(ReadContent(elementNode), attributes),
+                            "example" => new Example(ReadContent(elementNode), attributes),
+                            "para" => new Para(ReadContent(elementNode), attributes),
+                            "param" => new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode), attributes),
+                            "paramref" => new ParamRef(FindAttribute(elementNode, "name"), attributes),
+                            "typeparam" => new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode), attributes),
+                            "typeparamref" => new TypeParamRef(FindAttribute(elementNode, "name"), attributes),
+                            "code" => new Code(TrimCode(elementNode.Value), attributes),
+                            "c" => new C(elementNode.Value, attributes),
+                            "see" => new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode), attributes),
+                            "seealso" => new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode), attributes),
+                            "list" => new List(FindAttribute(elementNode, "type"), ReadContent(elementNode), attributes),
+                            "listheader" => new ListHeader(ReadContent(elementNode), attributes),
+                            "term" => new Term(ReadContent(elementNode), attributes),
+                            "description" => new Description(ReadContent(elementNode), attributes),
+                            "item" => new Item(ReadContent(elementNode), attributes),
+                            "exception" => new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode), attributes),
+                            "value" => new Value(ReadContent(elementNode), attributes),
+                            "returns" => new Returns(ReadContent(elementNode), attributes),
+                            _ => new UnknownElement(elementNode, ReadContent(elementNode), attributes),
                         };
                         break;
                     case XmlNodeType.Text:

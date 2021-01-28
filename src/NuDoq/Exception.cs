@@ -15,8 +15,9 @@ namespace NuDoq
         /// </summary>
         /// <param name="cref">The member id of the exception type.</param>
         /// <param name="elements">The elements that explain when this exception is thrown.</param>
-        public Exception(string cref, IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public Exception(string cref, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
             Cref = cref;
         }

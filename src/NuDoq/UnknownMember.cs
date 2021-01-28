@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NuDoq
 {
@@ -15,8 +16,9 @@ namespace NuDoq
         /// Initializes a new instance of the <see cref="UnknownMember"/> class.
         /// </summary>
         /// <param name="memberId">The member id.</param>
-        public UnknownMember(string memberId)
-            : base(memberId, Enumerable.Empty<Element>())
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public UnknownMember(string memberId, IDictionary<string, string> attributes)
+            : base(memberId, Enumerable.Empty<Element>(), attributes)
         {
         }
 

@@ -17,6 +17,22 @@ namespace NuDoq
         IXmlLineInfo? lineInfo;
 
         /// <summary>
+        /// Initializes the element with the given attributes.
+        /// </summary>
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        protected Element(IDictionary<string, string> attributes) => Attributes = attributes;
+
+        /// <summary>
+        /// Gets all the attributes of the element.
+        /// </summary>
+        public IDictionary<string, string> Attributes { get; }
+
+        /// <summary>
+        /// Enumerates this instance and all its descendents recursively.
+        /// </summary>
+        public IEnumerable<Element> Traverse() => Accept(new TraverseVisitor()).Elements;
+
+        /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
         public abstract TVisitor Accept<TVisitor>(TVisitor visitor) where TVisitor : Visitor;
@@ -42,11 +58,6 @@ namespace NuDoq
 
             return "";
         }
-
-        /// <summary>
-        /// Enumerates this instance and all its descendents recursively.
-        /// </summary>
-        public IEnumerable<Element> Traverse() => Accept(new TraverseVisitor()).Elements;
 
         internal void SetLineInfo(IXmlLineInfo lineInfo) => this.lineInfo = lineInfo;
 

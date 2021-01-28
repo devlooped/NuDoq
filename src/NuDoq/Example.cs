@@ -14,8 +14,9 @@ namespace NuDoq
         /// Initializes a new instance of the <see cref="Example"/> class.
         /// </summary>
         /// <param name="elements">The contained elements within this instance.</param>
-        public Example(IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public Example(IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
         }
 

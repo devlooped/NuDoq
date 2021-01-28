@@ -37,8 +37,8 @@ namespace NuDoq
 
             var id = map.FindId(typeof(Sample));
 
-            Assert.True(map.Ids.Contains(id));
-            Assert.True(map.Members.Contains(typeof(Sample)));
+            Assert.Contains(id, map.Ids);
+            Assert.Contains(typeof(Sample), map.Members);
         }
 
         [Fact]

@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

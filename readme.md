@@ -1,11 +1,10 @@
-![Icon](https://raw.github.com/kzu/NuDoq/master/doc/Icon-32.png) NuDoq: A .NET XML Documentation API
-===
+<h1 id="nudoq"><img src="https://raw.github.com/devlooped/NuDoq/main/doc/Icon-32.png" alt="Icon" style="vertical-align: text-top; border: 0px; padding: 0px; margin: 0px">  NuDoq: A lightweight .NET XML Documentation API</h1>
 
 A standalone API to read and write .NET XML documentation files and optionally augment it with reflection information.
 
-[![Build status](https://img.shields.io/appveyor/ci/kzu/NuDoq.svg)](https://ci.appveyor.com/project/kzu/NuDoq)
-[![NuGet downloads](https://img.shields.io/nuget/dt/NuDoq.svg)](https://www.nuget.org/packages/NuDoq)
-[![Version](https://img.shields.io/nuget/v/NuDoq.svg)](https://www.nuget.org/packages/NuDoq)
+[![Version](https://img.shields.io/nuget/v/NuDoq.svg?color=royalblue)](https://www.nuget.org/packages/NuDoq)
+[![Downloads](https://img.shields.io/nuget/dt/NuDoq?color=darkmagenta)](https://www.nuget.org/packages/NuDoq)
+[![License](https://img.shields.io/github/license/devlooped/NuDoq.svg?color=blue)](https://github.com/devlooped/NuDoq/blob/main/license.txt)
 
 NuDoq provides a simple and intuitive API that reads .NET XML documentation files into an in-memory model that can be easily used to generate alternative representations or arbitrary processing. If the read operation is performed using a .NET assembly rather than an XML file, NuDoq will automatically add the reflection information to the in-memory model for the documentation elements, making it very easy to post-process them by grouping by type, namespace, etc.
 

@@ -21,19 +21,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           
-      - name: ⚙ dotnet 5.0.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-      - name: ⚙ dotnet 3.1.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.x
-      - name: ⚙ dotnet 2.1.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 2.1.x
-
       - name: 🙏 build
         run: dotnet build -m:1 -bl:build.binlog -p:version=${GITHUB_REF#refs/*/v} -p:RepositoryBranch=${GITHUB_REF#refs/*/}
 

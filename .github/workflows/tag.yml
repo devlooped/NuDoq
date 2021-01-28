@@ -1,5 +1,5 @@
-﻿# Creates a draft release whenever a tag v* is pushed, 
-# with a changelog from the previous tag. If the tag 
+﻿# Creates a draft release whenever a tag v* is pushed,
+# with a changelog from the previous tag. If the tag
 # contains a label, the release is flagged as a prerelease.
 
 name: tag

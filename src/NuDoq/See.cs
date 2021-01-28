@@ -37,24 +37,21 @@ namespace NuDoq
         /// <summary>
         /// Gets the member id of the referenced member.
         /// </summary>
-        public string Cref { get; private set; }
+        public string Cref { get; }
 
         /// <summary>
         /// Gets the original langword attribute.
         /// </summary>
-        public string Langword { get; private set; }
+        public string Langword { get; }
 
         /// <summary>
         /// Gets the reference's text.
         /// </summary>
-        public string Content { get; private set; }
+        public string Content { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<see>" + base.ToString();
-        }
+        public override string ToString() => "<see>" + base.ToString();
     }
 }

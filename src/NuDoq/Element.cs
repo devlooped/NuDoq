@@ -14,7 +14,7 @@ namespace NuDoq
     [DebuggerDisplay("{ToText()}")]
     public abstract class Element : IVisitable, IXmlLineInfo
     {
-        IXmlLineInfo lineInfo;
+        IXmlLineInfo? lineInfo;
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -33,7 +33,7 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         public override string ToString()
         {
@@ -46,22 +46,13 @@ namespace NuDoq
         /// <summary>
         /// Enumerates this instance and all its descendents recursively.
         /// </summary>
-        public IEnumerable<Element> Traverse()
-        {
-            return Accept(new TraverseVisitor()).Elements;
-        }
+        public IEnumerable<Element> Traverse() => Accept(new TraverseVisitor()).Elements;
 
-        internal void SetLineInfo(IXmlLineInfo lineInfo)
-        {
-            this.lineInfo = lineInfo;
-        }
+        internal void SetLineInfo(IXmlLineInfo lineInfo) => this.lineInfo = lineInfo;
 
         class TraverseVisitor : Visitor
         {
-            public TraverseVisitor()
-            {
-                Elements = new List<Element>();
-            }
+            public TraverseVisitor() => Elements = new List<Element>();
 
             protected override void VisitElement(Element element)
             {
@@ -72,19 +63,10 @@ namespace NuDoq
             public List<Element> Elements { get; set; }
         }
 
-        bool IXmlLineInfo.HasLineInfo()
-        {
-            return lineInfo != null && lineInfo.HasLineInfo();
-        }
+        bool IXmlLineInfo.HasLineInfo() => lineInfo != null && lineInfo.HasLineInfo();
 
-        int IXmlLineInfo.LineNumber
-        {
-            get { return lineInfo == null ? 0 : lineInfo.LineNumber; }
-        }
+        int IXmlLineInfo.LineNumber => lineInfo == null ? 0 : lineInfo.LineNumber;
 
-        int IXmlLineInfo.LinePosition
-        {
-            get { return lineInfo == null ? 0 : lineInfo.LinePosition; }
-        }
+        int IXmlLineInfo.LinePosition => lineInfo == null ? 0 : lineInfo.LinePosition;
     }
 }

@@ -14,14 +14,11 @@ namespace NuDoq
         /// Initializes a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="elements">The contained elements within this instance.</param>
-        public Container(IEnumerable<Element> elements)
-        {
-            Elements = elements.Cached();
-        }
+        public Container(IEnumerable<Element> elements) => Elements = elements.Cached();
 
         /// <summary>
         /// Gets the elements contained in this instance.
         /// </summary>
-        public IEnumerable<Element> Elements { get; private set; }
+        public IEnumerable<Element> Elements { get; }
     }
 }

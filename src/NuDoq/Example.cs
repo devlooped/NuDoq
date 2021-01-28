@@ -29,11 +29,8 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<example>" + base.ToString();
-        }
+        public override string ToString() => "<example>" + base.ToString();
     }
 }

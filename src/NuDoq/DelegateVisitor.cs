@@ -13,229 +13,229 @@ namespace NuDoq
         /// Gets or sets the action to invoke when visiting all documented members of an XML document file.
         /// </summary>
         /// <seealso cref="Visitor.VisitDocument"/>
-        public Action<DocumentMembers> VisitDocument { get; set; }
+        public Action<DocumentMembers>? VisitDocument { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting all documented members of an assembly.
         /// </summary>
         /// <seealso cref="Visitor.VisitAssembly"/>
-        public Action<AssemblyMembers> VisitAssembly { get; set; }
+        public Action<AssemblyMembers>? VisitAssembly { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a type member.
         /// </summary>
         /// <seealso cref="Visitor.VisitType"/>
-        public Action<TypeDeclaration> VisitType { get; set; }
+        public Action<TypeDeclaration>? VisitType { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an interface.
         /// </summary>
         /// <seealso cref="Visitor.VisitInterface"/>
-        public Action<Interface> VisitInterface { get; set; }
+        public Action<Interface>? VisitInterface { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a class.
         /// </summary>
         /// <seealso cref="Visitor.VisitClass"/>
-        public Action<Class> VisitClass { get; set; }
+        public Action<Class>? VisitClass { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a struct.
         /// </summary>
         /// <seealso cref="Visitor.VisitStruct"/>
-        public Action<Struct> VisitStruct { get; set; }
+        public Action<Struct>? VisitStruct { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an enumeration.
         /// </summary>
         /// <seealso cref="Visitor.VisitEnum"/>
-        public Action<Enum> VisitEnum { get; set; }
+        public Action<Enum>? VisitEnum { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a field.
         /// </summary>
         /// <seealso cref="Visitor.VisitField"/>
-        public Action<Field> VisitField { get; set; }
+        public Action<Field>? VisitField { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a property.
         /// </summary>
         /// <seealso cref="Visitor.VisitProperty"/>
-        public Action<Property> VisitProperty { get; set; }
+        public Action<Property>? VisitProperty { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an event.
         /// </summary>
         /// <seealso cref="Visitor.VisitEvent"/>
-        public Action<Event> VisitEvent { get; set; }
+        public Action<Event>? VisitEvent { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting a method.
         /// </summary>
         /// <seealso cref="Visitor.VisitMethod"/>
-        public Action<Method> VisitMethod { get; set; }
+        public Action<Method>? VisitMethod { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an extension method.
         /// </summary>
         /// <seealso cref="Visitor.VisitExtensionMethod"/>
-        public Action<ExtensionMethod> VisitExtensionMethod { get; set; }
+        public Action<ExtensionMethod>? VisitExtensionMethod { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting any member.
         /// </summary>
         /// <seealso cref="Visitor.VisitMember"/>
-        public Action<Member> VisitMember { get; set; }
+        public Action<Member>? VisitMember { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>summary</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitSummary"/>
-        public Action<Summary> VisitSummary { get; set; }
+        public Action<Summary>? VisitSummary { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>remarks</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitRemarks"/>
-        public Action<Remarks> VisitRemarks { get; set; }
+        public Action<Remarks>? VisitRemarks { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>para</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitPara"/>
-        public Action<Para> VisitPara { get; set; }
+        public Action<Para>? VisitPara { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>code</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitCode"/>
-        public Action<Code> VisitCode { get; set; }
+        public Action<Code>? VisitCode { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>c</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitC"/>
-        public Action<C> VisitC { get; set; }
+        public Action<C>? VisitC { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the literal text inside other documentation elements.
         /// </summary>
         /// <seealso cref="Visitor.VisitText"/>
-        public Action<Text> VisitText { get; set; }
+        public Action<Text>? VisitText { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>example</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitExample"/>
-        public Action<Example> VisitExample { get; set; }
+        public Action<Example>? VisitExample { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>see</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitSee"/>
-        public Action<See> VisitSee { get; set; }
+        public Action<See>? VisitSee { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>seealso</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitSeeAlso"/>
-        public Action<SeeAlso> VisitSeeAlso { get; set; }
+        public Action<SeeAlso>? VisitSeeAlso { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>param</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitParam"/>
-        public Action<Param> VisitParam { get; set; }
+        public Action<Param>? VisitParam { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>paramref</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitParamRef"/>
-        public Action<ParamRef> VisitParamRef { get; set; }
+        public Action<ParamRef>? VisitParamRef { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>typeparam</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitTypeParam"/>
-        public Action<TypeParam> VisitTypeParam { get; set; }
+        public Action<TypeParam>? VisitTypeParam { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>typeparamref</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitTypeParamRef"/>
-        public Action<TypeParamRef> VisitTypeParamRef { get; set; }
+        public Action<TypeParamRef>? VisitTypeParamRef { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>value</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitValue"/>
-        public Action<Value> VisitValue { get; set; }
+        public Action<Value>? VisitValue { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>returns</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitReturns"/>
-        public Action<Returns> VisitReturns { get; set; }
+        public Action<Returns>? VisitReturns { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>list</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitList"/>
-        public Action<List> VisitList { get; set; }
+        public Action<List>? VisitList { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>listheader</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitListHeader"/>
-        public Action<ListHeader> VisitListHeader { get; set; }
+        public Action<ListHeader>? VisitListHeader { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>term</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitTerm"/>
-        public Action<Term> VisitTerm { get; set; }
+        public Action<Term>? VisitTerm { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>description</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitDescription"/>
-        public Action<Description> VisitDescription { get; set; }
+        public Action<Description>? VisitDescription { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>item</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitItem"/>
-        public Action<Item> VisitItem { get; set; }
+        public Action<Item>? VisitItem { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting the <c>exception</c> documentation element.
         /// </summary>
         /// <seealso cref="Visitor.VisitException"/>
-        public Action<Exception> VisitException { get; set; }
+        public Action<Exception>? VisitException { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an unknown member.
         /// </summary>
         /// <seealso cref="Visitor.VisitUnknownMember"/>
-        public Action<UnknownMember> VisitUnknownMember { get; set; }
+        public Action<UnknownMember>? VisitUnknownMember { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting an unknown element.
         /// </summary>
         /// <seealso cref="Visitor.VisitUnknownElement"/>
-        public Action<UnknownElement> VisitUnknownElement { get; set; }
+        public Action<UnknownElement>? VisitUnknownElement { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting any container element.
         /// </summary>
         /// <seealso cref="Visitor.VisitContainer"/>
-        public Action<Container> VisitContainer { get; set; }
+        public Action<Container>? VisitContainer { get; set; }
 
         /// <summary>
         /// Gets or sets the action to invoke when visiting any element.
         /// </summary>
         /// <seealso cref="Visitor.VisitElement"/>
-        public Action<Element> VisitElement { get; set; }
+        public Action<Element>? VisitElement { get; set; }
     }
 
     /// <summary>
@@ -245,24 +245,20 @@ namespace NuDoq
     /// </summary>
     public class DelegateVisitor : Visitor
     {
-        VisitorDelegates delegates;
+        readonly VisitorDelegates delegates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateVisitor"/> class.
         /// </summary>
         /// <param name="delegates">The delegates to use when visiting the model.</param>
-        public DelegateVisitor(VisitorDelegates delegates)
-        {
-            this.delegates = delegates;
-        }
+        public DelegateVisitor(VisitorDelegates delegates) => this.delegates = delegates;
 
         /// <summary>
         /// See <see cref="Visitor.VisitDocument"/>.
         /// </summary>
         public override void VisitDocument(DocumentMembers document)
         {
-            if (delegates.VisitDocument != null)
-                delegates.VisitDocument(document);
+            delegates.VisitDocument?.Invoke(document);
 
             base.VisitDocument(document);
         }
@@ -272,8 +268,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitAssembly(AssemblyMembers assembly)
         {
-            if (delegates.VisitAssembly != null)
-                delegates.VisitAssembly(assembly);
+            delegates.VisitAssembly?.Invoke(assembly);
 
             base.VisitAssembly(assembly);
         }
@@ -283,8 +278,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitC(C code)
         {
-            if (delegates.VisitC != null)
-                delegates.VisitC(code);
+            delegates.VisitC?.Invoke(code);
 
             base.VisitC(code);
         }
@@ -294,8 +288,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitClass(Class type)
         {
-            if (delegates.VisitClass != null)
-                delegates.VisitClass(type);
+            delegates.VisitClass?.Invoke(type);
 
             base.VisitClass(type);
         }
@@ -305,8 +298,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitCode(Code code)
         {
-            if (delegates.VisitCode != null)
-                delegates.VisitCode(code);
+            delegates.VisitCode?.Invoke(code);
 
             base.VisitCode(code);
         }
@@ -316,8 +308,7 @@ namespace NuDoq
         /// </summary>
         protected override void VisitContainer(Container container)
         {
-            if (delegates.VisitContainer != null)
-                delegates.VisitContainer(container);
+            delegates.VisitContainer?.Invoke(container);
 
             base.VisitContainer(container);
         }
@@ -327,8 +318,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitDescription(Description description)
         {
-            if (delegates.VisitDescription != null)
-                delegates.VisitDescription(description);
+            delegates.VisitDescription?.Invoke(description);
 
             base.VisitDescription(description);
         }
@@ -338,8 +328,7 @@ namespace NuDoq
         /// </summary>
         protected override void VisitElement(Element element)
         {
-            if (delegates.VisitElement != null)
-                delegates.VisitElement(element);
+            delegates.VisitElement?.Invoke(element);
 
             base.VisitElement(element);
         }
@@ -349,8 +338,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitEnum(Enum type)
         {
-            if (delegates.VisitEnum != null)
-                delegates.VisitEnum(type);
+            delegates.VisitEnum?.Invoke(type);
 
             base.VisitEnum(type);
         }
@@ -360,8 +348,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitEvent(Event @event)
         {
-            if (delegates.VisitEvent != null)
-                delegates.VisitEvent(@event);
+            delegates.VisitEvent?.Invoke(@event);
 
             base.VisitEvent(@event);
         }
@@ -371,8 +358,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitExample(Example example)
         {
-            if (delegates.VisitExample != null)
-                delegates.VisitExample(example);
+            delegates.VisitExample?.Invoke(example);
 
             base.VisitExample(example);
         }
@@ -382,8 +368,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitException(Exception exception)
         {
-            if (delegates.VisitException != null)
-                delegates.VisitException(exception);
+            delegates.VisitException?.Invoke(exception);
 
             base.VisitException(exception);
         }
@@ -393,8 +378,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitExtensionMethod(ExtensionMethod method)
         {
-            if (delegates.VisitExtensionMethod != null)
-                delegates.VisitExtensionMethod(method);
+            delegates.VisitExtensionMethod?.Invoke(method);
 
             base.VisitExtensionMethod(method);
         }
@@ -404,8 +388,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitField(Field field)
         {
-            if (delegates.VisitField != null)
-                delegates.VisitField(field);
+            delegates.VisitField?.Invoke(field);
 
             base.VisitField(field);
         }
@@ -415,8 +398,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitInterface(Interface type)
         {
-            if (delegates.VisitInterface != null)
-                delegates.VisitInterface(type);
+            delegates.VisitInterface?.Invoke(type);
 
             base.VisitInterface(type);
         }
@@ -426,8 +408,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitItem(Item item)
         {
-            if (delegates.VisitItem != null)
-                delegates.VisitItem(item);
+            delegates.VisitItem?.Invoke(item);
 
             base.VisitItem(item);
         }
@@ -437,8 +418,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitList(List list)
         {
-            if (delegates.VisitList != null)
-                delegates.VisitList(list);
+            delegates.VisitList?.Invoke(list);
 
             base.VisitList(list);
         }
@@ -448,8 +428,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitListHeader(ListHeader header)
         {
-            if (delegates.VisitListHeader != null)
-                delegates.VisitListHeader(header);
+            delegates.VisitListHeader?.Invoke(header);
 
             base.VisitListHeader(header);
         }
@@ -459,8 +438,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitMember(Member member)
         {
-            if (delegates.VisitMember != null)
-                delegates.VisitMember(member);
+            delegates.VisitMember?.Invoke(member);
 
             base.VisitMember(member);
         }
@@ -470,8 +448,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitMethod(Method method)
         {
-            if (delegates.VisitMethod != null)
-                delegates.VisitMethod(method);
+            delegates.VisitMethod?.Invoke(method);
 
             base.VisitMethod(method);
         }
@@ -481,8 +458,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitPara(Para para)
         {
-            if (delegates.VisitPara != null)
-                delegates.VisitPara(para);
+            delegates.VisitPara?.Invoke(para);
 
             base.VisitPara(para);
         }
@@ -492,8 +468,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitParam(Param param)
         {
-            if (delegates.VisitParam != null)
-                delegates.VisitParam(param);
+            delegates.VisitParam?.Invoke(param);
 
             base.VisitParam(param);
         }
@@ -503,8 +478,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitParamRef(ParamRef paramRef)
         {
-            if (delegates.VisitParamRef != null)
-                delegates.VisitParamRef(paramRef);
+            delegates.VisitParamRef?.Invoke(paramRef);
 
             base.VisitParamRef(paramRef);
         }
@@ -514,8 +488,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitProperty(Property property)
         {
-            if (delegates.VisitProperty != null)
-                delegates.VisitProperty(property);
+            delegates.VisitProperty?.Invoke(property);
 
             base.VisitProperty(property);
         }
@@ -525,8 +498,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitRemarks(Remarks remarks)
         {
-            if (delegates.VisitRemarks != null)
-                delegates.VisitRemarks(remarks);
+            delegates.VisitRemarks?.Invoke(remarks);
 
             base.VisitRemarks(remarks);
         }
@@ -536,8 +508,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitSee(See see)
         {
-            if (delegates.VisitSee != null)
-                delegates.VisitSee(see);
+            delegates.VisitSee?.Invoke(see);
 
             base.VisitSee(see);
         }
@@ -547,8 +518,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitSeeAlso(SeeAlso seeAlso)
         {
-            if (delegates.VisitSeeAlso != null)
-                delegates.VisitSeeAlso(seeAlso);
+            delegates.VisitSeeAlso?.Invoke(seeAlso);
 
             base.VisitSeeAlso(seeAlso);
         }
@@ -558,8 +528,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitStruct(Struct type)
         {
-            if (delegates.VisitStruct != null)
-                delegates.VisitStruct(type);
+            delegates.VisitStruct?.Invoke(type);
 
             base.VisitStruct(type);
         }
@@ -569,8 +538,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitSummary(Summary summary)
         {
-            if (delegates.VisitSummary != null)
-                delegates.VisitSummary(summary);
+            delegates.VisitSummary?.Invoke(summary);
 
             base.VisitSummary(summary);
         }
@@ -580,8 +548,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitTerm(Term term)
         {
-            if (delegates.VisitTerm != null)
-                delegates.VisitTerm(term);
+            delegates.VisitTerm?.Invoke(term);
 
             base.VisitTerm(term);
         }
@@ -591,8 +558,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitText(Text text)
         {
-            if (delegates.VisitText != null)
-                delegates.VisitText(text);
+            delegates.VisitText?.Invoke(text);
 
             base.VisitText(text);
         }
@@ -602,8 +568,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitType(TypeDeclaration type)
         {
-            if (delegates.VisitType != null)
-                delegates.VisitType(type);
+            delegates.VisitType?.Invoke(type);
 
             base.VisitType(type);
         }
@@ -613,8 +578,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitTypeParam(TypeParam typeParam)
         {
-            if (delegates.VisitTypeParam != null)
-                delegates.VisitTypeParam(typeParam);
+            delegates.VisitTypeParam?.Invoke(typeParam);
 
             base.VisitTypeParam(typeParam);
         }
@@ -624,8 +588,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitTypeParamRef(TypeParamRef typeParamRef)
         {
-            if (delegates.VisitTypeParamRef != null)
-                delegates.VisitTypeParamRef(typeParamRef);
+            delegates.VisitTypeParamRef?.Invoke(typeParamRef);
 
             base.VisitTypeParamRef(typeParamRef);
         }
@@ -635,8 +598,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitUnknownMember(UnknownMember member)
         {
-            if (delegates.VisitUnknownMember != null)
-                delegates.VisitUnknownMember(member);
+            delegates.VisitUnknownMember?.Invoke(member);
 
             base.VisitUnknownMember(member);
         }
@@ -646,8 +608,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitUnknownElement(UnknownElement element)
         {
-            if (delegates.VisitUnknownElement != null)
-                delegates.VisitUnknownElement(element);
+            delegates.VisitUnknownElement?.Invoke(element);
 
             base.VisitUnknownElement(element);
         }
@@ -657,8 +618,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitValue(Value value)
         {
-            if (delegates.VisitValue != null)
-                delegates.VisitValue(value);
+            delegates.VisitValue?.Invoke(value);
 
             base.VisitValue(value);
         }
@@ -668,8 +628,7 @@ namespace NuDoq
         /// </summary>
         public override void VisitReturns(Returns returns)
         {
-            if (delegates.VisitReturns != null)
-                delegates.VisitReturns(returns);
+            delegates.VisitReturns?.Invoke(returns);
 
             base.VisitReturns(returns);
         }

@@ -43,24 +43,21 @@ namespace NuDoq
         /// <summary>
         /// Gets the type of list.
         /// </summary>
-        public ListType Type { get; private set; }
+        public ListType Type { get; }
 
         /// <summary>
         /// Gets the header from the contained elements, if any.
         /// </summary>
-        public ListHeader Header { get { return Elements.OfType<ListHeader>().FirstOrDefault(); } }
+        public ListHeader Header => Elements.OfType<ListHeader>().FirstOrDefault();
 
         /// <summary>
         /// Gets the items from the contained elements.
         /// </summary>
-        public IEnumerable<Item> Items { get { return Elements.OfType<Item>(); } }
+        public IEnumerable<Item> Items => Elements.OfType<Item>();
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<list>" + base.ToString();
-        }
+        public override string ToString() => "<list>" + base.ToString();
     }
 }

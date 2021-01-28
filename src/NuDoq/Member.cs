@@ -18,15 +18,13 @@ namespace NuDoq
         /// <param name="memberId">The member id as specified in the documentation XML.</param>
         /// <param name="elements">The contained documentation elements.</param>
         public Member(string memberId, IEnumerable<Element> elements)
-            : base(elements)
-        {
-            Id = memberId;
-        }
+            : base(elements) 
+            => Id = memberId;
 
         /// <summary>
         /// Gets the member id as specified in the documentation XML.
         /// </summary>
-        public string Id { get; private set; }
+        public string Id { get; }
 
         /// <summary>
         /// Gets the kind of member.
@@ -37,14 +35,11 @@ namespace NuDoq
         /// Gets the reflection information for this member, 
         /// if the reading process used an assembly.
         /// </summary>
-        public MemberInfo Info { get; set; }
+        public MemberInfo? Info { get; set; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return Id + " " + base.ToString();
-        }
+        public override string ToString() => Id + " " + base.ToString();
     }
 }

@@ -12,10 +12,7 @@
         /// Initializes a new instance of the <see cref="C"/> class 
         /// with the given content.
         /// </summary>
-        public C(string content)
-        {
-            Content = content;
-        }
+        public C(string content) => Content = content;
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -29,14 +26,11 @@
         /// <summary>
         /// Gets the code content.
         /// </summary>
-        public string Content { get; private set; }
+        public string Content { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<c>" + base.ToString();
-        }
+        public override string ToString() => "<c>" + base.ToString();
     }
 }

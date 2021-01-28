@@ -10,7 +10,7 @@ namespace NuDoq
     /// Provides bidirectional mapping between reflection members and XML documentation ids.
     /// </summary>
     /// <remarks>
-    /// This map can be used in conjunction with the result of a <see cref="DocReader.Read(System.Reflection.Assembly)"/>
+    /// This map can be used in conjunction with the result of a <see cref="DocReader.Read(Assembly)"/>
     /// operation to do post-processing on the <see cref="Members"/> by grouping by type, loading inheritance trees, 
     /// etc.
     /// </remarks>
@@ -24,10 +24,7 @@ namespace NuDoq
         /// Adds all the members in the specified assembly to the map.
         /// </summary>
         /// <param name="assembly">The assembly to map to member ids.</param>
-        public void Add(Assembly assembly)
-        {
-            AddRange(assembly.GetTypes());
-        }
+        public void Add(Assembly assembly) => AddRange(assembly.GetTypes());
 
         /// <summary>
         /// Adds a set of types to the map.
@@ -36,9 +33,7 @@ namespace NuDoq
         public void AddRange(IEnumerable<Type> types)
         {
             foreach (var type in types)
-            {
                 Add(type);
-            }
         }
 
         /// <summary>
@@ -53,9 +48,7 @@ namespace NuDoq
             var members = type.GetMembers(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
             foreach (var member in members)
-            {
-                Add(type, member);
-            }
+                Add(member);
         }
 
         /// <summary>
@@ -66,20 +59,19 @@ namespace NuDoq
         /// <returns>The <see cref="MemberInfo"/> if found; <see langword="null"/> otherwise.</returns>
         public MemberInfo FindMember(string memberId)
         {
-            MemberInfo result = null;
-            idToMemberMap.TryGetValue(memberId, out result);
+            idToMemberMap.TryGetValue(memberId, out var result);
             return result;
         }
 
         /// <summary>
         /// Gets the documentation member ids of all members added so far to the map.
         /// </summary>
-        public IEnumerable<string> Ids { get { return idToMemberMap.Keys; } }
+        public IEnumerable<string> Ids => idToMemberMap.Keys;
 
         /// <summary>
         /// Gets all the reflection members added so far to the map.
         /// </summary>
-        public IEnumerable<MemberInfo> Members { get { return memberToIdMap.Keys; } }
+        public IEnumerable<MemberInfo> Members => memberToIdMap.Keys;
 
         /// <summary>
         /// Given a reflection <paramref name="member"/>, tries to find 
@@ -89,12 +81,11 @@ namespace NuDoq
         /// <returns>The documentation member id if found; <see langword="null"/> otherwise.</returns>
         public string FindId(MemberInfo member)
         {
-            string result = null;
-            memberToIdMap.TryGetValue(member, out result);
+            memberToIdMap.TryGetValue(member, out var result);
             return result;
         }
 
-        void Add(Type type, MemberInfo member)
+        void Add(MemberInfo member)
         {
             sb.Length = 0;
 
@@ -114,7 +105,7 @@ namespace NuDoq
                     break;
                 case MemberTypes.Method:
                     sb.Append("M:");
-                    Append(type, (MethodInfo)member);
+                    Append((MethodInfo)member);
                     break;
                 case MemberTypes.NestedType:
                     Add((Type)member);
@@ -138,7 +129,7 @@ namespace NuDoq
             sb.Append('.').Append(property.Name);
         }
 
-        void Append(Type owner, MethodInfo method)
+        void Append(MethodInfo method)
         {
             AppendType(sb, method.DeclaringType);
             sb.Append('.').Append(method.Name);
@@ -149,17 +140,17 @@ namespace NuDoq
                 sb.Append("``").Append(method.GetGenericArguments().Length);
             }
 
-            Append(owner, method, method.GetParameters());
+            Append(method.GetParameters());
         }
 
-        void Append(Type owner, MethodBase method, ParameterInfo[] parameters)
+        void Append(ParameterInfo[] parameters)
         {
             if (parameters.Length == 0)
             {
                 return;
             }
             sb.Append('(');
-            for (int i = 0; i < parameters.Length; i++)
+            for (var i = 0; i < parameters.Length; i++)
             {
                 if (i > 0)
                 {
@@ -187,7 +178,7 @@ namespace NuDoq
         {
             AppendType(sb, constructor.DeclaringType);
             sb.Append('.').Append("#ctor");
-            Append(constructor.DeclaringType, constructor, constructor.GetParameters());
+            Append(constructor.GetParameters());
         }
 
         void AppendType(StringBuilder sb, Type type, bool addTypeToMap = true)
@@ -246,7 +237,7 @@ namespace NuDoq
                 {
                     var args = type.GetGenericArguments();
                     sb.Append('{');
-                    for (int i = 0; i < args.Length; i++)
+                    for (var i = 0; i < args.Length; i++)
                     {
                         if (i > 0)
                         {

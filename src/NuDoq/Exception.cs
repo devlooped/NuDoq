@@ -33,14 +33,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the member id of the exception type.
         /// </summary>
-        public string Cref { get; private set; }
+        public string Cref { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<exception>" + base.ToString();
-        }
+        public override string ToString() => "<exception>" + base.ToString();
     }
 }

@@ -18,15 +18,13 @@ namespace NuDoq
         /// <param name="members">The lazily-read members of the set.</param>
         public DocumentMembers(XDocument xml, IEnumerable<Member> members)
             // In .NET 3.5 there's no covariance on IEnumerable.
-            : base(members.OfType<Element>())
-        {
-            Xml = xml;
-        }
+            : base(members.OfType<Element>()) 
+            => Xml = xml;
 
         /// <summary>
         /// Gets the source XML document that was used to read the members.
         /// </summary>
-        public XDocument Xml { get; private set; }
+        public XDocument Xml { get; }
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -38,11 +36,8 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return new Uri(Xml.BaseUri).LocalPath;
-        }
+        public override string ToString() => new Uri(Xml.BaseUri).LocalPath;
     }
 }

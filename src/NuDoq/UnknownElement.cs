@@ -14,15 +14,13 @@ namespace NuDoq
         /// <param name="xml">The <see cref="XElement"/> containing the entire element markup.</param>
         /// <param name="content">The child content.</param>
         public UnknownElement(XElement xml, IEnumerable<Element> content)
-            : base(content)
-        {
-            Xml = xml;
-        }
+            : base(content) 
+            => Xml = xml;
 
         /// <summary>
         /// Gets the <see cref="XElement"/> containing the entire element markup.
         /// </summary>
-        public XElement Xml { get; private set; }
+        public XElement Xml { get; }
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -34,11 +32,8 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "unknown:<" + Xml.Name.LocalName + ">" + base.ToString();
-        }
+        public override string ToString() => "unknown:<" + Xml.Name.LocalName + ">" + base.ToString();
     }
 }

@@ -27,14 +27,14 @@ namespace NuDoq
         /// <summary>
         /// Gets the assembly that was used to read the documented members.
         /// </summary>
-        public Assembly Assembly { get; private set; }
+        public Assembly Assembly { get; }
 
         /// <summary>
         /// Gets the map of reflection members to documentation ids used 
         /// to augment the <see cref="Member.Info"/> on all documented members 
         /// found in the XML API documentation associated with an assembly.
         /// </summary>
-        public MemberIdMap IdMap { get; private set; }
+        public MemberIdMap IdMap { get; }
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -46,11 +46,8 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return Assembly.Location + "|" + base.ToString();
-        }
+        public override string ToString() => Assembly.Location + "|" + base.ToString();
     }
 }

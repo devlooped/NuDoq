@@ -17,20 +17,18 @@ namespace NuDoq
         /// <param name="elements">The contained documentation elements.</param>
         public ExtensionMethod(string memberId, string extendedTypeId, IEnumerable<Element> elements)
             : base(memberId, elements)
-        {
-            ExtendedTypeId = extendedTypeId;
-        }
+            => ExtendedTypeId = extendedTypeId;
 
         /// <summary>
         /// Gets the extended type id (the <c>this</c> parameter).
         /// </summary>
-        public string ExtendedTypeId { get; private set; }
+        public string ExtendedTypeId { get; }
 
         /// <summary>
         /// Gets the kind of member, which contains both the <see cref="MemberKinds.Method" /> and 
         /// <see cref="MemberKinds.ExtensionMethod"/> flags.
         /// </summary>
-        public override MemberKinds Kind { get { return MemberKinds.Method | MemberKinds.ExtensionMethod; } }
+        public override MemberKinds Kind => MemberKinds.Method | MemberKinds.ExtensionMethod;
 
         /// <summary>
         /// Accepts the specified visitor.

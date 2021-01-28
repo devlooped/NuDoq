@@ -31,7 +31,7 @@ static class Guard
     /// Ensures the given <paramref name="value"/> is not null.
     /// Throws <see cref="ArgumentNullException"/> otherwise.
     /// </summary>
-    /// <exception cref="System.ArgumentException">The <paramref name="value"/> is null.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is null.</exception>
     public static void NotNull<T>(Expression<Func<T>> reference, T value)
     {
         if (value == null)
@@ -43,10 +43,10 @@ static class Guard
     /// Throws <see cref="ArgumentNullException"/> in the first case, or 
     /// <see cref="ArgumentException"/> in the latter.
     /// </summary>
-    /// <exception cref="System.ArgumentException">The <paramref name="value"/> is null or an empty string.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is null or an empty string.</exception>
     public static void NotNullOrEmpty(Expression<Func<string>> reference, string value)
     {
-        NotNull<string>(reference, value);
+        NotNull(reference, value);
         if (value.Length == 0)
             throw new ArgumentException("Parameter cannot be empty.", GetParameterName(reference));
     }
@@ -56,7 +56,7 @@ static class Guard
     /// to the <paramref name="validate"/> function. Throws <see cref="ArgumentNullException"/> 
     /// otherwise.
     /// </summary>
-    /// <exception cref="System.ArgumentException">The <paramref name="value"/> is not valid according 
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is not valid according 
     /// to the <paramref name="validate"/> function.</exception>
     public static void IsValid<T>(Expression<Func<T>> reference, T value, Func<T, bool> validate, string message)
     {
@@ -69,7 +69,7 @@ static class Guard
     /// to the <paramref name="validate"/> function. Throws <see cref="ArgumentNullException"/> 
     /// otherwise.
     /// </summary>
-    /// <exception cref="System.ArgumentException">The <paramref name="value"/> is not valid according 
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is not valid according 
     /// to the <paramref name="validate"/> function.</exception>
     public static void IsValid<T>(Expression<Func<T>> reference, T value, Func<T, bool> validate, string format, params object[] args)
     {

@@ -24,7 +24,7 @@ namespace NuDoq
         /// <summary>
         /// Gets the kind of member, which equals to <see cref="MemberKinds.Property"/>.
         /// </summary>
-        public override MemberKinds Kind { get { return MemberKinds.Property; } }
+        public override MemberKinds Kind => MemberKinds.Property;
 
         /// <summary>
         /// Accepts the specified visitor.

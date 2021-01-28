@@ -12,12 +12,12 @@ namespace NuDoq
     {
         public static string ToStringAlignAttributes(this XDocument document)
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
+            var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.OmitXmlDeclaration = true;
             settings.NewLineOnAttributes = true;
-            StringBuilder stringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(stringBuilder, settings))
+            var stringBuilder = new StringBuilder();
+            using (var xmlWriter = XmlWriter.Create(stringBuilder, settings))
                 document.WriteTo(xmlWriter);
             return stringBuilder.ToString();
         }
@@ -39,7 +39,7 @@ namespace NuDoq
 
         public static XDocument Normalize(this XDocument source, XmlSchemaSet schema)
         {
-            bool havePSVI = false;
+            var havePSVI = false;
             // validate, throw errors, add PSVI information
             if (schema != null)
             {
@@ -64,8 +64,8 @@ namespace NuDoq
 
         public static bool NormalizedEquals(this XDocument doc1, XDocument doc2, XmlSchemaSet schemaSet)
         {
-            XDocument d1 = Normalize(doc1, schemaSet);
-            XDocument d2 = Normalize(doc2, schemaSet);
+            var d1 = Normalize(doc1, schemaSet);
+            var d2 = Normalize(doc2, schemaSet);
             return XNode.DeepEquals(d1, d2);
         }
 
@@ -112,7 +112,7 @@ namespace NuDoq
             if (node is XComment || node is XProcessingInstruction)
                 return null;
 
-            XElement e = node as XElement;
+            var e = node as XElement;
             if (e != null)
                 return NormalizeElement(e, havePSVI);
             

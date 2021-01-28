@@ -23,7 +23,7 @@ namespace NuDoq
         /// Gets the kind of member, which contains both the <see cref="MemberKinds.Type" /> and 
         /// <see cref="MemberKinds.Struct"/> flags.
         /// </summary>
-        public override MemberKinds Kind { get { return MemberKinds.Type | MemberKinds.Struct; } }
+        public override MemberKinds Kind => MemberKinds.Type | MemberKinds.Struct;
 
         /// <summary>
         /// Accepts the specified visitor.

@@ -32,19 +32,16 @@ namespace NuDoq
         /// <summary>
         /// Gets the term from the contained elements, if any.
         /// </summary>
-        public Term Term { get { return Elements.OfType<Term>().FirstOrDefault(); } }
+        public Term Term => Elements.OfType<Term>().FirstOrDefault();
 
         /// <summary>
         /// Gets the description from the contained elements, if any.
         /// </summary>
-        public Description Description { get { return Elements.OfType<Description>().FirstOrDefault(); } }
+        public Description Description => Elements.OfType<Description>().FirstOrDefault();
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<item>" + base.ToString();
-        }
+        public override string ToString() => "<item>" + base.ToString();
     }
 }

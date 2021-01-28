@@ -35,19 +35,16 @@ namespace NuDoq
         /// <summary>
         /// Gets the member id of the referenced member.
         /// </summary>
-        public string Cref { get; private set; }
+        public string Cref { get; }
 
         /// <summary>
         /// Gets the reference's text.
         /// </summary>
-        public string Content { get; private set; }
+        public string Content { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<seealso>" + base.ToString();
-        }
+        public override string ToString() => "<seealso>" + base.ToString();
     }
 }

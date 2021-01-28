@@ -32,6 +32,6 @@ namespace NuDoq
         /// <summary>
         /// Gets the kind of member, which equals <see cref="MemberKinds.Unknown"/>.
         /// </summary>
-        public override MemberKinds Kind { get { return MemberKinds.Unknown; } }
+        public override MemberKinds Kind => MemberKinds.Unknown;
     }
 }

@@ -8,7 +8,7 @@ namespace NuDoq
     /// </summary>
     class TextVisitor : Visitor
     {
-        StringBuilder builder = new StringBuilder();
+        readonly StringBuilder builder = new StringBuilder();
 
         public override void VisitC(C code)
         {
@@ -62,6 +62,6 @@ namespace NuDoq
             builder.AppendLine();
         }
 
-        public string Text { get { return builder.ToString(); } }
+        public string Text => builder.ToString();
     }
 }

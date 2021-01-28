@@ -16,10 +16,8 @@ namespace NuDoq
         /// <param name="name">The name of the type parameter.</param>
         /// <param name="elements">The elements that make up the documentation.</param>
         public TypeParam(string name, IEnumerable<Element> elements)
-            : base(elements)
-        {
-            Name = name;
-        }
+            : base(elements) 
+            => Name = name;
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -33,14 +31,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the name of the type parameter.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return "<typeparam>" + base.ToString();
-        }
+        public override string ToString() => "<typeparam>" + base.ToString();
     }
 }

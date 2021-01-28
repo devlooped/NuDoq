@@ -20,7 +20,7 @@ namespace NuDoq
         /// </summary>
         /// <param name="fileName">Path to the documentation file.</param>
         /// <returns>All documented members found in the given file.</returns>
-        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
         public static DocumentMembers Read(string fileName)
         {
             if (!File.Exists(fileName))
@@ -43,11 +43,8 @@ namespace NuDoq
         /// <param name="assembly">The assembly to read the documentation from.</param>
         /// <returns>All documented members found in the given file, together with the reflection metadata 
         /// association from the assembly.</returns>
-        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
-        public static AssemblyMembers Read(Assembly assembly)
-        {
-            return Read(assembly, null);
-        }
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
+        public static AssemblyMembers Read(Assembly assembly) => Read(assembly, null);
 
         /// <summary>
         /// Uses the specified assembly to locate a documentation file alongside the assembly by 
@@ -59,8 +56,8 @@ namespace NuDoq
         /// <param name="documentationFilename">Path to the documentation file.</param>
         /// <returns>All documented members found in the given file, together with the reflection metadata 
         /// association from the assembly.</returns>
-        /// <exception cref="System.IO.FileNotFoundException">Could not find documentation file to load.</exception>
-        public static AssemblyMembers Read(Assembly assembly, string documentationFilename)
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
+        public static AssemblyMembers Read(Assembly assembly, string? documentationFilename)
         {
             var fileName = documentationFilename;
 
@@ -149,30 +146,16 @@ namespace NuDoq
         /// </summary>
         static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children)
         {
-            var member = default(Member);
-            switch (memberId[0])
+            Member? member = (memberId[0]) switch
             {
-                case 'T':
-                    member = new TypeDeclaration(memberId, children);
-                    break;
-                case 'F':
-                    member = new Field(memberId, children);
-                    break;
-                case 'P':
-                    member = new Property(memberId, children);
-                    break;
-                case 'M':
-                    member = new Method(memberId, children);
-                    break;
-                case 'E':
-                    member = new Event(memberId, children);
-                    break;
-                default:
-                    member = new UnknownMember(memberId);
-                    break;
-            }
-
-            member.SetLineInfo(element as IXmlLineInfo);
+                'T' => new TypeDeclaration(memberId, children),
+                'F' => new Field(memberId, children),
+                'P' => new Property(memberId, children),
+                'M' => new Method(memberId, children),
+                'E' => new Event(memberId, children),
+                _ => new UnknownMember(memberId),
+            };
+            member.SetLineInfo(element);
             return member;
         }
 
@@ -186,76 +169,34 @@ namespace NuDoq
                 var element = default(Element);
                 switch (node.NodeType)
                 {
-                    case System.Xml.XmlNodeType.Element:
+                    case XmlNodeType.Element:
                         var elementNode = (XElement)node;
-                        switch (elementNode.Name.LocalName)
+                        element = elementNode.Name.LocalName switch
                         {
-                            case "summary":
-                                element = new Summary(ReadContent(elementNode));
-                                break;
-                            case "remarks":
-                                element = new Remarks(ReadContent(elementNode));
-                                break;
-                            case "example":
-                                element = new Example(ReadContent(elementNode));
-                                break;
-                            case "para":
-                                element = new Para(ReadContent(elementNode));
-                                break;
-                            case "param":
-                                element = new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode));
-                                break;
-                            case "paramref":
-                                element = new ParamRef(FindAttribute(elementNode, "name"));
-                                break;
-                            case "typeparam":
-                                element = new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode));
-                                break;
-                            case "typeparamref":
-                                element = new TypeParamRef(FindAttribute(elementNode, "name"));
-                                break;
-                            case "code":
-                                element = new Code(TrimCode(elementNode.Value));
-                                break;
-                            case "c":
-                                element = new C(elementNode.Value);
-                                break;
-                            case "see":
-                                element = new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode));
-                                break;
-                            case "seealso":
-                                element = new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode));
-                                break;
-                            case "list":
-                                element = new List(FindAttribute(elementNode, "type"), ReadContent(elementNode));
-                                break;
-                            case "listheader":
-                                element = new ListHeader(ReadContent(elementNode));
-                                break;
-                            case "term":
-                                element = new Term(ReadContent(elementNode));
-                                break;
-                            case "description":
-                                element = new Description(ReadContent(elementNode));
-                                break;
-                            case "item":
-                                element = new Item(ReadContent(elementNode));
-                                break;
-                            case "exception":
-                                element = new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode));
-                                break;
-                            case "value":
-                                element = new Value(ReadContent(elementNode));
-                                break;
-                            case "returns":
-                                element = new Returns(ReadContent(elementNode));
-                                break;
-                            default:
-                                element = new UnknownElement(elementNode, ReadContent(elementNode));
-                                break;
-                        }
+                            "summary" => new Summary(ReadContent(elementNode)),
+                            "remarks" => new Remarks(ReadContent(elementNode)),
+                            "example" => new Example(ReadContent(elementNode)),
+                            "para" => new Para(ReadContent(elementNode)),
+                            "param" => new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode)),
+                            "paramref" => new ParamRef(FindAttribute(elementNode, "name")),
+                            "typeparam" => new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode)),
+                            "typeparamref" => new TypeParamRef(FindAttribute(elementNode, "name")),
+                            "code" => new Code(TrimCode(elementNode.Value)),
+                            "c" => new C(elementNode.Value),
+                            "see" => new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode)),
+                            "seealso" => new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode)),
+                            "list" => new List(FindAttribute(elementNode, "type"), ReadContent(elementNode)),
+                            "listheader" => new ListHeader(ReadContent(elementNode)),
+                            "term" => new Term(ReadContent(elementNode)),
+                            "description" => new Description(ReadContent(elementNode)),
+                            "item" => new Item(ReadContent(elementNode)),
+                            "exception" => new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode)),
+                            "value" => new Value(ReadContent(elementNode)),
+                            "returns" => new Returns(ReadContent(elementNode)),
+                            _ => new UnknownElement(elementNode, ReadContent(elementNode)),
+                        };
                         break;
-                    case System.Xml.XmlNodeType.Text:
+                    case XmlNodeType.Text:
                         element = new Text(TrimText(((XText)node).Value));
                         break;
                     default:
@@ -264,7 +205,7 @@ namespace NuDoq
 
                 if (element != null)
                 {
-                    element.SetLineInfo(xml as IXmlLineInfo);
+                    element.SetLineInfo(xml);
                     yield return element;
                 }
             }
@@ -273,26 +214,18 @@ namespace NuDoq
         /// <summary>
         /// Retrieves an attribute value if found, otherwise, returns a null string.
         /// </summary>
-        static string FindAttribute(XElement elementNode, string attributeName)
-        {
-            return elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
-        }
+        static string FindAttribute(XElement elementNode, string attributeName) 
+            => elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
 
         /// <summary>
         /// Trims the text by removing new lines and trimming the indent.
         /// </summary>
-        static string TrimText(string content)
-        {
-            return TrimLines(content, StringSplitOptions.RemoveEmptyEntries, " ");
-        }
+        static string TrimText(string content) => TrimLines(content, StringSplitOptions.RemoveEmptyEntries, " ");
 
         /// <summary>
         /// Trims the code by removing extra indent.
         /// </summary>
-        static string TrimCode(string content)
-        {
-            return TrimLines(content, StringSplitOptions.None, Environment.NewLine);
-        }
+        static string TrimCode(string content) => TrimLines(content, StringSplitOptions.None, Environment.NewLine);
 
         static string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
         {

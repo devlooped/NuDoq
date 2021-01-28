@@ -573,8 +573,8 @@ We can have paragraphs anywhere.
 
         class CountingVisitor : Visitor
         {
-            string platform;
-            string fileName;
+            readonly string platform;
+            readonly string fileName;
 
             public int TypeCount { get; set; }
             public int ContainerCount { get; set; }

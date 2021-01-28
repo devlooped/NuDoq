@@ -157,7 +157,15 @@ namespace NuDoq
                     sb.Append(',');
                 }
                 var p = parameters[i];
-                AppendType(sb, p.ParameterType);
+                if (p.ParameterType.IsByRef)
+                {
+                    AppendType(sb, p.ParameterType.GetElementType());
+                    sb.Append("@");
+                }
+                else
+                {
+                    AppendType(sb, p.ParameterType);
+                }
             }
             sb.Append(')');
         }

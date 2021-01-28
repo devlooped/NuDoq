@@ -665,6 +665,17 @@ new
 lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First().Content);
         }
 
+        [Fact]
+        public void when_reading_indexer_property_then_succeeds()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly(), new ReaderOptions { KeepNewLinesInText = true });
+            var method = member.Elements.OfType<Property>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && ((PropertyInfo)m.Info!).GetIndexParameters().Length > 0);
+
+            Assert.NotNull(method);
+            Assert.Equal("indexed", method.ToText());
+        }
+
         class CountingVisitor : Visitor
         {
             readonly string platform;
@@ -737,6 +748,13 @@ lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First(
             /// lines
             /// </summary>
             public string NewLines { get; set; }
+
+            /// <summary>indexed</summary>
+            public int this[int index]
+            {
+                get => 0;
+                set => Console.WriteLine(value);
+            }
         }
     }
 }

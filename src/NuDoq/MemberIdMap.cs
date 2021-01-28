@@ -127,6 +127,7 @@ namespace NuDoq
         {
             AppendType(sb, property.DeclaringType);
             sb.Append('.').Append(property.Name);
+            Append(property.GetIndexParameters());
         }
 
         void Append(MethodInfo method)

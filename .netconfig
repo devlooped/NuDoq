@@ -14,10 +14,8 @@
 	skip
 [file ".github/workflows/pages.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/pages.yml
-	skip
-[file "Gemfile"]
-	url = https://github.com/devlooped/oss/blob/main/Gemfile
-	skip
+	etag = 3f1fb2481dcb41987d775eb6ed61c10adc00995f287636e7adda3ade5efc94b7
+	weak
 [file "assets/images/sponsors.svg"]
 	url = https://github.com/devlooped/oss/blob/main/assets/images/sponsors.svg
 	skip
@@ -103,4 +101,8 @@
 [file "support.md"]
 	url = https://github.com/devlooped/oss/blob/main/support.md
 	etag = 2d47e2fc4fdfa3515203d452674566e3df507461f9938f451a06d79deb687d24
+	weak
+[file "Gemfile"]
+	url = https://github.com/devlooped/oss/blob/main/Gemfile
+	etag = d45832acd078778ffebf260000f6d25172a131f51684744d7e982da2a47170ce
 	weak

@@ -6,7 +6,7 @@
         /// Some method
         /// </summary>
         /// <param name="x">The x param</param>
-        public void SomeMethod<T>(ref string x)
+        public void SomeMethod<TMethod>(ref string x)
         {
         }
     }

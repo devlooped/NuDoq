@@ -649,6 +649,22 @@ We can have paragraphs anywhere.
             Assert.Equal("out", method.Elements.OfType<Param>().First().Elements.OfType<Text>().First().Content);
         }
 
+        [Fact]
+        public void when_reading_with_keep_lines_then_preserves_original_text()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly(), new ReaderOptions { KeepNewLinesInText = true });
+            var method = member.Elements.OfType<Property>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.NewLines));
+
+            Assert.NotNull(method);
+            Assert.Equal(@"With
+
+new
+
+
+lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First().Content);
+        }
+
         class CountingVisitor : Visitor
         {
             readonly string platform;
@@ -711,6 +727,16 @@ We can have paragraphs anywhere.
             {
                 p1 = default;
             }
+
+            /// <summary>
+            /// With
+            /// 
+            /// new
+            /// 
+            /// 
+            /// lines
+            /// </summary>
+            public string NewLines { get; set; }
         }
     }
 }

@@ -612,16 +612,41 @@ We can have paragraphs anywhere.
         }
 
         [Fact]
-        public void when_reading_unkknown_element_then_can_be_empty()
+        public void when_reading_unknown_element_then_can_be_empty()
         {
             var member = DocReader.Read(Assembly.GetExecutingAssembly());
-            var method = member.Elements.OfType<Method>().FirstOrDefault(m => m.Info.DeclaringType == typeof(CustomXml));
+            var method = member.Elements.OfType<Method>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.Preliminary));
 
-            Assert.Single(method.Elements);
+            Assert.NotNull(method);
             Assert.Equal("preliminary", method.Elements.OfType<UnknownElement>().First().Xml.Name.LocalName);
 
             Assert.Empty(method.Elements.OfType<UnknownElement>().First().Elements);
             Assert.Empty(method.Elements.OfType<UnknownElement>().First().Attributes);
+        }
+
+        [Fact]
+        public void when_reading_byref_element_then_can_read_parameter_doc()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+            var method = member.Elements.OfType<Method>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.ByRef));
+
+            Assert.NotNull(method);
+            Assert.Equal("p1", method.Elements.OfType<Param>().First().Name);
+            Assert.Equal("byref", method.Elements.OfType<Param>().First().Elements.OfType<Text>().First().Content);
+        }
+
+        [Fact]
+        public void when_reading_out_element_then_can_read_parameter_doc()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+            var method = member.Elements.OfType<Method>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.Out));
+
+            Assert.NotNull(method);
+            Assert.Equal("p1", method.Elements.OfType<Param>().First().Name);
+            Assert.Equal("out", method.Elements.OfType<Param>().First().Elements.OfType<Text>().First().Content);
         }
 
         class CountingVisitor : Visitor
@@ -674,6 +699,18 @@ We can have paragraphs anywhere.
         {
             /// <preliminary />
             public void Preliminary() { }
+
+            /// <summary>example method</summary>
+            /// <param name="p1">byref</param>
+            public void ByRef(ref int p1) { }
+
+
+            /// <summary>example method</summary>
+            /// <param name="p1">out</param>
+            public void Out(out int p1)
+            {
+                p1 = default;
+            }
         }
     }
 }

@@ -290,7 +290,23 @@ namespace NuDoq
         /// <summary>
         /// Trims the code by removing extra indent.
         /// </summary>
-        string TrimCode(string content) => TrimLines(content, StringSplitOptions.None, Environment.NewLine);
+        string TrimCode(string content)
+            => TrimLines(content, StringSplitOptions.None, Environment.NewLine);
+
+        string TrimWhitespaceTo(string content, int index)
+        {
+            if (string.IsNullOrEmpty(content))
+                return content;
+
+            for (var i = 0; i < index; i++)
+            {
+                // Check for end of whitespace
+                if (!char.IsWhiteSpace(content[i]))
+                    return content.Substring(i);
+            }
+
+            return content.Substring(index);
+        }
 
         string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
         {
@@ -330,7 +346,7 @@ namespace NuDoq
                         else if (line.Length < indent)
                             return string.Empty;
                         else
-                            return line.Substring(indent);
+                            return TrimWhitespaceTo(line, indent);
                     })
                 .ToArray());
         }

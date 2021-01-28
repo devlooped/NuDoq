@@ -5,7 +5,8 @@ using System.Xml.Linq;
 namespace NuDoq
 {
     /// <summary>
-    /// 
+    /// A visitor that creates an XML documentation file from an in-memory 
+    /// model of all members.
     /// </summary>
     public class XmlVisitor : Visitor
     {

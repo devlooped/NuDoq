@@ -51,6 +51,11 @@ namespace NuDoq
         public string Content { get; }
 
         /// <summary>
+        /// Gets the hyperlink, if present.
+        /// </summary>
+        public string? Href => Attributes.TryGetValue("href", out var href) ? href : null;
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         public override string ToString() => "<see>" + base.ToString();

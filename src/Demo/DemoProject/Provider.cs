@@ -50,6 +50,6 @@ namespace Demo
         /// <summary>
         /// Occurs when the provider is connected.
         /// </summary>
-        public event EventHandler Connected = (sender, args) => {};
+        public event EventHandler Connected = (sender, args) => { };
     }
 }

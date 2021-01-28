@@ -16,7 +16,7 @@ namespace NuDoq
         /// <param name="name">The name of the parameter.</param>
         /// <param name="elements">The elements that make up the parameter documentation.</param>
         public Param(string name, IEnumerable<Element> elements)
-            : base(elements) 
+            : base(elements)
             => Name = name;
 
         /// <summary>

@@ -45,9 +45,9 @@ namespace NuDoq
             var originalXml = XDocument.Load(Path.ChangeExtension(typeof(ProviderType).Assembly.Location, ".xml"));
             var member = DocReader.Read(typeof(ProviderType).Assembly);
             var visitor = new XmlVisitor();
-            
+
             member.Accept(visitor);
-            
+
             //WriteXml(originalXml.Normalize(), "C:\\Temp\\source.xml");
             //WriteXml(visitor.Xml.Normalize(), "C:\\Temp\\target.xml");
 

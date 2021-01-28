@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xunit;
 using System.Xml;
 using Demo;
+using Xunit;
 
 namespace NuDoq
 {
@@ -366,9 +366,9 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
 var code = new SomeCodeTagWithinRemarks();
 You can use Demo.Provider see tag within sections.
 We can have paragraphs anywhere.
-"; 
+";
 
-            Assert.Equal(content, member.Elements.OfType<Remarks>().First().ToText());            
+            Assert.Equal(content, member.Elements.OfType<Remarks>().First().ToText());
         }
 
         [Fact]

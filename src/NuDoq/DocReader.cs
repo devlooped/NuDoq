@@ -214,7 +214,7 @@ namespace NuDoq
         /// <summary>
         /// Retrieves an attribute value if found, otherwise, returns a null string.
         /// </summary>
-        static string FindAttribute(XElement elementNode, string attributeName) 
+        static string FindAttribute(XElement elementNode, string attributeName)
             => elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
 
         /// <summary>

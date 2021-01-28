@@ -14,7 +14,7 @@ namespace NuDoq
         /// <param name="xml">The <see cref="XElement"/> containing the entire element markup.</param>
         /// <param name="content">The child content.</param>
         public UnknownElement(XElement xml, IEnumerable<Element> content)
-            : base(content) 
+            : base(content)
             => Xml = xml;
 
         /// <summary>

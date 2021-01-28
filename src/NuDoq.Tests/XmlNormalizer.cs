@@ -115,7 +115,7 @@ namespace NuDoq
             var e = node as XElement;
             if (e != null)
                 return NormalizeElement(e, havePSVI);
-            
+
             // Only thing left is XCData and XText, so clone them
             return node;
         }

@@ -40,7 +40,7 @@ namespace NuDoq
         /// The member is an event.
         /// </summary>
         Event = 16,
-        
+
         // Here start the extended member types 
         // available only when you pass in an 
         // assembly for the reading.

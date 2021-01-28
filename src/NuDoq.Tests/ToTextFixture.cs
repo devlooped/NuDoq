@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Demo;
 using Xunit;
-using System.IO;
 
 namespace NuDoq
 {

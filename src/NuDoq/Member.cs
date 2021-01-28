@@ -18,7 +18,7 @@ namespace NuDoq
         /// <param name="memberId">The member id as specified in the documentation XML.</param>
         /// <param name="elements">The contained documentation elements.</param>
         public Member(string memberId, IEnumerable<Element> elements)
-            : base(elements) 
+            : base(elements)
             => Id = memberId;
 
         /// <summary>

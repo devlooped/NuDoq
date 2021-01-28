@@ -9,12 +9,12 @@
         /// The bullet list type.
         /// </summary>
         Bullet,
-        
+
         /// <summary>
         /// The number list type.
         /// </summary>
         Number,
-        
+
         /// <summary>
         /// The table list type.
         /// </summary>

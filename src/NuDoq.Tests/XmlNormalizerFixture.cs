@@ -9,15 +9,15 @@ namespace NuDoq
     public class XmlNormalizerFixture
     {
         [Theory]
-        [InlineData("One tree is in default namespace.  Other is in a namespace with a prefix.", 
+        [InlineData("One tree is in default namespace.  Other is in a namespace with a prefix.",
                     @"<Root xmlns='http://www.northwind.com'>
                       <Child>1</Child>
                     </Root>",
                     @"<n:Root xmlns:n='http://www.northwind.com'>
                         <n:Child>1</n:Child>
-                    </n:Root>", 
+                    </n:Root>",
                     null, true)]
-        [InlineData("Variation on namespace prefixes.", 
+        [InlineData("Variation on namespace prefixes.",
                     @"<Root xmlns='http://www.northwind.com'>
                       <a:Child xmlns:a='http://www.adventureworks.com'>1</a:Child>
                     </Root>",
@@ -25,15 +25,15 @@ namespace NuDoq
                         <Child xmlns='http://www.adventureworks.com'>1</Child>
                     </Root>",
                     null, true)]
-        [InlineData("Attributes are not ordered.", 
+        [InlineData("Attributes are not ordered.",
                     @"<Root a='1' b='2'>
                       <Child>1</Child>
                     </Root>",
                     @"<Root b='2' a='1'>
                         <Child>1</Child>
-                    </Root>", 
+                    </Root>",
                     null, true)]
-        [InlineData("Attributes are not ordered, take 2.", 
+        [InlineData("Attributes are not ordered, take 2.",
                     @"<Root a='1' b='2'>
                       <Child a='a' b='b' c='c' d='d'>1</Child>
                     </Root>",
@@ -41,7 +41,7 @@ namespace NuDoq
                         <Child d='d' c='c' b='b' a='a'>1</Child>
                     </Root>",
                     null, true)]
-        [InlineData("One tree has a comment.  Other does not.", 
+        [InlineData("One tree has a comment.  Other does not.",
                     "<Root><!--Comment--></Root>",
                     "<Root></Root>",
                     null, true)]
@@ -64,15 +64,15 @@ namespace NuDoq
                         </remarks>
                     </doc>",
                     null, true)]
-        [InlineData("One tree has comment and PI., other does not.", 
+        [InlineData("One tree has comment and PI., other does not.",
                     @"<Root>
                         <!--Comment-->
                         <?xml-stylesheet href='mystyle.css' type='text/css'?>
                         <Child></Child>
-                      </Root>", 
+                      </Root>",
                      "<Root><Child></Child></Root>", null, true)]
         [InlineData("Element is data type of xsd:double, values are equal when normalized.",
-                    "<Root>25</Root>", "<Root>+25</Root>", 
+                    "<Root>25</Root>", "<Root>+25</Root>",
                     @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
                       <xsd:element name='Root' type='xsd:double'/>
                     </xsd:schema>", true)]
@@ -282,7 +282,7 @@ namespace NuDoq
                         </xsd:complexType>
                         </xsd:element>
                     </xsd:schema>", true)]
-        [InlineData("Element has a default attribute.", 
+        [InlineData("Element has a default attribute.",
                     "<Root/>",
                     "<Root ADefaultBooleanAttribute='false'/>",
                     @"<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>

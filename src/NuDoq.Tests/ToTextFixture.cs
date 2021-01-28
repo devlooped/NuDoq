@@ -144,7 +144,7 @@ cool!";
         }
 
         [Fact]
-        public void when_rendering_paragram_then_renders_wrapping_new_lines()
+        public void when_rendering_paragraph_then_renders_wrapping_new_lines()
         {
             var map = new MemberIdMap();
             map.Add(typeof(ProviderType));

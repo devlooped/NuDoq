@@ -52,8 +52,14 @@ namespace NuDoq
         public override void VisitPara(Para para)
         {
             // Avoid double line breaks between adjacent <para> elements.
-            if (builder.Length < 2 ||
-                new string(new char[] { builder[builder.Length - 2], builder[builder.Length - 1] }) != Environment.NewLine)
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                if (builder.Length < 2 ||
+                    new string(new char[] { builder[builder.Length - 2], builder[builder.Length - 1] }) != Environment.NewLine)
+                    builder.AppendLine();
+            }
+            else if (builder.Length < 1 ||
+                builder[builder.Length - 1].ToString() != Environment.NewLine)
             {
                 builder.AppendLine();
             }

@@ -59,7 +59,32 @@ namespace NuDoq
             return "";
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the class can return line information.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if <see cref="Element.LineNumber"/> and <see cref="Element.LinePosition"/> 
+        /// can be provided; otherwise, <c>false</c>.
+        /// </returns>
+        protected bool HasLineInfo() => lineInfo != null && lineInfo.HasLineInfo();
+
+        /// <summary>
+        /// Gets the current line number.
+        /// </summary>
+        protected int LineNumber => lineInfo == null ? 0 : lineInfo.LineNumber;
+
+        /// <summary>
+        /// Gets the current line position.
+        /// </summary>
+        protected int LinePosition => lineInfo == null ? 0 : lineInfo.LinePosition;
+
         internal void SetLineInfo(IXmlLineInfo lineInfo) => this.lineInfo = lineInfo;
+
+        bool IXmlLineInfo.HasLineInfo() => HasLineInfo();
+
+        int IXmlLineInfo.LineNumber => LineNumber;
+
+        int IXmlLineInfo.LinePosition => LinePosition;
 
         class TraverseVisitor : Visitor
         {
@@ -73,11 +98,5 @@ namespace NuDoq
 
             public List<Element> Elements { get; set; }
         }
-
-        bool IXmlLineInfo.HasLineInfo() => lineInfo != null && lineInfo.HasLineInfo();
-
-        int IXmlLineInfo.LineNumber => lineInfo == null ? 0 : lineInfo.LineNumber;
-
-        int IXmlLineInfo.LinePosition => lineInfo == null ? 0 : lineInfo.LinePosition;
     }
 }

@@ -9,11 +9,26 @@ using System.Xml.Linq;
 namespace NuDoq
 {
     /// <summary>
+    /// Options for <see cref="DocReader.Read(string,ReaderOptions)"/>
+    /// </summary>
+    public class ReaderOptions
+    {
+        /// <summary>
+        /// Allows to keep new lines when parsing text content.
+        /// </summary>
+        public bool KeepNewLinesInText { get; set; }
+    }
+
+    /// <summary>
     /// Reads .NET XML API documentation files, optionally augmenting 
     /// them with reflection information if reading from an assembly.
     /// </summary>
-    public static class DocReader
+    public class DocReader
     {
+        readonly ReaderOptions options;
+
+        DocReader(ReaderOptions options) => this.options = options;
+
         /// <summary>
         /// Reads the specified documentation file and returns a lazily-constructed 
         /// set of members that can be visited.
@@ -22,18 +37,19 @@ namespace NuDoq
         /// <returns>All documented members found in the given file.</returns>
         /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
         public static DocumentMembers Read(string fileName)
-        {
-            if (!File.Exists(fileName))
-                throw new FileNotFoundException("Could not find documentation file to load.", fileName);
+            => Read(fileName, new ReaderOptions());
 
-            var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
 
-            return new DocumentMembers(doc, doc.Root.Element("members").Elements("member")
-                .Where(element => element.Attribute("name") != null)
-                //.OrderBy(element => element.Attribute("name").Value)
-                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element),
-                    element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value))));
-        }
+        /// <summary>
+        /// Reads the specified documentation file and returns a lazily-constructed 
+        /// set of members that can be visited.
+        /// </summary>
+        /// <param name="fileName">Path to the documentation file.</param>
+        /// <param name="options">Options for reading the documentation</param>
+        /// <returns>All documented members found in the given file.</returns>
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
+        public static DocumentMembers Read(string fileName, ReaderOptions options)
+            => new DocReader(options).ReadInternal(fileName);
 
         /// <summary>
         /// Uses the specified assembly to locate a documentation file alongside the assembly by 
@@ -45,7 +61,8 @@ namespace NuDoq
         /// <returns>All documented members found in the given file, together with the reflection metadata 
         /// association from the assembly.</returns>
         /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
-        public static AssemblyMembers Read(Assembly assembly) => Read(assembly, null);
+        public static AssemblyMembers Read(Assembly assembly)
+            => Read(assembly, null, new ReaderOptions());
 
         /// <summary>
         /// Uses the specified assembly to locate a documentation file alongside the assembly by 
@@ -59,6 +76,51 @@ namespace NuDoq
         /// association from the assembly.</returns>
         /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
         public static AssemblyMembers Read(Assembly assembly, string? documentationFilename)
+            => Read(assembly, documentationFilename, new ReaderOptions());
+
+        /// <summary>
+        /// Uses the specified assembly to locate a documentation file alongside the assembly by 
+        /// changing the extension to ".xml". If the file is found, it will be read and all 
+        /// found members will contain extended reflection information in the <see cref="Member.Info"/> 
+        /// property.
+        /// </summary>
+        /// <param name="assembly">The assembly to read the documentation from.</param>
+        /// <param name="options">Options for reading the documentation.</param>
+        /// <returns>All documented members found in the given file, together with the reflection metadata 
+        /// association from the assembly.</returns>
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
+        public static AssemblyMembers Read(Assembly assembly, ReaderOptions options)
+            => Read(assembly, null, options);
+
+        /// <summary>
+        /// Uses the specified assembly to locate a documentation file alongside the assembly by 
+        /// changing the extension to ".xml". If the file is found, it will be read and all 
+        /// found members will contain extended reflection information in the <see cref="Member.Info"/> 
+        /// property.
+        /// </summary>
+        /// <param name="assembly">The assembly to read the documentation from.</param>
+        /// <param name="documentationFilename">Path to the documentation file.</param>
+        /// <param name="options">Options for reading the documentation.</param>
+        /// <returns>All documented members found in the given file, together with the reflection metadata 
+        /// association from the assembly.</returns>
+        /// <exception cref="FileNotFoundException">Could not find documentation file to load.</exception>
+        public static AssemblyMembers Read(Assembly assembly, string? documentationFilename, ReaderOptions options)
+            => new DocReader(options).ReadInternal(assembly, documentationFilename);
+
+        DocumentMembers ReadInternal(string fileName)
+        {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException("Could not find documentation file to load.", fileName);
+
+            var doc = XDocument.Load(fileName, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
+
+            return new DocumentMembers(doc, doc.Root.Element("members").Elements("member")
+                .Where(element => element.Attribute("name") != null)
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element),
+                    element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value))));
+        }
+
+        AssemblyMembers ReadInternal(Assembly assembly, string? documentationFilename)
         {
             var fileName = documentationFilename;
 
@@ -74,8 +136,8 @@ namespace NuDoq
 
             return new AssemblyMembers(assembly, map, doc, doc.Root.Element("members").Elements("member")
                 .Where(element => element.Attribute("name") != null)
-                //.OrderBy(e => e.Attribute("name").Value)
-                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element), element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value)))
+                .Select(element => CreateMember(element.Attribute("name").Value, element, ReadContent(element),
+                    element.Attributes().ToDictionary(x => x.Name.LocalName, x => x.Value)))
                 .Select(member => ReplaceExtensionMethods(member, map))
                 .Select(member => ReplaceTypes(member, map))
                 .Select(member => SetInfo(member, map)));
@@ -84,7 +146,7 @@ namespace NuDoq
         /// <summary>
         /// Sets the extended reflection info if found in the map.
         /// </summary>
-        static Member SetInfo(Member member, MemberIdMap map)
+        Member SetInfo(Member member, MemberIdMap map)
         {
             member.Info = map.FindMember(member.Id);
 
@@ -95,7 +157,7 @@ namespace NuDoq
         /// Replaces the generic <see cref="TypeDeclaration"/> with 
         /// concrete types according to the reflection information.
         /// </summary>
-        static Member ReplaceTypes(Member member, MemberIdMap map)
+        Member ReplaceTypes(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Type)
                 return member;
@@ -123,7 +185,7 @@ namespace NuDoq
         /// <param name="member">The member.</param>
         /// <param name="map">The map.</param>
         /// <returns></returns>
-        static Member ReplaceExtensionMethods(Member member, MemberIdMap map)
+        Member ReplaceExtensionMethods(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Method)
                 return member;
@@ -145,7 +207,7 @@ namespace NuDoq
         /// <summary>
         /// Creates the appropriate type of member according to the member id prefix.
         /// </summary>
-        static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children, IDictionary<string, string> attributes)
+        Member CreateMember(string memberId, XElement element, IEnumerable<Element> children, IDictionary<string, string> attributes)
         {
             Member? member = (memberId[0]) switch
             {
@@ -163,7 +225,7 @@ namespace NuDoq
         /// <summary>
         /// Reads all supported documentation elements.
         /// </summary>
-        static IEnumerable<Element> ReadContent(XElement xml)
+        IEnumerable<Element> ReadContent(XElement xml)
         {
             foreach (var node in xml.Nodes())
             {
@@ -216,20 +278,21 @@ namespace NuDoq
         /// <summary>
         /// Retrieves an attribute value if found, otherwise, returns a null string.
         /// </summary>
-        static string FindAttribute(XElement elementNode, string attributeName)
+        string FindAttribute(XElement elementNode, string attributeName)
             => elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
 
         /// <summary>
         /// Trims the text by removing new lines and trimming the indent.
         /// </summary>
-        static string TrimText(string content) => TrimLines(content, StringSplitOptions.RemoveEmptyEntries, " ");
+        string TrimText(string content)
+            => TrimLines(content, StringSplitOptions.RemoveEmptyEntries, options.KeepNewLinesInText ? Environment.NewLine : " ");
 
         /// <summary>
         /// Trims the code by removing extra indent.
         /// </summary>
-        static string TrimCode(string content) => TrimLines(content, StringSplitOptions.None, Environment.NewLine);
+        string TrimCode(string content) => TrimLines(content, StringSplitOptions.None, Environment.NewLine);
 
-        static string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
+        string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
         {
             var lines = content.Split(new[] { Environment.NewLine, "\n" }, splitOptions).ToList();
 

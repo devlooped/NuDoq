@@ -72,7 +72,7 @@ namespace NuDoq
             //Assert.True(originalXml.NormalizedEquals(visitor.Xml));
         }
 
-        private static void WriteXml(XDocument xml)
+        static void WriteXml(XDocument xml)
         {
             using (var writer = XmlWriter.Create(Console.Out, new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
             {
@@ -80,7 +80,7 @@ namespace NuDoq
             }
         }
 
-        private static void WriteXml(XDocument xml, string file)
+        static void WriteXml(XDocument xml, string file)
         {
             using (var writer = XmlWriter.Create(file, new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
             {

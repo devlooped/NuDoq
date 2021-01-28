@@ -27,18 +27,18 @@ namespace NuDoq
     /// Internal class used to cache the results of the enumeration of the 
     /// container elements.
     /// </summary>
-    internal static class CachedEnumerable
+    static class CachedEnumerable
     {
         public static IEnumerable<T> Cached<T>(this IEnumerable<T> enumerable)
         {
             return new CachedEnumerableImpl<T>(enumerable);
         }
 
-        private class CachedEnumerableImpl<T> : IEnumerable<T>
+        class CachedEnumerableImpl<T> : IEnumerable<T>
         {
-            private IEnumerator<T> enumerator;
-            private IEnumerable<T> enumerable;
-            private List<T> cache = new List<T>();
+            IEnumerator<T> enumerator;
+            IEnumerable<T> enumerable;
+            List<T> cache = new List<T>();
 
             public CachedEnumerableImpl(IEnumerable<T> enumerable)
             {

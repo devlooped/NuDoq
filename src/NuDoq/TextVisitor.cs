@@ -25,9 +25,9 @@ namespace NuDoq
     /// <summary>
     /// Visitor that is used to render ToString for elements.
     /// </summary>
-    internal class TextVisitor : Visitor
+    class TextVisitor : Visitor
     {
-        private StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         public override void VisitC(C code)
         {

@@ -104,7 +104,7 @@ namespace NuDoq
         /// <summary>
         /// Sets the extended reflection info if found in the map.
         /// </summary>
-        private static Member SetInfo(Member member, MemberIdMap map)
+        static Member SetInfo(Member member, MemberIdMap map)
         {
             member.Info = map.FindMember(member.Id);
 
@@ -115,7 +115,7 @@ namespace NuDoq
         /// Replaces the generic <see cref="TypeDeclaration"/> with 
         /// concrete types according to the reflection information.
         /// </summary>
-        private static Member ReplaceTypes(Member member, MemberIdMap map)
+        static Member ReplaceTypes(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Type)
                 return member;
@@ -143,7 +143,7 @@ namespace NuDoq
         /// <param name="member">The member.</param>
         /// <param name="map">The map.</param>
         /// <returns></returns>
-        private static Member ReplaceExtensionMethods(Member member, MemberIdMap map)
+        static Member ReplaceExtensionMethods(Member member, MemberIdMap map)
         {
             if (member.Kind != MemberKinds.Method)
                 return member;
@@ -165,7 +165,7 @@ namespace NuDoq
         /// <summary>
         /// Creates the appropriate type of member according to the member id prefix.
         /// </summary>
-        private static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children)
+        static Member CreateMember(string memberId, XElement element, IEnumerable<Element> children)
         {
             var member = default(Member);
             switch (memberId[0])
@@ -197,7 +197,7 @@ namespace NuDoq
         /// <summary>
         /// Reads all supported documentation elements.
         /// </summary>
-        private static IEnumerable<Element> ReadContent(XElement xml)
+        static IEnumerable<Element> ReadContent(XElement xml)
         {
             foreach (var node in xml.Nodes())
             {
@@ -291,7 +291,7 @@ namespace NuDoq
         /// <summary>
         /// Retrieves an attribute value if found, otherwise, returns a null string.
         /// </summary>
-        private static string FindAttribute(XElement elementNode, string attributeName)
+        static string FindAttribute(XElement elementNode, string attributeName)
         {
             return elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
         }
@@ -299,7 +299,7 @@ namespace NuDoq
         /// <summary>
         /// Trims the text by removing new lines and trimming the indent.
         /// </summary>
-        private static string TrimText(string content)
+        static string TrimText(string content)
         {
             return TrimLines(content, StringSplitOptions.RemoveEmptyEntries, " ");
         }
@@ -307,12 +307,12 @@ namespace NuDoq
         /// <summary>
         /// Trims the code by removing extra indent.
         /// </summary>
-        private static string TrimCode(string content)
+        static string TrimCode(string content)
         {
             return TrimLines(content, StringSplitOptions.None, Environment.NewLine);
         }
 
-        private static string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
+        static string TrimLines(string content, StringSplitOptions splitOptions, string joinWith)
         {
             var lines = content.Split(new[] { Environment.NewLine, "\n" }, splitOptions).ToList();
 

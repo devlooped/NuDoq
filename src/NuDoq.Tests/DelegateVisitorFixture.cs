@@ -28,7 +28,7 @@ namespace NuDoq
 
     public class DelegateVisitorFixture
     {
-        private ConcurrentDictionary<PropertyInfo, int> calls = new ConcurrentDictionary<PropertyInfo, int>();
+        ConcurrentDictionary<PropertyInfo, int> calls = new ConcurrentDictionary<PropertyInfo, int>();
 
         [Fact]
         public void when_visiting_root_then_visits_all_delegates()
@@ -58,7 +58,7 @@ namespace NuDoq
             }
         }
 
-        private void Called(PropertyInfo property)
+        void Called(PropertyInfo property)
         {
             calls[property] = calls.GetOrAdd(property, 0) + 1;
         }

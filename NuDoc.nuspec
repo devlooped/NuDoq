@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <package>
-    <metadata>
-        <id>NuDoc</id>
-        <version>0.5</version>
-        <title>NuDoc was renamed NuDoq</title>
-        <authors>Daniel Cazzulino, kzu</authors>
-        <owners>kzu</owners>
-        <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.</description>
-        <licenseUrl>https://github.com/kzu/NuDoq/blob/master/License.txt</licenseUrl>
-        <projectUrl>https://github.com/kzu/NuDoq</projectUrl>
-        <iconUrl>https://raw.github.com/kzu/NuDoq/master/doc/Icon-big.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <dependencies>
-			<dependency id="NuDoq" />
-        </dependencies>
-    </metadata>
-    <files>
-		<file src="Readme.md" />
-    </files>
+  <metadata>
+    <id>NuDoc</id>
+    <version>0.5.1</version>
+    <title>NuDoc was renamed NuDoq</title>
+    <authors>Daniel Cazzulino, kzu</authors>
+    <owners>kzu</owners>
+    <description>A simple and intuitive API for reading XML API documentation from .NET assemblies or XML files.
+
+NOTE: this package has been renamed to NuDoq. It now just includes a dependency on that instead.
+    </description>
+    <licenseUrl>https://github.com/kzu/NuDoq/blob/master/License.txt</licenseUrl>
+    <projectUrl>https://github.com/kzu/NuDoq</projectUrl>
+    <iconUrl>https://raw.github.com/kzu/NuDoq/master/doc/Icon-big.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <dependency id="NuDoq" version="1.2.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="readme.md" />
+  </files>
 </package>

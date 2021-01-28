@@ -32,7 +32,7 @@ namespace NuDoq
     [DebuggerDisplay("{ToText()}")]
     public abstract class Element : IVisitable, IXmlLineInfo
     {
-        private IXmlLineInfo lineInfo;
+        IXmlLineInfo lineInfo;
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -74,7 +74,7 @@ namespace NuDoq
             this.lineInfo = lineInfo;
         }
 
-        private class TraverseVisitor : Visitor
+        class TraverseVisitor : Visitor
         {
             public TraverseVisitor()
             {

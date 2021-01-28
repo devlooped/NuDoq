@@ -36,7 +36,7 @@ namespace NuDoq
     {
         internal readonly Dictionary<string, MemberInfo> idToMemberMap = new Dictionary<string, MemberInfo>();
         internal readonly Dictionary<MemberInfo, string> memberToIdMap = new Dictionary<MemberInfo, string>();
-        private readonly StringBuilder sb = new StringBuilder();
+        readonly StringBuilder sb = new StringBuilder();
 
         /// <summary>
         /// Adds all the members in the specified assembly to the map.
@@ -112,7 +112,7 @@ namespace NuDoq
             return result;
         }
 
-        private void Add(Type type, MemberInfo member)
+        void Add(Type type, MemberInfo member)
         {
             sb.Length = 0;
 
@@ -150,13 +150,13 @@ namespace NuDoq
             }
         }
 
-        private void Append(PropertyInfo property)
+        void Append(PropertyInfo property)
         {
             AppendType(sb, property.DeclaringType);
             sb.Append('.').Append(property.Name);
         }
 
-        private void Append(Type owner, MethodInfo method)
+        void Append(Type owner, MethodInfo method)
         {
             AppendType(sb, method.DeclaringType);
             sb.Append('.').Append(method.Name);
@@ -170,7 +170,7 @@ namespace NuDoq
             Append(owner, method, method.GetParameters());
         }
 
-        private void Append(Type owner, MethodBase method, ParameterInfo[] parameters)
+        void Append(Type owner, MethodBase method, ParameterInfo[] parameters)
         {
             if (parameters.Length == 0)
             {
@@ -189,26 +189,26 @@ namespace NuDoq
             sb.Append(')');
         }
 
-        private void Append(FieldInfo field)
+        void Append(FieldInfo field)
         {
             AppendType(sb, field.DeclaringType);
             sb.Append('.').Append(field.Name);
         }
 
-        private void Append(EventInfo @event)
+        void Append(EventInfo @event)
         {
             AppendType(sb, @event.DeclaringType);
             sb.Append('.').Append(@event.Name);
         }
 
-        private void Append(ConstructorInfo constructor)
+        void Append(ConstructorInfo constructor)
         {
             AppendType(sb, constructor.DeclaringType);
             sb.Append('.').Append("#ctor");
             Append(constructor.DeclaringType, constructor, constructor.GetParameters());
         }
 
-        private void AppendType(StringBuilder sb, Type type, bool addTypeToMap = true)
+        void AppendType(StringBuilder sb, Type type, bool addTypeToMap = true)
         {
             // Generic parameters will only have the parameter name, i.e. "T".
             if (!type.IsGenericParameter)

@@ -29,7 +29,7 @@ using System.Linq.Expressions;
 /// Generated overloads for available Func/Action generic types 
 /// for current target framework version 4.5.
 /// </devdoc>
-internal static partial class Reflect
+static partial class Reflect
 { 
 	/// <summary>
 	/// Gets the method represented by the lambda expression.
@@ -1351,7 +1351,7 @@ internal static partial class Reflect
 /// for current target framework version 4.5.
 /// </devdoc>
 /// <typeparam name="TTarget">Type to reflect.</typeparam>
-internal static partial class Reflect<TTarget>
+static partial class Reflect<TTarget>
 { 
 	/// <summary>
 	/// Gets the method represented by the lambda expression.

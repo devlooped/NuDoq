@@ -93,7 +93,7 @@ namespace Demo
         /// <summary>
         /// This is not added to the type map.
         /// </summary>
-        private class PrivateNestedType
+        class PrivateNestedType
         {
         }
     }

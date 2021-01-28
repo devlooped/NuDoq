@@ -1,89 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1228A1E3-7EE4-46BA-BCBC-5B251CCDAC68}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NuDoq</RootNamespace>
-    <AssemblyName>NuDoq.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>1591,1712,1710</NoWarn>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="xunit">
-      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Demo\DemoProject\DemoProject.csproj" />
+    <ProjectReference Include="..\NuDoq\NuDoq.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="DelegateVisitorFixture.cs" />
-    <Compile Include="MemberIdMapFixture.cs" />
-    <Compile Include="netfx\System\Guard.cs" />
-    <Compile Include="netfx\System\Reflection\Reflect.cs" />
-    <Compile Include="netfx\System\Reflection\Reflect.Overloads.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reflect.Overloads.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReaderFixture.cs" />
-    <Compile Include="SampleTypes\Foo.cs" />
-    <Compile Include="TrimLinesBugRepro.cs" />
-    <Compile Include="XmlNormalizer.cs" />
-    <Compile Include="XmlNormalizerFixture.cs" />
-    <Compile Include="XmlVisitorFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToTextFixture.cs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.8.3" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\kzu.licenseheader">
-      <Link>kzu.licenseheader</Link>
-    </None>
-    <None Include="netfx\System\Reflection\Reflect.Overloads.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Reflect.Overloads.cs</LastGenOutput>
-    </None>
-    <None Include="netfx\System\Reflection\TargetFramework.ttinclude" />
-    <None Include="packages.config" />
-    <Content Include="..\Demo\DemoProject\DemoProject.xml">
-      <Link>DemoProject.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="XmlDocumentation.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demo\DemoProject\DemoProject.csproj">
-      <Project>{d0bc4842-9b39-4a72-9600-eeec50a394a6}</Project>
-      <Name>ClariusLabs.DemoProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NuDoq\NuDoq.csproj">
-      <Project>{3f235025-3ae8-4776-be9c-6872c2932f27}</Project>
-      <Name>NuDoq</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

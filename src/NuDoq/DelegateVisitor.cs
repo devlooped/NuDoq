@@ -264,7 +264,7 @@ namespace NuDoq
     /// </summary>
     public class DelegateVisitor : Visitor
     {
-        private VisitorDelegates delegates;
+        VisitorDelegates delegates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateVisitor"/> class.

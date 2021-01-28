@@ -29,7 +29,7 @@ using System.Linq.Expressions;
 /// expressions, typically static members where no 
 /// instance parameter is needed.
 /// </summary>
-internal static partial class Reflect
+static partial class Reflect
 {
 	/// <summary>
 	/// Gets the method represented by the lambda expression.
@@ -123,7 +123,7 @@ internal static partial class Reflect
 		return info;
 	}
 
-	private static MethodInfo GetMethodInfo(LambdaExpression lambda)
+	static MethodInfo GetMethodInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 
@@ -133,7 +133,7 @@ internal static partial class Reflect
 		return ((MethodCallExpression)lambda.Body).Method;
 	}
 
-	private static MethodInfo GetDelegateMethodInfo(LambdaExpression lambda)
+	static MethodInfo GetDelegateMethodInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 
@@ -161,7 +161,7 @@ internal static partial class Reflect
 		return (MethodInfo)methodRef.Value;
 	}
 
-	private static MemberInfo GetMemberInfo(LambdaExpression lambda)
+	static MemberInfo GetMemberInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 
@@ -177,7 +177,7 @@ internal static partial class Reflect
 /// type.
 /// </summary>
 /// <typeparam name="TTarget">Type to reflect.</typeparam>
-internal static partial class Reflect<TTarget>
+static partial class Reflect<TTarget>
 {
 	/// <summary>
 	/// Gets the method represented by the lambda expression.
@@ -271,7 +271,7 @@ internal static partial class Reflect<TTarget>
 		return info;
 	}
 
-	private static MethodInfo GetDelegateMethodInfo(LambdaExpression lambda)
+	static MethodInfo GetDelegateMethodInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 
@@ -299,7 +299,7 @@ internal static partial class Reflect<TTarget>
 		return (MethodInfo)methodRef.Value;
 	}
 
-	private static MethodInfo GetMethodInfo(LambdaExpression lambda)
+	static MethodInfo GetMethodInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 
@@ -309,7 +309,7 @@ internal static partial class Reflect<TTarget>
 		return ((MethodCallExpression)lambda.Body).Method;
 	}
 
-	private static MemberInfo GetMemberInfo(LambdaExpression lambda)
+	static MemberInfo GetMemberInfo(LambdaExpression lambda)
 	{
 		Guard.NotNull(() => lambda, lambda);
 

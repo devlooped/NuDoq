@@ -77,7 +77,7 @@ static class Guard
             throw new ArgumentException(string.Format(format, args), GetParameterName(reference));
     }
 
-    private static string GetParameterName(Expression reference)
+    static string GetParameterName(Expression reference)
     {
         var lambda = reference as LambdaExpression;
         var member = lambda.Body as MemberExpression;

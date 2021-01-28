@@ -28,7 +28,7 @@ namespace NuDoq
 
     public class ReaderFixture
     {
-        private static readonly Assembly assembly = typeof(Provider).Assembly;
+        static readonly Assembly assembly = typeof(Provider).Assembly;
 
         [Fact]
         public void when_reading_non_existent_xml_then_throws()
@@ -39,7 +39,7 @@ namespace NuDoq
         [Fact(Skip = "If this test runs before the next, the LoadFrom context will keep the temp-loaded assembly and cause it to fail.")]
         public void when_xml_not_found_alongside_assembly_then_throws()
         {
-            var clr = new FileInfo(@"..\..\..\Demo\DemoProject\bin\DemoProject.dll").FullName;
+            var clr = new FileInfo(@"DemoProject.dll").FullName;
             var temp = Path.GetTempFileName();
             File.Copy(clr, temp, true);
 
@@ -47,34 +47,13 @@ namespace NuDoq
         }
 
         [Fact]
-        public void when_reading_assemblies_from_different_platforms_then_succeeds()
+        public void when_reading_assembly_then_succeeds()
         {
-            var metro = new FileInfo(@"..\..\..\Demo\DemoMetro\bin\DemoMetro.dll").FullName;
-            var sl = new FileInfo(@"..\..\..\Demo\DemoSilverlight\bin\DemoSilverlight.dll").FullName;
-            var wp = new FileInfo(@"..\..\..\Demo\DemoPhone\bin\DemoPhone.dll").FullName;
-            var clr = new FileInfo(@"..\..\..\Demo\DemoProject\bin\DemoProject.dll").FullName;
+            var clr = new FileInfo(@"DemoProject.dll").FullName;
 
-            var countMetro = new CountingVisitor("NuDoq-metro");
-            var countSl = new CountingVisitor("NuDoq-sl");
-            var countWp = new CountingVisitor("NuDoq-wp");
             var countClr = new CountingVisitor("NuDoq-net");
 
-            DocReader.Read(Assembly.LoadFrom(metro)).Accept(countMetro);
-            DocReader.Read(Assembly.LoadFrom(sl)).Accept(countSl);
-            DocReader.Read(Assembly.LoadFrom(wp)).Accept(countWp);
             DocReader.Read(Assembly.LoadFrom(clr)).Accept(countClr);
-
-            Assert.Equal(countMetro.TypeCount, countClr.TypeCount);
-            Assert.Equal(countSl.TypeCount, countClr.TypeCount);
-            Assert.Equal(countWp.TypeCount, countClr.TypeCount);
-
-            Assert.Equal(countMetro.ElementCount, countClr.ElementCount);
-            Assert.Equal(countSl.ElementCount, countClr.ElementCount);
-            Assert.Equal(countWp.ElementCount, countClr.ElementCount);
-
-            Assert.Equal(countMetro.ContainerCount, countClr.ContainerCount);
-            Assert.Equal(countSl.ContainerCount, countClr.ContainerCount);
-            Assert.Equal(countWp.ContainerCount, countClr.ContainerCount);
         }
 
         [Fact]
@@ -391,7 +370,7 @@ var length = code.Length + 1;", ((Example)children[1]).Elements.OfType<Code>().F
         [Fact]
         public void when_using_to_text_then_renders_text_content()
         {
-            var xml = new FileInfo(@"..\..\..\Demo\DemoProject\DemoProject.xml").FullName;
+            var xml = new FileInfo(@"DemoProject.xml").FullName;
             var members = DocReader.Read(xml);
             var member = members.Elements.OfType<TypeDeclaration>().FirstOrDefault(x => x.Id == "T:Demo.SampleExtensions");
 
@@ -610,10 +589,10 @@ We can have paragraphs anywhere.
             Assert.True(element.Elements.OfType<UnknownElement>().Single().Elements.OfType<Text>().Any());
         }
 
-        private class CountingVisitor : Visitor
+        class CountingVisitor : Visitor
         {
-            private string platform;
-            private string fileName;
+            string platform;
+            string fileName;
 
             public int TypeCount { get; set; }
             public int ContainerCount { get; set; }

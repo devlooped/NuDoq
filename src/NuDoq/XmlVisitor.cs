@@ -28,7 +28,7 @@ namespace NuDoq
     /// </summary>
     public class XmlVisitor : Visitor
     {
-        private XElement currentElement;
+        XElement currentElement;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlVisitor"/> class.
@@ -260,12 +260,12 @@ namespace NuDoq
         /// </summary>
         public XDocument Xml { get; private set; }
 
-        private void AddXml<TVisitable>(string elementName, TVisitable element, Action<TVisitable> visit)
+        void AddXml<TVisitable>(string elementName, TVisitable element, Action<TVisitable> visit)
         {
             AddXml(new XElement(elementName), element, visit);
         }
 
-        private void AddXml<TVisitable>(string elementName, string attributeName, object attributeValueOrNull, TVisitable element, Action<TVisitable> visit)
+        void AddXml<TVisitable>(string elementName, string attributeName, object attributeValueOrNull, TVisitable element, Action<TVisitable> visit)
         {
             var xml = new XElement(elementName);
             if (attributeValueOrNull != null)
@@ -274,7 +274,7 @@ namespace NuDoq
             AddXml(xml, element, visit);
         }
 
-        private void AddXml<TVisitable>(XElement xml, TVisitable element, Action<TVisitable> visit)
+        void AddXml<TVisitable>(XElement xml, TVisitable element, Action<TVisitable> visit)
         {
             this.currentElement.Add(xml);
             this.currentElement = xml;

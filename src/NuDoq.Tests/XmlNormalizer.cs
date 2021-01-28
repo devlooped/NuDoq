@@ -44,7 +44,7 @@ namespace NuDoq
 
     public static class XmlNormalizer
     {
-        private static class Xsi
+        static class Xsi
         {
             public static XNamespace ns = "http://www.w3.org/2001/XMLSchema-instance";
             public static XName schemaLocation = ns + "schemaLocation";
@@ -88,7 +88,7 @@ namespace NuDoq
             return XNode.DeepEquals(d1, d2);
         }
 
-        private static IEnumerable<XAttribute> NormalizeAttributes(XElement element, bool havePSVI)
+        static IEnumerable<XAttribute> NormalizeAttributes(XElement element, bool havePSVI)
         {
             return element.Attributes()
                     .Where(a => !a.IsNamespaceDeclaration &&
@@ -125,7 +125,7 @@ namespace NuDoq
                     );
         }
 
-        private static XNode NormalizeNode(XNode node, bool havePSVI)
+        static XNode NormalizeNode(XNode node, bool havePSVI)
         {
             // trim comments and processing instructions from normalized tree
             if (node is XComment || node is XProcessingInstruction)
@@ -139,7 +139,7 @@ namespace NuDoq
             return node;
         }
 
-        private static XElement NormalizeElement(XElement element, bool havePSVI)
+        static XElement NormalizeElement(XElement element, bool havePSVI)
         {
             if (havePSVI)
             {

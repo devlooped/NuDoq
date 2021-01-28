@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>NuDoq</PackageId>
+    <Description>A lightweight API to read and write .NET XML documentation files, optionally augmented with reflection information.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

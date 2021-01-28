@@ -4,3 +4,12 @@
 
 # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.CS1591.severity = none
+
+# Default severity for analyzer diagnostics with category 'Style'
+dotnet_analyzer_diagnostic.category-Style.severity = none
+
+# CS1712: Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
+dotnet_diagnostic.CS1712.severity = none
+
+# CS1710: XML comment has a duplicate typeparam tag
+dotnet_diagnostic.CS1710.severity = none

@@ -16,8 +16,9 @@ namespace NuDoq
         /// <param name="cref">The member id of the referenced member.</param>
         /// <param name="content">The link's text label, if any.</param>
         /// <param name="elements">The child elements.</param>
-        public SeeAlso(string cref, string content, IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public SeeAlso(string cref, string content, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
             Cref = cref;
             Content = content;

@@ -1,4 +1,6 @@
-﻿namespace NuDoq
+﻿using System.Collections.Generic;
+
+namespace NuDoq
 {
     /// <summary>
     /// Represents the <c>c</c> documentation tag.
@@ -12,7 +14,9 @@
         /// Initializes a new instance of the <see cref="C"/> class 
         /// with the given content.
         /// </summary>
-        public C(string content) => Content = content;
+        public C(string content, IDictionary<string, string> attributes)
+            : base(attributes)
+            => Content = content;
 
         /// <summary>
         /// Accepts the specified visitor.

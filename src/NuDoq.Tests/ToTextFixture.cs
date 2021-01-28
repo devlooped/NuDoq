@@ -42,7 +42,7 @@ namespace NuDoq
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
             var members = DocReader.Read(assembly);
 
-            Assert.True(members.ToString().Contains(assembly.Location));
+            Assert.Contains(assembly.Location, members.ToString());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace NuDoq
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
             var members = DocReader.Read(xmlFile);
 
-            Assert.True(members.ToString().Contains(xmlFile));
+            Assert.Contains(xmlFile, members.ToString());
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace NuDoq
             var xmlFile = Path.ChangeExtension(assembly.Location, ".xml");
             var member = DocReader.Read(xmlFile).Elements.OfType<Member>().First();
 
-            Assert.True(member.ToString().Contains(member.Id));
+            Assert.Contains(member.Id, member.ToString());
         }
 
         [Fact]

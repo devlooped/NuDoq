@@ -14,8 +14,9 @@ namespace NuDoq
         /// Initializes a new instance of the <see cref="Description"/> class.
         /// </summary>
         /// <param name="elements">The elements that make up the description.</param>
-        public Description(IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public Description(IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
         {
         }
 

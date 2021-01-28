@@ -378,7 +378,7 @@ We can have paragraphs anywhere.
 
             Assert.Equal(ListType.Table, list.Type);
             Assert.NotNull(list.Header);
-            Assert.Equal(1, list.Items.Count());
+            Assert.Single(list.Items);
         }
 
         [Fact]
@@ -571,6 +571,59 @@ We can have paragraphs anywhere.
             Assert.True(element.Elements.OfType<UnknownElement>().Single().Elements.OfType<Text>().Any());
         }
 
+        [Fact]
+        public void when_reading_custom_xml_then_can_access_elements_and_attributes()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+
+            var custom = member.Elements.OfType<Class>().First(c => c.Info == typeof(CustomXml));
+            var summary = custom.Elements.OfType<Summary>().FirstOrDefault();
+
+            Assert.NotNull(summary);
+
+            var unk = summary.Elements.OfType<UnknownElement>().FirstOrDefault();
+
+            Assert.NotNull(unk);
+            Assert.Equal("value", unk.Xml.Attribute("id")?.Value);
+            Assert.Equal("element with ", unk.Elements.OfType<Text>().FirstOrDefault()?.Content);
+
+            var nested = unk.Elements.OfType<UnknownElement>().FirstOrDefault();
+
+            Assert.NotNull(nested);
+            Assert.Equal("help", nested.Xml.Attribute("class")?.Value);
+            Assert.Equal("nested", nested.Elements.OfType<Text>().FirstOrDefault()?.Content);
+        }
+
+        [Fact]
+        public void when_reading_known_element_then_can_access_custom_attributes()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+
+            var custom = member.Elements.OfType<Class>().First(c => c.Info == typeof(CustomXml));
+            var code = custom.Elements.OfType<Remarks>().FirstOrDefault()?.Elements?.OfType<Code>().FirstOrDefault();
+
+            Assert.NotNull(code);
+
+            Assert.True(code.Attributes.TryGetValue("source", out var source));
+            Assert.Equal("foo.cs", source);
+
+            Assert.True(code.Attributes.TryGetValue("region", out var region));
+            Assert.Equal("example", region);
+        }
+
+        [Fact]
+        public void when_reading_unkknown_element_then_can_be_empty()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+            var method = member.Elements.OfType<Method>().FirstOrDefault(m => m.Info.DeclaringType == typeof(CustomXml));
+
+            Assert.Single(method.Elements);
+            Assert.Equal("preliminary", method.Elements.OfType<UnknownElement>().First().Xml.Name.LocalName);
+
+            Assert.Empty(method.Elements.OfType<UnknownElement>().First().Elements);
+            Assert.Empty(method.Elements.OfType<UnknownElement>().First().Attributes);
+        }
+
         class CountingVisitor : Visitor
         {
             readonly string platform;
@@ -606,6 +659,21 @@ We can have paragraphs anywhere.
                 ElementCount++;
                 //File.AppendAllLines("C:\\Temp\\" + platform + ".txt", new[] { element.ToString() });
             }
+        }
+
+        /// <summary>
+        /// This element contains 
+        /// <custom id="value">
+        /// element with <nested class="help">nested</nested> elements.
+        /// </custom>
+        /// </summary>
+        /// <remarks>
+        /// <code source="foo.cs" region="example" />
+        /// </remarks>
+        public class CustomXml
+        {
+            /// <preliminary />
+            public void Preliminary() { }
         }
     }
 }

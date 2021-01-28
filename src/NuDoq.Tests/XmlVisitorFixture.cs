@@ -1,15 +1,19 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Demo;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace NuDoq
 {
     public class XmlVisitorFixture
     {
+        readonly ITestOutputHelper output;
+
+        public XmlVisitorFixture(ITestOutputHelper output) => this.output = output;
+
         [Fact]
         public void when_visiting_xml_then_adds_source_assembly()
         {
@@ -54,9 +58,9 @@ namespace NuDoq
             //Assert.True(originalXml.NormalizedEquals(visitor.Xml));
         }
 
-        static void WriteXml(XDocument xml)
+        void WriteXml(XDocument xml)
         {
-            using (var writer = XmlWriter.Create(Console.Out, new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
+            using (var writer = XmlWriter.Create(new TestOutputTextWriter(output), new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
             {
                 xml.WriteTo(writer);
             }

@@ -309,9 +309,9 @@ namespace NuDoq
             var d2 = XDocument.Parse(doc2);
 
             if (expectedEquals == true)
-                Assert.True(XmlNormalizer.NormalizedEquals(d1, d2, schemaSet));
+                Assert.True(XmlNormalizer.NormalizedEquals(d1, d2, schemaSet), description);
             else
-                Assert.False(XmlNormalizer.NormalizedEquals(d1, d2, schemaSet));
+                Assert.False(XmlNormalizer.NormalizedEquals(d1, d2, schemaSet), description);
         }
     }
 }

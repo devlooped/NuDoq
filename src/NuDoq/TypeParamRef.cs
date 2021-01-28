@@ -1,4 +1,6 @@
-﻿namespace NuDoq
+﻿using System.Collections.Generic;
+
+namespace NuDoq
 {
     /// <summary>
     /// Represents the <c>typeparamref</c> documentation tag.
@@ -12,7 +14,10 @@
         /// Initializes a new instance of the <see cref="TypeParamRef"/> class.
         /// </summary>
         /// <param name="name">The name of the referenced type parameter.</param>
-        public TypeParamRef(string name) => Name = name;
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public TypeParamRef(string name, IDictionary<string, string> attributes)
+            : base(attributes)
+            => Name = name;
 
         /// <summary>
         /// Accepts the specified visitor.

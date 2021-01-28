@@ -15,8 +15,9 @@ namespace NuDoq
         /// </summary>
         /// <param name="name">The name of the type parameter.</param>
         /// <param name="elements">The elements that make up the documentation.</param>
-        public TypeParam(string name, IEnumerable<Element> elements)
-            : base(elements)
+        /// <param name="attributes">The attributes of the element, if any.</param>
+        public TypeParam(string name, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
             => Name = name;
 
         /// <summary>

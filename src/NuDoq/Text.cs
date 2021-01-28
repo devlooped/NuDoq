@@ -1,4 +1,6 @@
-﻿namespace NuDoq
+﻿using System.Collections.Generic;
+
+namespace NuDoq
 {
     /// <summary>
     /// Represents basic literal text in the documentation.
@@ -9,7 +11,9 @@
         /// Initializes a new instance of the <see cref="Text"/> class.
         /// </summary>
         /// <param name="content">The literal text content.</param>
-        public Text(string content) => Content = content;
+        public Text(string content)
+            : base(new Dictionary<string, string>())
+            => Content = content;
 
         /// <summary>
         /// Accepts the specified visitor.

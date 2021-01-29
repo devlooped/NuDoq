@@ -25,7 +25,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the member id as specified in the documentation XML.
         /// </summary>
-        public string Id { get; }
+        public string Id
+        {
+            get => Attributes.TryGetValue("name", out var value) ? value : "";
+            set => Attributes["name"] = value;
+        }
 
         /// <summary>
         /// Gets the kind of member.

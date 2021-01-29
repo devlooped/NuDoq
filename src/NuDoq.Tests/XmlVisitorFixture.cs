@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using Demo;
@@ -58,20 +59,42 @@ namespace NuDoq
             //Assert.True(originalXml.NormalizedEquals(visitor.Xml));
         }
 
+        [Fact]
+        public void when_reading_custom_xml_then_document_preserves_element_and_attributes()
+        {
+            var members = DocReader.Read(Assembly.GetExecutingAssembly(), new ReaderOptions { KeepNewLinesInText = true });
+
+            var xml = members.Accept(new XmlVisitor()).Xml;
+
+            var summary = xml.Root
+                .Element("members")
+                .Elements("member")
+                .First(x => x.Attribute("name").Value == "T:NuDoq.CustomXml")
+                .Element("summary");
+
+            Assert.NotNull(summary.Element("custom"));
+            Assert.Equal("value", summary.Element("custom").Attribute("id").Value);
+
+            var remarks = xml.Root
+                .Element("members")
+                .Elements("member")
+                .First(x => x.Attribute("name").Value == "T:NuDoq.CustomXml")
+                .Element("remarks");
+
+            Assert.Equal("foo.cs", remarks.Element("code").Attribute("source").Value);
+            Assert.Equal("example", remarks.Element("code").Attribute("region").Value);
+        }
+
         void WriteXml(XDocument xml)
         {
-            using (var writer = XmlWriter.Create(new TestOutputTextWriter(output), new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
-            {
-                xml.WriteTo(writer);
-            }
+            using var writer = XmlWriter.Create(new TestOutputTextWriter(output), new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true });
+            xml.WriteTo(writer);
         }
 
         static void WriteXml(XDocument xml, string file)
         {
-            using (var writer = XmlWriter.Create(file, new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true }))
-            {
-                xml.WriteTo(writer);
-            }
+            using var writer = XmlWriter.Create(file, new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true });
+            xml.WriteTo(writer);
         }
     }
 }

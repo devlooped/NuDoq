@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
 namespace NuDoq
@@ -13,9 +14,8 @@ namespace NuDoq
         /// </summary>
         /// <param name="xml">The <see cref="XElement"/> containing the entire element markup.</param>
         /// <param name="content">The child content.</param>
-        /// <param name="attributes">The attributes of the element, if any.</param>
-        public UnknownElement(XElement xml, IEnumerable<Element> content, IDictionary<string, string> attributes)
-            : base(content, attributes)
+        public UnknownElement(XElement xml, IEnumerable<Element> content)
+            : base(content, new ReadOnlyDictionary<string, string>(new Dictionary<string, string>()))
             => Xml = xml;
 
         /// <summary>

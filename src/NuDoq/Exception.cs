@@ -18,9 +18,10 @@ namespace NuDoq
         /// <param name="attributes">The attributes of the element, if any.</param>
         public Exception(string cref, IEnumerable<Element> elements, IDictionary<string, string> attributes)
             : base(elements, attributes)
-        {
-            Cref = cref;
-        }
+            => Cref = cref;
+
+        internal Exception(IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes) { }
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -34,7 +35,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the member id of the exception type.
         /// </summary>
-        public string Cref { get; }
+        public string Cref
+        {
+            get => Attributes.TryGetValue("cref", out var value) ? value : "";
+            set => Attributes.SetOrRemove("cref", value);
+        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

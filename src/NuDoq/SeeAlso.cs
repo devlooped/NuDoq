@@ -24,6 +24,10 @@ namespace NuDoq
             Content = content;
         }
 
+        internal SeeAlso(string content, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes)
+            => Content = content;
+
         /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
@@ -34,19 +38,27 @@ namespace NuDoq
         }
 
         /// <summary>
-        /// Gets the member id of the referenced member.
-        /// </summary>
-        public string Cref { get; }
-
-        /// <summary>
         /// Gets the reference's text.
         /// </summary>
         public string Content { get; }
 
         /// <summary>
+        /// Gets the member id of the referenced member.
+        /// </summary>
+        public string Cref
+        {
+            get => Attributes.TryGetValue("cref", out var value) ? value : "";
+            set => Attributes.SetOrRemove("cref", value);
+        }
+
+        /// <summary>
         /// Gets the hyperlink, if present.
         /// </summary>
-        public string? Href => Attributes.TryGetValue("href", out var href) ? href : null;
+        public string? Href
+        {
+            get => Attributes.TryGetValue("href", out var value) ? value : "";
+            set => Attributes.SetOrRemove("href", value);
+        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

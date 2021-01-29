@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -56,7 +57,7 @@ namespace NuDoq
         /// This method is called for all <see cref="Member" />-derived
         /// types.
         /// </remarks>
-        public override void VisitMember(Member member) => AddXml("member", "name", member.Id, member, base.VisitMember);
+        public override void VisitMember(Member member) => AddXml("member", member, base.VisitMember);
 
         /// <summary>
         /// Visits the <c>c</c> documentation element.
@@ -81,7 +82,7 @@ namespace NuDoq
         /// <summary>
         /// Visits the <c>exception</c> documentation element.
         /// </summary>
-        public override void VisitException(Exception exception) => AddXml("exception", "cref", exception.Cref, exception, base.VisitException);
+        public override void VisitException(Exception exception) => AddXml("exception", exception, base.VisitException);
 
         /// <summary>
         /// Visits the <c>item</c> documentation element.
@@ -91,7 +92,7 @@ namespace NuDoq
         /// <summary>
         /// Visits the <c>list</c> documentation element.
         /// </summary>
-        public override void VisitList(List list) => AddXml("list", "type", list.Type.ToString().ToLowerInvariant(), list, base.VisitList);
+        public override void VisitList(List list) => AddXml("list", list, base.VisitList);
 
         /// <summary>
         /// Visits the <c>listheader</c> documentation element.
@@ -106,12 +107,12 @@ namespace NuDoq
         /// <summary>
         /// Visits the <c>param</c> documentation element.
         /// </summary>
-        public override void VisitParam(Param param) => AddXml("param", "name", param.Name, param, base.VisitParam);
+        public override void VisitParam(Param param) => AddXml("param", param, base.VisitParam);
 
         /// <summary>
         /// Visits the <c>paramref</c> documentation elemnet.
         /// </summary>
-        public override void VisitParamRef(ParamRef paramRef) => AddXml("paramref", "name", paramRef.Name, paramRef, base.VisitParamRef);
+        public override void VisitParamRef(ParamRef paramRef) => AddXml("paramref", paramRef, base.VisitParamRef);
 
         /// <summary>
         /// Visits the <c>remarks</c> documentation element.
@@ -121,21 +122,12 @@ namespace NuDoq
         /// <summary>
         /// Visits the <c>see</c> documentation element.
         /// </summary>
-        public override void VisitSee(See see)
-        {
-            var element = new XElement("see");
-            if (see.Cref != null)
-                element.Add(new XAttribute("cref", see.Cref));
-            if (see.Langword != null)
-                element.Add(new XAttribute("langword", see.Langword));
-
-            AddXml(element, see, base.VisitSee);
-        }
+        public override void VisitSee(See see) => AddXml("see", see, base.VisitSee);
 
         /// <summary>
         /// Visits the <c>seealso</c> documentation element.
         /// </summary>
-        public override void VisitSeeAlso(SeeAlso seeAlso) => AddXml("seealso", "cref", seeAlso.Cref, seeAlso, base.VisitSeeAlso);
+        public override void VisitSeeAlso(SeeAlso seeAlso) => AddXml("seealso", seeAlso, base.VisitSeeAlso);
 
         /// <summary>
         /// Visits the <c>summary</c> documentation element.
@@ -159,12 +151,12 @@ namespace NuDoq
         /// <summary>
         /// Visits the <c>typeparam</c> documentation element.
         /// </summary>
-        public override void VisitTypeParam(TypeParam typeParam) => AddXml("typeparam", "name", typeParam.Name, typeParam, base.VisitTypeParam);
+        public override void VisitTypeParam(TypeParam typeParam) => AddXml("typeparam", typeParam, base.VisitTypeParam);
 
         /// <summary>
         /// Visits the <c>typeparamref</c> documentation element.
         /// </summary>
-        public override void VisitTypeParamRef(TypeParamRef typeParamRef) => AddXml("typeparamref", "name", typeParamRef.Name, typeParamRef, base.VisitTypeParamRef);
+        public override void VisitTypeParamRef(TypeParamRef typeParamRef) => AddXml("typeparamref", typeParamRef, base.VisitTypeParamRef);
 
         /// <summary>
         /// Visits an unknown documentation element.
@@ -181,23 +173,19 @@ namespace NuDoq
         /// </summary>
         public XDocument Xml { get; }
 
-        void AddXml<TVisitable>(string elementName, TVisitable element, Action<TVisitable> visit) => AddXml(new XElement(elementName), element, visit);
+        void AddXml<TVisitable>(string elementName, TVisitable element, Action<TVisitable> visit)
+            => AddXml(new XElement(elementName), element, visit);
 
-        void AddXml<TVisitable>(string elementName, string attributeName, object attributeValueOrNull, TVisitable element, Action<TVisitable> visit)
-        {
-            var xml = new XElement(elementName);
-            if (attributeValueOrNull != null)
-                xml.Add(new XAttribute(attributeName, attributeValueOrNull));
-
-            AddXml(xml, element, visit);
-        }
-
-        void AddXml<TVisitable>(XElement xml, TVisitable element, Action<TVisitable> visit)
+        void AddXml<TVisitable>(XElement xml, TVisitable visitable, Action<TVisitable> visit)
         {
             currentElement?.Add(xml);
             currentElement = xml;
 
-            visit(element);
+            // UnknownElement already populates its own attributes from the original XElement
+            if (visitable is Element element && visitable is not UnknownElement)
+                xml.Add(element.Attributes.Select(x => new XAttribute(x.Key, x.Value)));
+
+            visit(visitable);
 
             currentElement = currentElement.Parent;
         }

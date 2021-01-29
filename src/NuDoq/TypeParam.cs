@@ -20,6 +20,9 @@ namespace NuDoq
             : base(elements, attributes)
             => Name = name;
 
+        internal TypeParam(IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes) { }
+
         /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
@@ -32,7 +35,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the name of the type parameter.
         /// </summary>
-        public string Name { get; }
+        public string Name
+        {
+            get => Attributes.TryGetValue("name", out var value) ? value : "";
+            private set => Attributes["name"] = value;
+        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

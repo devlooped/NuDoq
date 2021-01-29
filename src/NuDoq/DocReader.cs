@@ -241,23 +241,23 @@ namespace NuDoq
                             "remarks" => new Remarks(ReadContent(elementNode), attributes),
                             "example" => new Example(ReadContent(elementNode), attributes),
                             "para" => new Para(ReadContent(elementNode), attributes),
-                            "param" => new Param(FindAttribute(elementNode, "name"), ReadContent(elementNode), attributes),
-                            "paramref" => new ParamRef(FindAttribute(elementNode, "name"), attributes),
-                            "typeparam" => new TypeParam(FindAttribute(elementNode, "name"), ReadContent(elementNode), attributes),
-                            "typeparamref" => new TypeParamRef(FindAttribute(elementNode, "name"), attributes),
+                            "param" => new Param(ReadContent(elementNode), attributes),
+                            "paramref" => new ParamRef(attributes),
+                            "typeparam" => new TypeParam(ReadContent(elementNode), attributes),
+                            "typeparamref" => new TypeParamRef(attributes),
                             "code" => new Code(TrimCode(elementNode.Value), attributes),
                             "c" => new C(elementNode.Value, attributes),
-                            "see" => new See(FindAttribute(elementNode, "cref"), FindAttribute(elementNode, "langword"), elementNode.Value, ReadContent(elementNode), attributes),
-                            "seealso" => new SeeAlso(FindAttribute(elementNode, "cref"), elementNode.Value, ReadContent(elementNode), attributes),
-                            "list" => new List(FindAttribute(elementNode, "type"), ReadContent(elementNode), attributes),
+                            "see" => new See(elementNode.Value, ReadContent(elementNode), attributes),
+                            "seealso" => new SeeAlso(elementNode.Value, ReadContent(elementNode), attributes),
+                            "list" => new List(ReadContent(elementNode), attributes),
                             "listheader" => new ListHeader(ReadContent(elementNode), attributes),
                             "term" => new Term(ReadContent(elementNode), attributes),
                             "description" => new Description(ReadContent(elementNode), attributes),
                             "item" => new Item(ReadContent(elementNode), attributes),
-                            "exception" => new Exception(FindAttribute(elementNode, "cref"), ReadContent(elementNode), attributes),
+                            "exception" => new Exception(ReadContent(elementNode), attributes),
                             "value" => new Value(ReadContent(elementNode), attributes),
                             "returns" => new Returns(ReadContent(elementNode), attributes),
-                            _ => new UnknownElement(elementNode, ReadContent(elementNode), attributes),
+                            _ => new UnknownElement(elementNode, ReadContent(elementNode)),
                         };
                         break;
                     case XmlNodeType.Text:
@@ -274,12 +274,6 @@ namespace NuDoq
                 }
             }
         }
-
-        /// <summary>
-        /// Retrieves an attribute value if found, otherwise, returns a null string.
-        /// </summary>
-        string FindAttribute(XElement elementNode, string attributeName)
-            => elementNode.Attributes().Where(x => x.Name == attributeName).Select(x => x.Value).FirstOrDefault();
 
         /// <summary>
         /// Trims the text by removing new lines and trimming the indent.

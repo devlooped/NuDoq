@@ -19,6 +19,9 @@ namespace NuDoq
             : base(attributes)
             => Name = name;
 
+        internal ParamRef(IDictionary<string, string> attributes)
+            : base(attributes) { }
+
         /// <summary>
         /// Accepts the specified visitor.
         /// </summary>
@@ -31,7 +34,11 @@ namespace NuDoq
         /// <summary>
         /// Gets the name of the referenced parameter.
         /// </summary>
-        public string Name { get; }
+        public string Name
+        {
+            get => Attributes.TryGetValue("name", out var value) ? value : "";
+            private set => Attributes["name"] = value;
+        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

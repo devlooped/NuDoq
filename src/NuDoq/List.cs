@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace NuDoq
@@ -15,22 +16,15 @@ namespace NuDoq
         /// <summary>
         /// Initializes a new instance of the <see cref="List"/> class.
         /// </summary>
-        /// <param name="type">The type of list, which can be "bullet", "number" or "table".</param>
+        /// <param name="type">The type of list.</param>
         /// <param name="elements">The elements.</param>
         /// <param name="attributes">The attributes of the element, if any.</param>
-        public List(string type, IEnumerable<Element> elements, IDictionary<string, string> attributes)
+        public List(ListType type, IEnumerable<Element> elements, IDictionary<string, string> attributes)
             : base(elements, attributes)
-        {
-            Type = ListType.Unknown;
-            if (!string.IsNullOrEmpty(type))
-            {
-                try
-                {
-                    Type = (ListType)System.Enum.Parse(typeof(ListType), System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(type));
-                }
-                catch (ArgumentException) { }
-            }
-        }
+            => Type = type;
+
+        internal List(IEnumerable<Element> elements, IDictionary<string, string> attributes)
+            : base(elements, attributes) { }
 
         /// <summary>
         /// Accepts the specified visitor.
@@ -44,7 +38,12 @@ namespace NuDoq
         /// <summary>
         /// Gets the type of list.
         /// </summary>
-        public ListType Type { get; }
+        public ListType Type
+        {
+            get => Attributes.TryGetValue("type", out var value) && System.Enum.TryParse<ListType>(value, true, out var type)
+                  ? type : ListType.Unknown;
+            private set => Attributes["type"] = value.ToString().ToLowerInvariant();
+        }
 
         /// <summary>
         /// Gets the header from the contained elements, if any.

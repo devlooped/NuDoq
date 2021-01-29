@@ -44,11 +44,7 @@
 	weak
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = a65d351062bf119617b5861aea7e2038ee2b637cbf703993c3cf68b1f219a65c
-	weak
-[file ".github/workflows/release.yml"]
-	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release.yml
-	etag = 9035cfc96bc6340476e196699695b49a19066039e8774497659413f8a8cb8e2a
+	etag = 337666cc9f17f0cf395df950370967381f6de5134cc215f61035d36f38fed3a3
 	weak
 [file ".github/workflows/tag.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/tag.yml
@@ -92,7 +88,7 @@
 	weak
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
-	etag = 236390b1c5b2576d6d013656e24f6d74a0042a0e4071a19e8c626cf6b7005b54
+	etag = f90be354c63f82bcfac68246648aee9a5a2842f1e4b66421b850939635610532
 	weak
 [file "src/kzu.snk"]
 	url = https://github.com/devlooped/oss/blob/main/src/kzu.snk
@@ -105,4 +101,20 @@
 [file "Gemfile"]
 	url = https://github.com/devlooped/oss/blob/main/Gemfile
 	etag = d45832acd078778ffebf260000f6d25172a131f51684744d7e982da2a47170ce
+	weak
+[file ".github/workflows/changelog.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/changelog.yml
+	etag = 01608ff4a85f7c9cdcaf92e959c3a3b5d7fd38c22cf797d9364cf1b00d304f58
+	weak
+[file ".github/workflows/publish.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml
+	etag = 523800fb333a6f18684431e1a53b6e82d28c8d905951c00b2b80343129fb8c2e
+	weak
+[file ".github/workflows/release-artifacts.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-artifacts.yml
+	etag = 132bb6a2a5434670582e577a63ea9cb98e8a64b87404e6001922415e203ce57d
+	weak
+[file ".github/workflows/release-notes.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-notes.yml
+	etag = 47c898bfee2cd752176aee0d15a5763cdec42820d08b074385dbdcdeeec84606
 	weak

@@ -104,13 +104,13 @@
 	weak
 [file ".github/workflows/publish.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml
-	etag = 523800fb333a6f18684431e1a53b6e82d28c8d905951c00b2b80343129fb8c2e
+	etag = 8067230717247263ad661c69780fdfdf4b6f140287517fee9c5d4e64d4b737af
 	weak
 [file ".github/workflows/release-artifacts.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-artifacts.yml
-	etag = 5f185097d7acbfa7e023ced8be818ad9341b63b4ae8813733e7f86376b464502
+	etag = 8be10a2fbeb9e6924d8b08e58a61a0f69138352c6f5477b53dcd34c26d8d35ef
 	weak
 [file ".github/workflows/release-notes.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-notes.yml
-	etag = 47c898bfee2cd752176aee0d15a5763cdec42820d08b074385dbdcdeeec84606
+	etag = e997e6e7bfd4d850a3554d4232562075a89cf7713a8cec4aef483f2bd6f3c10a
 	weak

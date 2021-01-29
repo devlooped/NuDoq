@@ -1,6 +1,7 @@
 # Builds a release version of the project and uploads 
 # as artifacts of the release for verification/history
 
+name: release-artifacts
 on:
   release:
     types: [published]

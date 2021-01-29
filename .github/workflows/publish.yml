@@ -2,6 +2,7 @@
 # whenever a release is published.
 # Requires: secrets.NUGET_API_KEY
 
+name: publish
 on:
   release:
     types: [released]

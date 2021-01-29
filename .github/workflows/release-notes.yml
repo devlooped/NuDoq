@@ -1,4 +1,6 @@
 # Updates a release with release notes
+name: release-notes
+
 on:
   release:
     types: [published]

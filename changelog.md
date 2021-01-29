@@ -1,5 +1,13 @@
 
 
+## [v2.0.1](https://github.com/devlooped/NuDoq/tree/v2.0.1) (2021-01-29)
+
+[Full Changelog](https://github.com/devlooped/NuDoq/compare/v2.0.0...v2.0.1)
+
+**Implemented enhancements:**
+
+- Project URL in the nuget package metadata is wrong [\#39](https://github.com/devlooped/NuDoq/issues/39)
+
 ## [v2.0.0](https://github.com/devlooped/NuDoq/tree/v2.0.0) (2021-01-29)
 
 [Full Changelog](https://github.com/devlooped/NuDoq/compare/v2.0.0-beta...v2.0.0)

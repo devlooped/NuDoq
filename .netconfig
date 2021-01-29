@@ -46,10 +46,6 @@
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
 	etag = 337666cc9f17f0cf395df950370967381f6de5134cc215f61035d36f38fed3a3
 	weak
-[file ".github/workflows/tag.yml"]
-	url = https://github.com/devlooped/oss/blob/main/.github/workflows/tag.yml
-	etag = 26e271cf76e00c6922552af104b1e496103bdfa75ebef253447594207b10153e
-	weak
 [file ".github_changelog_generator"]
 	url = https://github.com/devlooped/oss/blob/main/.github_changelog_generator
 	etag = a724e0cbbad99a04e6cd3738a5f3ec5416dd5f29ae7073e7afe5471e73107e42
@@ -112,7 +108,7 @@
 	weak
 [file ".github/workflows/release-artifacts.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-artifacts.yml
-	etag = 132bb6a2a5434670582e577a63ea9cb98e8a64b87404e6001922415e203ce57d
+	etag = 5f185097d7acbfa7e023ced8be818ad9341b63b4ae8813733e7f86376b464502
 	weak
 [file ".github/workflows/release-notes.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-notes.yml

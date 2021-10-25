@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" Visible="false" />
-    <PackageReference Include="ThisAssembly" Version="1.0.8" PrivateAssets="all" />
+    <PackageReference Include="ThisAssembly" Version="1.0.9" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

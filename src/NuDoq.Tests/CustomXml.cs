@@ -26,6 +26,11 @@ namespace NuDoq
         /// <preliminary />
         public void Preliminary() { }
 
+        /// <summary>
+        /// <![CDATA[<><> character data]]>
+        /// </summary>
+        public void HasCData() {}
+
         /// <summary>example method</summary>
         /// <param name="p1">byref</param>
         public void ByRef(ref int p1) { }

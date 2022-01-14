@@ -688,6 +688,16 @@ lines", method.Elements.OfType<Summary>().First().Elements.OfType<Text>().First(
 End", method.ToText());
         }
 
+        [Fact]
+        public void when_reading_cdata_then_preserves_text()
+        {
+            var member = DocReader.Read(Assembly.GetExecutingAssembly());
+            var method = member.Elements.OfType<Method>()
+                .FirstOrDefault(m => m.Info?.DeclaringType == typeof(CustomXml) && m.Info?.Name == nameof(CustomXml.HasCData));
+
+            Assert.NotNull(method);
+            Assert.Equal("<><> character data", method.ToText());
+        }
 
         class CountingVisitor : Visitor
         {

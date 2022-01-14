@@ -263,6 +263,9 @@ namespace NuDoq
                     case XmlNodeType.Text:
                         element = new Text(TrimText(((XText)node).Value));
                         break;
+                    case XmlNodeType.CDATA:
+                        element = new Text(((XCData)node).Value);
+                        break;
                     default:
                         break;
                 }

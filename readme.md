@@ -1,4 +1,5 @@
-<h1 id="nudoq"><img src="https://raw.github.com/devlooped/NuDoq/main/doc/Icon-32.png" alt="Icon" style="vertical-align: text-top; border: 0px; padding: 0px; margin: 0px">  NuDoq: A lightweight .NET XML Documentation API</h1>
+![Icon](https://raw.github.com/devlooped/NuDoq/main/doc/Icon-32.png) NuDoq: A lightweight .NET XML Documentation API
+================
 
 A standalone API to read and write .NET XML documentation files and optionally augment it with reflection information.
 
@@ -6,17 +7,22 @@ A standalone API to read and write .NET XML documentation files and optionally a
 [![Downloads](https://img.shields.io/nuget/dt/NuDoq?color=darkmagenta)](https://www.nuget.org/packages/NuDoq)
 [![License](https://img.shields.io/github/license/devlooped/NuDoq.svg?color=blue)](https://github.com/devlooped/NuDoq/blob/main/license.txt)
 
+<!-- #overview -->
+
 NuDoq provides a simple and intuitive API that reads .NET XML documentation files into an in-memory model that can be easily used to generate alternative representations or arbitrary processing. If the read operation is performed using a .NET assembly rather than an XML file, NuDoq will automatically add the reflection information to the in-memory model for the documentation elements, making it very easy to post-process them by grouping by type, namespace, etc.
 
 NuDoq leverages two well-known patterns: the [Visitor](http://en.wikipedia.org/wiki/Visitor_pattern) pattern and the [Composite](http://en.wikipedia.org/wiki/Composite_pattern) pattern. Essentially, every member in the documentation file is represented as a separate "visitable" type. By simply writing a NuDoq **Visitor**-derived class, you can process only the elements you're interested in.
 
-NuDoq can read documentation files from any CIL assembly, and the source tree has explicit unit tests that do so for all major .NET platforms: .NET, WinRT/Metro, Windows Phone and Silverlight.
+NuDoq can read documentation files from any .NET assembly, which are most commonly located alongside the binary.
+
+<!-- #overview -->
 
 # How to Install
 NuDoq is a single assembly with no external dependencies whatsoever and is distributed as a [NuGet](https://nuget.org/packages/NuDoq) package. It can be installed issuing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console):
 
 	PM> Install-Package NuDoq
 
+<!-- #usage -->
 # Usage
 
 The main API is `DocReader`, which you can use to read an [XML documentation file](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc), or an assembly, in which case the XML file alongside the assembly location will be read and augmented with reflection information about types and members:
@@ -160,20 +166,13 @@ There are two logically separated hierarchies of visitable elements: the members
 
 The following is the members hierarchy:
 
-![Members hierarchy](https://raw.github.com/kzu/NuDoq/master/doc/NuDoq.Members.png)
+![Members hierarchy](https://raw.githubusercontent.com/devlooped/NuDoq/main/doc/NuDoq.Members.png)
 
 And this is the supported documentation elements hierarchy:
 
-![Members hierarchy](https://raw.github.com/kzu/NuDoq/master/doc/NuDoq.Content.png)
+![Members hierarchy](https://raw.githubusercontent.com/devlooped/NuDoq/main/doc/NuDoq.Content.png)
 
 Note that at the visitor level, both hierarchies are treated uniformly, since they all ultimately inherit from `Element`. In this fashion, you can have one or multiple visitors processing different parts of the graph, such as one that processes members and generates individual folders for each, and one for documentation elements that generate the content.
 
 
-
-## Sponsors
-
-<h3 style="vertical-align: text-top" id="by-clarius">
-<img src="https://raw.githubusercontent.com/devlooped/oss/main/assets/images/sponsors.svg" alt="sponsors" height="36" width="36" style="vertical-align: text-top; border: 0px; padding: 0px; margin: 0px">&nbsp;&nbsp;by&nbsp;<a href="https://github.com/clarius">@clarius</a>&nbsp;<img src="https://raw.githubusercontent.com/clarius/branding/main/logo/logo.svg" alt="sponsors" height="36" width="36" style="vertical-align: text-top; border: 0px; padding: 0px; margin: 0px">
-</h3>
-
-*[get mentioned here too](https://github.com/sponsors/devlooped)!*
+<!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->

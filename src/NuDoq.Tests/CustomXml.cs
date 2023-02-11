@@ -29,7 +29,7 @@ namespace NuDoq
         /// <summary>
         /// <![CDATA[<><> character data]]>
         /// </summary>
-        public void HasCData() {}
+        public void HasCData() { }
 
         /// <summary>example method</summary>
         /// <param name="p1">byref</param>

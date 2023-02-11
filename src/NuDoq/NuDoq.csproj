@@ -8,9 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NuGetizer" Version="0.9.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" Visible="false" />
-    <PackageReference Include="ThisAssembly" Version="1.2.5" PrivateAssets="all" />
-    <PackageReference Include="NuGetizer" Version="0.9.1" PrivateAssets="all" />
+    <PackageReference Include="ThisAssembly.AssemblyInfo" Version="1.2.5" Pack="false" />
+    <PackageReference Include="ThisAssembly.Project" Version="1.2.5" Pack="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NuDoq.CodeAnalysis\NuDoq.CodeAnalysis.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

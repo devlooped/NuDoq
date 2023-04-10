@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" Visible="false" />
-    <PackageReference Include="ThisAssembly" Version="1.2.5" PrivateAssets="all" />
+    <PackageReference Include="ThisAssembly" Version="1.2.13" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

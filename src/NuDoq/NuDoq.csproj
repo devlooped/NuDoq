@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" Visible="false" />
     <PackageReference Include="ThisAssembly" Version="1.2.5" PrivateAssets="all" />
-    <PackageReference Include="NuGetizer" Version="0.9.1" PrivateAssets="all" />
+    <PackageReference Include="NuGetizer" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

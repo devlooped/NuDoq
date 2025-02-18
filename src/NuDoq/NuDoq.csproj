@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThisAssembly" Version="1.2.5" PrivateAssets="all" />
+    <PackageReference Include="ThisAssembly" Version="2.0.11" PrivateAssets="all" />
     <PackageReference Include="NuGetizer" Version="0.9.1" PrivateAssets="all" />
   </ItemGroup>
 

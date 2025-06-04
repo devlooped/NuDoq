@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThisAssembly" Version="2.0.11" PrivateAssets="all" />
+    <PackageReference Include="ThisAssembly" Version="2.0.14" PrivateAssets="all" />
     <PackageReference Include="NuGetizer" Version="1.2.4" PrivateAssets="all" />
   </ItemGroup>
 

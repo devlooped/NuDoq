@@ -24,7 +24,8 @@ namespace NuDoq
                 yield return new Text("foo");
                 yield return new Text("bar");
                 enumerations++;
-            };
+            }
+            ;
 
             var element = new Summary(GetElements(), new Dictionary<string, string>());
 

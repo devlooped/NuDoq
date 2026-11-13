@@ -7,6 +7,8 @@ updates:
   directory: /
   schedule:
     interval: daily
+  ignore:
+    - dependency-name: "Microsoft.CodeAnalysis*"
   groups:
     Azure:
       patterns:
@@ -32,6 +34,9 @@ updates:
     Web:
       patterns:
         - "Microsoft.AspNetCore*"
+    OpenTelemetry:
+      patterns:
+        - "OpenTelemetry*"
     Tests:
       patterns:
         - "Microsoft.NET.Test*"
